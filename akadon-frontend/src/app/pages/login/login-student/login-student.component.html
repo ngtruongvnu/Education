@@ -1,0 +1,80 @@
+<div class="title">
+  <img src="./assets/images/register/student-icon.svg" alt="" />
+  <p>Học viên</p>
+</div>
+<div class="login-form">
+  <a class="back" routerLink="/user/login"
+    ><i class="fas fa-arrow-left"></i> <span>Quay lại</span></a
+  >
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="input-area">
+      <label for="username">Email</label>
+      <input
+        type="text"
+        id="username"
+        formControlName="username"
+        class="form-control"
+        placeholder="Email"
+      />
+      <div
+        *ngIf="f.username.invalid && (f.username.dirty || f.username.touched)"
+      >
+        <div *ngIf="f.username.errors">
+          <div *ngIf="f.username.errors.required">
+            <span class="errors">Email không được để trống</span>
+          </div>
+          <div *ngIf="f.username.errors.email">
+            <span class="errors">Không đúng định dạng email</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="input-area">
+      <label for="password">Mật khẩu</label>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        class="form-control"
+        placeholder="Mật khẩu"
+      />
+      <div
+        *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)"
+      >
+        <div *ngIf="f.password.errors">
+          <div *ngIf="f.password.errors.required">
+            <span class="errors">Mật khẩu không được để trống</span>
+          </div>
+        </div>
+      </div>
+      <i class="far fa-eye" id="hide" (click)="change($event)"></i>
+      <i class="far fa-eye-slash" id="show" (click)="change($event)"></i>
+    </div>
+    <div class="input-area remember-me">
+      <input type="checkbox" id="rememberMe" />
+      <label for="rememberMe">Ghi nhớ tài khoản</label>
+    </div>
+    <div class="submit">
+      <button type="submit" class="valid" *ngIf="loginForm.valid">
+        Đăng nhập <i class="fas fa-arrow-right"></i>
+      </button>
+      <button
+        type="submit"
+        *ngIf="!loginForm.valid"
+        style="cursor: not-allowed; opacity: 0.5"
+      >
+        Đăng nhập
+      </button>
+    </div>
+  </form>
+  <a class="forgot-password">Quên mật khẩu</a>
+  <div class="other"><span>Hoặc đăng nhập bằng</span></div>
+  <div class="other-methods">
+    <button class="valid facebook" (click)="facebookLogin()">
+      Facebook <i class="fas fa-arrow-right"></i>
+    </button>
+    <button class="valid zalo" (click)="googleLogin()">
+      Google <i class="fas fa-arrow-right"></i>
+    </button>
+  </div>
+</div>

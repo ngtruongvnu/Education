@@ -1,0 +1,62 @@
+.info {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  padding-bottom: 0;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+}
+.info .icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #fff;
+}
+.info .icon img {
+  width: 60%;
+}
+.info a {
+  display: inline-block;
+  margin-left: -20px;
+  width: calc(100% + 40px);
+  padding: 5px 0;
+  background-color: rgba(0, 0, 0, 0.123);
+  margin-top: 10px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+}
+.student {
+  background: linear-gradient(90deg, rgb(255, 0, 90) 3.75%, rgb(255, 72, 13));
+}
+.tutor {
+  background: linear-gradient(90deg, rgb(3, 107, 179) 3.75%, rgb(3, 176, 169));
+}
+.course {
+  background: linear-gradient(90deg, rgb(3, 179, 97) 3.75%, rgb(87, 176, 3));
+}
+.info a i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 37%;
+  transition: 0.3s;
+}
+.info a:hover i {
+  right: 35%;
+}
+.title {
+  width: 100%;
+  background: #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+}

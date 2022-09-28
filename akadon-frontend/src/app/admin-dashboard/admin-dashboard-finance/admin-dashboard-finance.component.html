@@ -1,0 +1,174 @@
+<p style="font-weight: 600; font-size: 18px">
+  Danh sách các giao dịch được nhận
+</p>
+<div class="choose-date">
+  <label for="transaction-date" class="icon-birthday"
+    >Chọn khoảng ngày giao dịch</label
+  >
+  <form [formGroup]="range">
+    <mat-form-field appearance="fill" class="date-range-transaction">
+      <mat-label>Chọn khoảng ngày</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate placeholder="Bắt đầu" formControlName="startDate" />
+        <input matEndDate placeholder="Kết thúc" formControlName="endDate" />
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+  </form>
+  <button
+    class="btn btn-outline-success ml-2"
+    *ngIf="range.valid"
+    (click)="filter()"
+  >
+    Lọc
+  </button>
+  <button
+    class="btn btn-outline-danger ml-2"
+    *ngIf="range.valid"
+    (click)="remove()"
+  >
+    Bỏ lọc
+  </button>
+</div>
+<div class="table-responsive mt-2">
+  <table class="table" style="background: #fff; border-radius: 5px">
+    <thead>
+      <tr>
+        <th scope="col" style="font-weight: 600; text-align: center">STT</th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Ngày giao dịch
+        </th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Người gửi
+        </th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Nội dung chuyển khoản
+        </th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Số tiền
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <p
+        *ngIf="listTransaction.length === 0"
+        style="padding: 10px; color: red; font-weight: 600"
+      >
+        Chưa có giao dịch nào
+      </p>
+      <tr *ngFor="let transaction of listTransaction; let i = index">
+        <th scope="row" style="text-align: center">{{ i + 1 }}</th>
+        <td style="text-align: center">
+          {{ transaction.dateTransaction | date: "dd/MM/yyyy HH:mm:ss" }}
+        </td>
+        <td style="text-align: center">{{ transaction.sendName }}</td>
+        <td style="text-align: center">{{ transaction.content }}</td>
+        <td style="text-align: center">
+          {{ transaction.sentMoney | currency: "USD" }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <mat-paginator
+    *ngIf="listTransaction.length != 0"
+    [length]="length"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    (page)="pageEvent = getPaginatorData($event)"
+  >
+  </mat-paginator>
+</div>
+<p style="font-weight: 600; font-size: 18px; margin-top: 20px">
+  Danh sách các giao dịch đã gửi
+</p>
+<div class="choose-date">
+  <label for="transaction-date" class="icon-birthday"
+    >Chọn khoảng ngày giao dịch</label
+  >
+  <form [formGroup]="rangeSent">
+    <mat-form-field appearance="fill" class="date-range-transaction">
+      <mat-label>Chọn khoảng ngày</mat-label>
+      <mat-date-range-input [rangePicker]="pickerSent">
+        <input
+          matStartDate
+          placeholder="Bắt đầu"
+          formControlName="startDateSent"
+        />
+        <input
+          matEndDate
+          placeholder="Kết thúc"
+          formControlName="endDateSent"
+        />
+      </mat-date-range-input>
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="pickerSent"
+      ></mat-datepicker-toggle>
+      <mat-date-range-picker #pickerSent></mat-date-range-picker>
+    </mat-form-field>
+  </form>
+  <button
+    class="btn btn-outline-success ml-2"
+    *ngIf="rangeSent.valid"
+    (click)="filterSent()"
+  >
+    Lọc
+  </button>
+  <button
+    class="btn btn-outline-danger ml-2"
+    *ngIf="rangeSent.valid"
+    (click)="removeSent()"
+  >
+    Bỏ lọc
+  </button>
+</div>
+
+<div class="table-responsive mt-2">
+  <table class="table" style="background: #fff; border-radius: 5px">
+    <thead>
+      <tr>
+        <th scope="col" style="font-weight: 600; text-align: center">STT</th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Ngày giao dịch
+        </th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Người gửi
+        </th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Nội dung chuyển khoản
+        </th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Số tiền
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <p
+        *ngIf="listTransactionSent.length === 0"
+        style="padding: 10px; color: red; font-weight: 600"
+      >
+        Chưa có giao dịch nào
+      </p>
+      <tr *ngFor="let transaction of listTransactionSent; let i = index">
+        <th scope="row" style="text-align: center">{{ i + 1 }}</th>
+        <td style="text-align: center">
+          {{ transaction.dateTransaction | date: "dd/MM/yyyy HH:mm:ss" }}
+        </td>
+        <td style="text-align: center">{{ transaction.sendName }}</td>
+        <td style="text-align: center">{{ transaction.content }}</td>
+        <td style="text-align: center">
+          {{ transaction.sentMoney | currency: "USD" }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <mat-paginator
+    *ngIf="listTransactionSent.length != 0"
+    [length]="lengthSent"
+    [pageSize]="pageSizeSent"
+    [pageIndex]="pageIndexSent"
+    (page)="pageEventSent = getPaginatorSentData($event)"
+  >
+  </mat-paginator>
+</div>

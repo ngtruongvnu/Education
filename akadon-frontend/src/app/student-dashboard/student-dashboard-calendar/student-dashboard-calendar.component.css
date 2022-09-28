@@ -1,0 +1,26 @@
+ejs-schedule {
+  margin: 20px 0;
+}
+mat-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+::ng-deep .e-subject {
+  font-size: 21px;
+}
+mat-spinner {
+  width: 100px !important;
+  height: 100px !important;
+  margin: 0 auto;
+}
+::ng-deep mat-spinner svg {
+  width: 100px !important;
+  height: 100px !important;
+}
+::ng-deep .e-schedule .e-vertical-view .e-day-wrapper .e-appointment .e-subject,
+::ng-deep .e-schedule .e-vertical-view .e-day-wrapper .e-appointment .e-time {
+  font-size: 15px;
+  margin: 10px;
+}

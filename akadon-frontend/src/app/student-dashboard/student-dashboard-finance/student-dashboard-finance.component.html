@@ -1,0 +1,366 @@
+<div
+  style="
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+  "
+>
+  <p style="font-size: 21px; font-weight: 700">Những khóa học cần thanh toán</p>
+  <a routerLink="/dashboard-student/transaction-history" class="link"
+    >Lịch sử giao dịch</a
+  >
+</div>
+
+<div class="pay">
+  <p *ngIf="listCourseDetail.length === 0">
+    Hôm nay chưa có khóa học nào cần thanh toán
+  </p>
+  <div *ngIf="listCourseDetail.length > 0">
+    <div class="course-main" id="happening">
+      <p class="empty" *ngIf="lengthHappen === 0">
+        Bạn chưa có khóa học nào đang diễn ra
+      </p>
+      <a
+        *ngFor="let courseDetail of listCourseDetail; let i = index"
+        class="course-info"
+        data-toggle="modal"
+        data-target="#courseDetail"
+        style="color: unset; text-decoration: none"
+      >
+        <img
+          src="http://localhost:8888/upload/images/{{
+            courseDetail.objCourse?.objTutorRequest?.objTutor?.image
+          }}"
+          alt=""
+        />
+        <div class="info">
+          <p>
+            <span class="bold">Gia sư:</span>
+            <span>{{
+              courseDetail.objCourse?.objTutorRequest?.objTutor?.fullName
+            }}</span>
+          </p>
+          <p>
+            <span class="bold">Môn học:</span>
+            <span>{{
+              courseDetail.objCourse?.objStudentRequest?.objSubject?.subjectName
+            }}</span>
+          </p>
+          <p>
+            <span class="bold">Trình độ:</span>
+            <span>{{
+              courseDetail.objCourse?.objStudentRequest?.objLevel?.levelName
+            }}</span>
+          </p>
+        </div>
+        <div class="info" style="border-right: 1px solid rgba(0, 0, 0, 0.151)">
+          <p>
+            <span class="bold">Giờ học:</span>
+            <span
+              >{{
+                courseDetail.objCourse?.objStudentRequest?.beginTime
+                  | date: "HH:mm"
+              }}
+              -
+              {{
+                courseDetail.objCourse?.objStudentRequest?.endTime
+                  | date: "HH:mm"
+              }}</span
+            >
+          </p>
+          <p>
+            <span class="bold">Ngày học:</span>
+            <span>{{
+              courseDetail.objCourse?.studyDate | learningDateTransform
+            }}</span>
+          </p>
+          <p>
+            <span class="bold">Thời gian khóa học:</span>
+            <span
+              >{{ courseDetail.objCourse?.startDate | date: "dd/MM/yyy" }} -
+              {{ courseDetail.objCourse?.endDate | date: "dd/MM/yyy" }}</span
+            >
+          </p>
+        </div>
+        <div class="info text-center" style="border: none">
+          <p>
+            <span class="bold" *ngIf="!courseDetail.objCourse?.paymentStatus"
+              >Ngày thanh toán:</span
+            >
+            <span *ngIf="!courseDetail.objCourse?.paymentStatus">
+              {{ listPayDate[i]?.activeDate | date: "dd/MM/yyyy" }}</span
+            >
+          </p>
+          <button
+            class="btn btn-outline-success"
+            data-toggle="modal"
+            data-target="#pay"
+            style="font-size: 13px"
+            (click)="payForCourseDetail(courseDetail)"
+            *ngIf="!courseDetail.objCourse?.paymentStatus"
+          >
+            Thanh toán
+          </button>
+          <div
+            *ngIf="courseDetail.objCourse?.paymentStatus"
+            style="color: rgb(0, 199, 0)"
+          >
+            <i class="fas fa-check-circle"></i> Đã thanh toán
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="mt-3 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-3">
+    <div class="course">
+      <div class="course-header">
+        <span class="type">Khóa học đang chờ</span>
+        <span class="quantity">{{ lengthWaiting }}</span>
+      </div>
+      <div class="course-main" id="waiting">
+        <p class="empty" *ngIf="lengthWaiting === 0">
+          Bạn chưa có khóa học nào đang chờ
+        </p>
+        <a
+          *ngFor="let course of listWaiting; let i = index"
+          class="course-info"
+          data-toggle="modal"
+          data-target="#courseDetail"
+          style="color: unset; text-decoration: none"
+        >
+          <img
+            src="http://localhost:8888/upload/images/{{
+              course?.objTutorRequest?.objTutor?.image
+            }}"
+            alt=""
+          />
+          <div class="info">
+            <p>
+              <span class="bold">Gia sư:</span>
+              <span>{{ course.objTutorRequest?.objTutor?.fullName }}</span>
+            </p>
+            <p>
+              <span class="bold">Môn học:</span>
+              <span>{{
+                course.objStudentRequest?.objSubject?.subjectName
+              }}</span>
+            </p>
+            <p>
+              <span class="bold">Trình độ:</span>
+              <span>{{ course.objStudentRequest?.objLevel?.levelName }}</span>
+            </p>
+          </div>
+          <div
+            class="info"
+            style="border-right: 1px solid rgba(0, 0, 0, 0.151)"
+          >
+            <p>
+              <span class="bold">Giờ học:</span>
+              <span
+                >{{ course.objStudentRequest?.beginTime | date: "HH:mm" }} -
+                {{ course.objStudentRequest?.endTime | date: "HH:mm" }}</span
+              >
+            </p>
+            <p>
+              <span class="bold">Ngày học:</span>
+              <span>{{ course.studyDate | learningDateTransform }}</span>
+            </p>
+            <p>
+              <span class="bold">Thời gian khóa học:</span>
+              <span
+                >{{ course.startDate | date: "dd/MM/yyy" }} -
+                {{ course.endDate | date: "dd/MM/yyy" }}</span
+              >
+            </p>
+          </div>
+          <div class="info text-center" style="border: none">
+            <p>
+              <span class="bold" *ngIf="!course.paymentStatus"
+                >Ngày thanh toán:</span
+              >
+              <span *ngIf="!course.paymentStatus">
+                {{
+                  listPayDateWaiting[i]?.activeDate | date: "dd/MM/yyyy"
+                }}</span
+              >
+            </p>
+            <button
+              class="btn btn-outline-success"
+              data-toggle="modal"
+              data-target="#pay"
+              style="font-size: 13px"
+              (click)="payForCourse(course)"
+              *ngIf="!course.paymentStatus"
+            >
+              Thanh toán
+            </button>
+            <div *ngIf="course.paymentStatus" style="color: rgb(0, 199, 0)">
+              <i class="fas fa-check-circle"></i> Đã thanh toán
+            </div>
+          </div>
+        </a>
+      </div>
+      <mat-paginator
+        *ngIf="listWaiting.length != 0"
+        [length]="lengthWaiting"
+        [pageSize]="pageSizeWaiting"
+        [pageIndex]="pageIndexWaiting"
+        (page)="pageWaitingEvent = getPaginatorWaitingData($event)"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+  <div class="col-xl-6">
+    <div class="course mt-3">
+      <div class="course-header">
+        <span class="type">Những khóa học đang diễn ra</span>
+        <span class="quantity">{{ lengthHappen }}</span>
+      </div>
+      <div class="course-main" id="happening">
+        <p class="empty" *ngIf="lengthHappen === 0">
+          Bạn chưa có khóa học nào đang diễn ra
+        </p>
+        <a
+          *ngFor="let course of listHappen; let i = index"
+          class="course-info"
+          data-toggle="modal"
+          data-target="#courseDetail"
+          style="color: unset; text-decoration: none"
+        >
+          <img
+            src="http://localhost:8888/upload/images/{{
+              course?.objTutorRequest?.objTutor?.image
+            }}"
+            alt=""
+          />
+          <div class="info">
+            <p>
+              <span class="bold">Gia sư:</span>
+              <span>{{ course.objTutorRequest?.objTutor?.fullName }}</span>
+            </p>
+            <p>
+              <span class="bold">Môn học:</span>
+              <span>{{
+                course.objStudentRequest?.objSubject?.subjectName
+              }}</span>
+            </p>
+            <p>
+              <span class="bold">Trình độ:</span>
+              <span>{{ course.objStudentRequest?.objLevel?.levelName }}</span>
+            </p>
+          </div>
+          <div
+            class="info"
+            style="border-right: 1px solid rgba(0, 0, 0, 0.151)"
+          >
+            <p>
+              <span class="bold">Giờ học:</span>
+              <span
+                >{{ course.objStudentRequest?.beginTime | date: "HH:mm" }} -
+                {{ course.objStudentRequest?.endTime | date: "HH:mm" }}</span
+              >
+            </p>
+            <p>
+              <span class="bold">Ngày học:</span>
+              <span>{{ course.studyDate | learningDateTransform }}</span>
+            </p>
+            <p>
+              <span class="bold">Thời gian khóa học:</span>
+              <span
+                >{{ course.startDate | date: "dd/MM/yyy" }} -
+                {{ course.endDate | date: "dd/MM/yyy" }}</span
+              >
+            </p>
+          </div>
+          <div class="info text-center" style="border: none">
+            <p>
+              <span class="bold" *ngIf="!course.paymentStatus"
+                >Ngày thanh toán:</span
+              >
+              <span *ngIf="!course.paymentStatus">
+                {{ listPayDate[i]?.activeDate | date: "dd/MM/yyyy" }}</span
+              >
+            </p>
+            <button
+              class="btn btn-outline-success"
+              data-toggle="modal"
+              data-target="#pay"
+              style="font-size: 13px"
+              (click)="payForCourse(course)"
+              *ngIf="!course.paymentStatus"
+            >
+              Thanh toán
+            </button>
+            <div *ngIf="course.paymentStatus" style="color: rgb(0, 199, 0)">
+              <i class="fas fa-check-circle"></i> Đã thanh toán
+            </div>
+          </div>
+        </a>
+      </div>
+      <mat-paginator
+        *ngIf="listHappen.length != 0"
+        [length]="lengthHappen"
+        [pageSize]="pageSizeHappen"
+        [pageIndex]="pageIndexHappen"
+        (page)="pageHappenEvent = getPaginatorHappenData($event)"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="pay"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title" id="exampleModalLabel">Thanh toán học phí</p>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          <span>Chi phí/tiếng: </span
+          >{{ paidCourse.objStudentRequest?.costPerHour | number }} VNĐ
+        </p>
+        <p>
+          <span>Số giờ học 1 buổi: </span
+          >{{
+            paidCourse.objStudentRequest?.durationPerSession | timeTransform
+          }}
+          VNĐ
+        </p>
+        <p>
+          <span>Tổng tiền phải thanh toán: </span>
+          <span>
+            {{ paidMoney | currency: "USD" }}
+          </span>
+        </p>
+        <ngx-paypal class="w-75" [config]="payPalConfig"> </ngx-paypal>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-danger"
+          data-dismiss="modal"
+        >
+          Đóng
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

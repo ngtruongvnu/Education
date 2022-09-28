@@ -1,0 +1,24 @@
+<div class="request">
+  <header>
+    <p>Yêu cầu của bạn</p>
+    <a class="link" routerLink="/dashboard-student/request-form"
+      >Đăng yêu cầu mới</a
+    >
+  </header>
+  <div class="request-menu mt-2 mb-3">
+    <a
+      class="menu-link"
+      routerLink="/dashboard-student/request/send"
+      routerLinkActive="active"
+      >Yêu cầu chưa được nhận</a
+    >
+
+    <a
+      class="menu-link"
+      routerLink="/dashboard-student/request/receive"
+      routerLinkActive="active"
+      >Yêu cầu đã được nhận</a
+    >
+  </div>
+  <router-outlet></router-outlet>
+</div>

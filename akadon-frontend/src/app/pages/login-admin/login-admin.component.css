@@ -1,0 +1,132 @@
+.register {
+  display: flex;
+}
+.register .banner {
+  background-image: url("/assets/images/register/banner.png");
+  height: 100vh;
+  width: 45%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 30px 50px;
+}
+.main {
+  width: 55%;
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  position: relative;
+}
+._main {
+  position: relative;
+  top: 50px;
+}
+p {
+  margin: 0;
+}
+.title {
+  font-size: 40px;
+  font-weight: 700;
+  color: #000;
+}
+.input-area {
+  width: 50%;
+  margin-left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 10px 0;
+}
+.input-area label {
+  text-align: left;
+  margin-bottom: 10px;
+}
+.input-area input {
+  width: 100%;
+  margin-left: 0;
+  margin-bottom: 10px;
+  padding: 12px 15px;
+  position: relative;
+}
+.input-area i {
+  position: absolute;
+  right: 20px;
+  top: 43px;
+  color: #8f8f8f;
+  cursor: pointer;
+  font-size: 20px;
+}
+.input-area #hide {
+  display: none;
+}
+.remember-me {
+  flex-direction: row;
+  align-items: center;
+}
+.remember-me input {
+  width: unset;
+  margin: 0;
+  padding: 0;
+  margin-right: 8px;
+}
+.remember-me label {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+form .submit {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+button {
+  width: 100%;
+  position: relative;
+  margin: 10px 0;
+  background: #2969b4;
+  border-radius: 30px;
+  padding: 0.8rem 0px;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+  border: none;
+}
+button i {
+  font-size: 11px;
+  position: absolute;
+  top: 14px;
+  right: 20%;
+  opacity: 0;
+  transition: 0.3s;
+}
+form .submit .valid:hover {
+  background: #277ddf;
+}
+form .submit .valid:hover i {
+  right: 10%;
+  opacity: 1;
+}
+.errors {
+  bottom: -10px;
+}
+.error-popup {
+  /* position: absolute;
+  top: 0;
+  right: 100px; */
+  background: rgba(185, 0, 0, 0.644);
+  color: #fff;
+  font-weight: 600;
+  padding: 20px 30px;
+  border-radius: 10px;
+  z-index: 20;
+}
+.forgot-password {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+  margin: 10px 0;
+  font-size: 14px;
+  font-weight: 500;
+}

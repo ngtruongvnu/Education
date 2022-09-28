@@ -1,0 +1,899 @@
+<div class="back">
+  <a routerLink="/dashboard-tutor/home"
+    ><i class="fas fa-arrow-left mr-2"></i>Quay lại</a
+  >
+</div>
+<div class="tutor-information row">
+  <div class="col-xl-8 col-lg-7 col-md-12 col-sm-12 col-12 mb-3">
+    <div class="individual-page">
+      <div class="page-header">
+        <p class="page-title">Trang cá nhân</p>
+        <p class="confirmed" *ngIf="true">
+          <i class="fas fa-check-circle"></i> Đã xác thực
+        </p>
+        <p class="unconfirmed" *ngIf="false">
+          <i class="fas fa-exclamation-circle"></i> Chưa được xác thực
+        </p>
+        <button
+          class="edit-button"
+          data-toggle="modal"
+          data-target="#edit-information"
+        >
+          <i class="fas fa-pencil-alt"></i>
+        </button>
+      </div>
+      <div class="page-main">
+        <div class="avatar">
+          <mat-spinner
+            class="avatar-spinner"
+            *ngIf="isAvatarLoading"
+          ></mat-spinner>
+          <img
+            src="http://localhost:8888/upload/images/{{ loginUser.image }}"
+            alt=""
+            class="account-image"
+          />
+          <label for="upload-image"><i class="fas fa-camera"></i></label>
+          <input
+            type="file"
+            name=""
+            class="upload-image"
+            id="upload-image"
+            (change)="selectFile($event)"
+          />
+        </div>
+        <div class="information">
+          <ul>
+            <li>
+              <div class="name-vote">
+                <span class="name">{{ loginUser.fullName }}</span>
+                <a><i class="fas fa-save"></i></a>
+                <div class="vote ml-2">
+                  <div class="active-star">
+                    <i
+                      class="fas fa-star mb-1"
+                      style="color: #ccc"
+                      *ngFor="let i of [].constructor(5)"
+                    ></i>
+                  </div>
+
+                  <div class="disable-star">
+                    <i
+                      class="fas fa-star mt-1"
+                      style="color: #ff6d34"
+                      *ngFor="let i of [].constructor(loginUser.rating)"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-birthday-cake"></i>
+              <span>{{ loginUser.birthday | date: "dd/MM/yyyy" }}</span>
+            </li>
+            <li>
+              <i class="fas fa-phone-alt"></i
+              ><span>{{ loginUser.phonenumber }}</span>
+            </li>
+            <li>
+              <i class="fas fa-map-marker-alt"></i
+              ><span
+                >{{ loginUser.ward }} - {{ loginUser.district }} -
+                {{ loginUser.city }}</span
+              >
+            </li>
+            <li>
+              <i class="fas fa-envelope"></i><span>{{ loginUser.email }}</span>
+            </li>
+            <li>
+              <i class="fas fa-venus-mars"></i
+              ><span>{{ loginUser.gender ? "Nam" : "Nữ" }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4 col-lg-5 col-md-12 col-sm-12 col-12 mb-3">
+    <div class="behavior-point">
+      <p style="font-weight: 600; padding-top: 20px">Điểm hành vi</p>
+      <div class="point">
+        <img
+          src="./assets/images/dashboard/profile/behavior-point.png"
+          class="point-circle"
+          alt=""
+        />
+        <div class="emotions">
+          <img
+            *ngIf="loginUser.behaviorPoint >= 0 && loginUser.behaviorPoint < 20"
+            src="./assets/images/dashboard/profile/emotions/emotion-1.png"
+            class="w-100"
+            alt=""
+          />
+          <img
+            *ngIf="
+              loginUser.behaviorPoint >= 20 && loginUser.behaviorPoint < 40
+            "
+            src="./assets/images/dashboard/profile/emotions/emotion-2.png"
+            class="w-100"
+            alt=""
+          />
+          <img
+            *ngIf="
+              loginUser.behaviorPoint >= 40 && loginUser.behaviorPoint < 60
+            "
+            src="./assets/images/dashboard/profile/emotions/emotion-3.png"
+            class="w-100"
+            alt=""
+          />
+          <img
+            *ngIf="
+              loginUser.behaviorPoint >= 60 && loginUser.behaviorPoint < 80
+            "
+            src="./assets/images/dashboard/profile/emotions/emotion-4.png"
+            class="w-100"
+            alt=""
+          />
+          <img
+            *ngIf="
+              loginUser.behaviorPoint >= 80 && loginUser.behaviorPoint <= 100
+            "
+            src="./assets/images/dashboard/profile/emotions/emotion-5.png"
+            class="w-100"
+            alt=""
+          />
+        </div>
+        <div class="round" [style.transform]="rotate"></div>
+        <div class="score">
+          <span class="scoree">{{ loginUser.behaviorPoint }}</span>
+          <span
+            class="level"
+            style="color: #ff1018"
+            *ngIf="loginUser.behaviorPoint >= 0 && loginUser.behaviorPoint < 20"
+            >Quá tệ</span
+          >
+          <span
+            class="level"
+            style="color: #ff5635"
+            *ngIf="
+              loginUser.behaviorPoint >= 20 && loginUser.behaviorPoint < 40
+            "
+            >Cảnh báo</span
+          >
+          <span
+            class="level"
+            style="color: #ffc007"
+            *ngIf="
+              loginUser.behaviorPoint >= 40 && loginUser.behaviorPoint < 60
+            "
+            >Bình thường</span
+          >
+          <span
+            class="level"
+            style="color: #036ab4"
+            *ngIf="
+              loginUser.behaviorPoint >= 60 && loginUser.behaviorPoint < 80
+            "
+            >Tốt</span
+          >
+          <span
+            class="level"
+            style="color: #03b0a9"
+            *ngIf="
+              loginUser.behaviorPoint >= 80 && loginUser.behaviorPoint <= 100
+            "
+            >Rất tốt</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal edit information -->
+<div
+  class="modal fade"
+  id="edit-information"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title" id="exampleModalLabel">Chỉnh sửa thông tin</p>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body edit-info">
+        <form [formGroup]="infoEditForm">
+          <div class="input-area">
+            <label for="display-name">Tên hiển thị</label>
+            <input
+              type="text"
+              class="form-control"
+              id="display-name"
+              formControlName="fullName"
+              [value]="loginUser.fullName"
+              required
+            />
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            "
+          >
+            <div class="input-area birthday" style="width: 48%">
+              <label for="birthday">Năm sinh</label>
+              <input
+                type="text"
+                name="birthday"
+                class="form-control"
+                id="birthday"
+              />
+              <label for="birthday" class="icon-birthday"
+                ><i class="far fa-calendar-alt"></i
+              ></label>
+            </div>
+            <div class="input-area" style="width: 48%">
+              <label for="display-name">Giới tính</label>
+              <select class="form-control" formControlName="gender" id="gender">
+                <option name="gender" value="false">Nữ</option>
+                <option name="gender" value="true">Nam</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="input-area">
+            <label for="city">Tỉnh / Thành phố</label>
+            <select
+              class="form-control"
+              formControlName="city"
+              id="city"
+              (change)="chooseCity($event)"
+            >
+              <option selected disabled="disabled">Tỉnh / Thành phố</option>
+              <ng-container *ngFor="let city of cityData">
+                <option [value]="city.id">{{ city.Name }}</option>
+              </ng-container>
+            </select>
+            <div *ngIf="i.city.invalid && (i.city.dirty || i.city.touched)">
+              <div *ngIf="i.city.errors">
+                <div *ngIf="i.city.errors.cityCheck">
+                  <span class="errors">Vui lòng chọn tỉnh, thành phố</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="input-area">
+            <label for="district">Quận / Huyện</label>
+            <select
+              class="form-control"
+              formControlName="district"
+              id="district"
+              (change)="chooseDistrict($event)"
+            >
+              <option selected disabled="disabled">Quận / Huyện</option>
+              <ng-container *ngFor="let district of districtData">
+                <option [value]="district.id">
+                  {{ district.Name }}
+                </option>
+              </ng-container>
+            </select>
+            <div
+              *ngIf="
+                i.district.invalid && (i.district.dirty || i.district.touched)
+              "
+            >
+              <div *ngIf="i.district.errors">
+                <div *ngIf="i.district.errors.districtCheck">
+                  <span class="errors">Vui lòng chọn quận, huyện</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="input-area">
+            <label for="ward">Phường / Xã</label>
+            <select class="form-control" formControlName="ward" id="ward">
+              <option selected disabled="disabled">Phường / Xã</option>
+              <ng-container *ngFor="let ward of wardData">
+                <option [value]="ward.Name">{{ ward.Name }}</option>
+              </ng-container>
+            </select>
+            <div *ngIf="i.ward.invalid && (i.ward.dirty || i.ward.touched)">
+              <div *ngIf="i.ward.errors">
+                <div *ngIf="i.ward.errors.wardCheck">
+                  <span class="errors">Vui lòng chọn phường, xã</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="input-area">
+            <label for="phoneNumber">Số điện thoại</label>
+            <input
+              type="text"
+              class="form-control"
+              id="phoneNumber"
+              formControlName="phoneNumber"
+            />
+            <div
+              *ngIf="
+                i.phoneNumber.invalid &&
+                (i.phoneNumber.dirty || i.phoneNumber.touched)
+              "
+            >
+              <div *ngIf="i.phoneNumber.errors">
+                <div *ngIf="i.phoneNumber.errors.required">
+                  <span class="errors" style="margin-bottom: -17px"
+                    >Số điện thoại không được để trống</span
+                  >
+                </div>
+                <div
+                  *ngIf="
+                    i.phoneNumber.errors.minlength ||
+                    i.phoneNumber.errors.maxlength
+                  "
+                >
+                  <span class="errors" style="margin-bottom: -17px"
+                    >Số điện thoại từ 10 đến 11 số</span
+                  >
+                </div>
+                <div *ngIf="i.phoneNumber.errors.editTutorPhoneNumberCheck">
+                  <span class="errors" style="margin-bottom: -17px"
+                    >Số điện thoại này đã được sử dụng</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal">Hủy</button>
+        <button
+          type="button"
+          *ngIf="infoEditForm.valid"
+          (click)="updateInfo()"
+          class="update"
+          data-dismiss="modal"
+        >
+          Thay đổi
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="introduction mb-3">
+  <div class="introduction-header">
+    <p class="title">Giới thiệu về bản thân</p>
+    <button class="edit-button" data-toggle="modal" data-target="#editCarrer">
+      <i class="fas fa-pencil-alt"></i>
+    </button>
+  </div>
+  <ul>
+    <li>
+      <p style="font-weight: 600" class="pt-2 pb-2">Chuyên môn nhận dạy</p>
+      <div class="carrers">
+        <div class="carrer" *ngFor="let detail of listTutorDetail">
+          {{ detail.objSubject?.subjectName }} -
+          {{ detail.objLevel?.levelName }}
+        </div>
+        <button
+          type="button"
+          class="carrer view-all"
+          data-toggle="modal"
+          data-target="#all"
+          *ngIf="listTutorDetail.length < detailAll.length"
+        >
+          Xem tất cả
+        </button>
+      </div>
+    </li>
+    <li>
+      <p style="font-weight: 600" class="pt-2 pb-2">Kinh nghiệm gia sư</p>
+      <p class="content">Chưa có</p>
+    </li>
+  </ul>
+</div>
+<div class="introduction mt-3 mb-3 certificates">
+  <div class="introduction-header">
+    <p class="title">Chứng chỉ, bằng cấp</p>
+    <button
+      class="edit-button"
+      data-toggle="modal"
+      data-target="#addCertificate"
+    >
+      <i class="fas fa-plus"></i>
+    </button>
+  </div>
+  <div class="certificates-body">
+    <div *ngIf="listCertificate.length === 0">Chưa có thành tích</div>
+    <div class="row" style="padding: 0 20px">
+      <div class="mt-2 col-xl-4" *ngFor="let image of listCertificate">
+        <div class="certificate">
+          <i
+            class="fas fa-times-circle delete-carrer delete-certificate"
+            (click)="deleteCertificate(image)"
+          ></i>
+          <p style="font-weight: 700; font-size: 18px; color: #0367b4">
+            {{ image.verifycateType }}
+          </p>
+          <p
+            style="
+              color: #2dc052;
+              font-weight: 500;
+              font-size: 15px;
+              padding: 15px 0;
+            "
+          >
+            <i class="fas fa-check-circle"></i> Đã duyệt
+          </p>
+
+          <button
+            type="button"
+            class="carrer view-all"
+            style="border: none; border-radius: 30px; padding: 5px 10px"
+            data-toggle="modal"
+            data-target="#detail"
+            (click)="viewDetail(image)"
+          >
+            Xem chi tiết
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="introduction response mb-3">
+  <div class="introduction-header">
+    <p class="title">Phản hồi của học sinh</p>
+  </div>
+  <div class="response-body">
+    <div class="vote-menu">
+      <div
+        style="width: 20%; display: flex; align-items: center; font-weight: 700"
+      >
+        <span class="vote-average"> {{ average | number }} </span>
+        <span>/ 5 <i class="fas fa-star"></i> </span>
+      </div>
+      <ul>
+        <li>
+          <a class="active" (click)="chooseComment($event)" id="all-comments"
+            >Tất cả ({{ allReview }})</a
+          >
+        </li>
+        <li>
+          <a (click)="chooseComment($event)" id="5-star"
+            >5 <i class="fas fa-star"></i> ({{ fiveStarReview }})</a
+          >
+        </li>
+        <li>
+          <a (click)="chooseComment($event)" id="4-star"
+            >4 <i class="fas fa-star"></i> ({{ fourStarReview }})</a
+          >
+        </li>
+        <li>
+          <a (click)="chooseComment($event)" id="3-star"
+            >3 <i class="fas fa-star"></i> ({{ threeStarReview }})</a
+          >
+        </li>
+        <li>
+          <a (click)="chooseComment($event)" id="2-star"
+            >2 <i class="fas fa-star"></i> ({{ twoStarReview }})</a
+          >
+        </li>
+        <li>
+          <a (click)="chooseComment($event)" id="1-star"
+            >1 <i class="fas fa-star"></i> ({{ oneStarReview }})</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <div class="comments">
+      <mat-spinner
+        class="review-spinner"
+        *ngIf="isCommentLoading"
+      ></mat-spinner>
+      <div class="empty" *ngIf="!isCommentLoading && listReview.length === 0">
+        <img src="./assets/images/review-empty.svg" alt="" />
+        <p>Chưa có đánh giá</p>
+      </div>
+      <div *ngIf="!isCommentLoading && listReview.length > 0">
+        <p class="title pt-2">Những học viên đã đánh giá</p>
+        <table class="table review">
+          <thead>
+            <tr>
+              <th scope="col">Ngày đánh giá</th>
+              <th scope="col">Email học viên</th>
+              <th scope="col">Đánh giá</th>
+              <th scope="col">Số sao</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let review of listReview">
+              <td>{{ review.commentDate | date: "dd/MM/yyyy" }}</td>
+              <td>{{ review.sendCommentEmail }}</td>
+              <td>
+                <p style="background-color: #fff; border: none; padding: 0">
+                  {{ review.comment }}
+                </p>
+              </td>
+              <td>
+                <div class="vote ml-2">
+                  <div class="active-star">
+                    <i
+                      class="fas fa-star mb-1"
+                      style="color: #ccc"
+                      *ngFor="let i of [].constructor(5)"
+                    ></i>
+                  </div>
+                  <div class="disable-star">
+                    <i
+                      class="fas fa-star mt-1"
+                      style="color: #ff6d34"
+                      *ngFor="let i of [].constructor(review.rating)"
+                    ></i>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="all"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title" id="exampleModalLongTitle">Môn học nhận dạy</p>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="carrers">
+          <div class="carrer" *ngFor="let detail of detailAll">
+            {{ detail.objSubject?.subjectName }} -
+            {{ detail.objLevel?.levelName }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="editCarrer"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title" id="exampleModalLongTitle">
+          Chỉnh sửa chuyên môn
+        </p>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="carrers">
+          <div class="carrer" *ngFor="let detail of detailAll">
+            {{ detail.objSubject?.subjectName }} -
+            {{ detail.objLevel?.levelName }}
+            <i
+              class="fas fa-times delete-carrer"
+              (click)="deleteDetail(detail)"
+            ></i>
+          </div>
+        </div>
+        <form
+          [formGroup]="detailForm"
+          (ngSubmit)="submitDetail()"
+          class="detail"
+        >
+          <div formArrayName="details">
+            <div
+              *ngFor="let detail of details.controls; let i = index"
+              class="detail-form"
+            >
+              <div [formGroupName]="i">
+                <div class="input-form">
+                  <div class="input-area">
+                    <label for="subject">Môn học</label>
+                    <select
+                      class="form-control"
+                      formControlName="subject"
+                      id="subject"
+                    >
+                      <option selected disabled="disabled">Chọn môn học</option>
+                      <ng-container *ngFor="let subject of subjectData">
+                        <option [ngValue]="subject">
+                          {{ subject.subjectName }}
+                        </option>
+                      </ng-container>
+                    </select>
+                  </div>
+                  <div class="input-area">
+                    <label for="level">Trình độ</label>
+                    <mat-form-field appearance="fill">
+                      <mat-select
+                        formControlName="level"
+                        class="form-control"
+                        multiple
+                        id="level"
+                        placeholder="Chọn trình độ"
+                      >
+                        <mat-option
+                          *ngFor="let level of levelData"
+                          [value]="level"
+                          >{{ level.levelName }}</mat-option
+                        >
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <button
+                    class="btn btn-primary bg-info"
+                    style="margin-top: 10px; border: none"
+                    (click)="addDetail()"
+                  >
+                    Thêm
+                  </button>
+                  <button
+                    class="btn btn-primary bg-danger"
+                    style="margin-top: 10px; border: none"
+                    (click)="removeDetail(i)"
+                    *ngIf="details.length > 1"
+                  >
+                    Xóa
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="actions m-2">
+          <div class="submit">
+            <button
+              type="submit"
+              (click)="submitDetail()"
+              class="valid btn btn-success"
+              *ngIf="detailForm.valid"
+              data-dismiss="modal"
+            >
+              Cập nhật
+            </button>
+            <button
+              type="submit"
+              class="btn btn-success"
+              *ngIf="!detailForm.valid"
+              style="cursor: not-allowed; opacity: 0.5"
+            >
+              Cập nhật
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="detail"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title" id="exampleModalLongTitle">
+          Ảnh bằng cấp / Chứng chỉ
+        </p>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 30px">
+        <p style="color: #2dc052; font-weight: 500; font-size: 15px">
+          <i class="fas fa-check-circle"></i> Đã duyệt
+        </p>
+        <p style="font-weight: 500; font-size: 16px">
+          Loại bằng cấp/chứng chỉ: {{ certificateDetail.verifycateType }}
+        </p>
+        <p style="font-weight: 500; font-size: 16px">
+          Giá trị: {{ certificateDetail.verifyValue }}
+        </p>
+        <p style="font-weight: 500; font-size: 16px">
+          Năm: {{ certificateDetail.verifyYear }}
+        </p>
+        <img
+          src="http://localhost:8888/upload/images/{{
+            certificateDetail.verifyImage
+          }}"
+          style="border-radius: 20px"
+          alt=""
+          class="w-100"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="addCertificate"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title" id="exampleModalLabel">Thêm thành tích</p>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="certificateForm" (ngSubmit)="addVerificate()">
+          <div class="input-area">
+            <label for="display-name">Tên thành tích</label>
+            <select
+              formControlName="verifycateType"
+              (change)="chooseType($event)"
+              class="form-control"
+              id=""
+            >
+              <option selected disabled>Chọn thành tích</option>
+              <ng-container *ngFor="let type of certificateType">
+                <option [value]="type.id">{{ type.type }}</option>
+              </ng-container>
+            </select>
+          </div>
+          <div class="input-area" *ngIf="type1">
+            <label for="display-name">Tên thành tích</label>
+            <select formControlName="verifyValue" class="form-control" id="">
+              <option selected disabled>Loại</option>
+              <option value="Giỏi">Giỏi</option>
+              <option value="Khá">Khá</option>
+              <option value="Trung bình">Trung bình</option>
+            </select>
+          </div>
+          <div
+            *ngIf="type2"
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            "
+          >
+            <div class="input-area" style="width: 48%">
+              <label for="verifyValue">Điểm</label>
+              <input
+                type="text"
+                formControlName="verifyValue"
+                class="form-control"
+                id="verifyValue"
+              />
+            </div>
+            <div class="input-area" style="width: 48%">
+              <label for="verifyYear">Năm</label>
+              <input
+                type="text"
+                formControlName="verifyYear"
+                class="form-control"
+                id="verifyYear"
+              />
+            </div>
+          </div>
+          <div
+            *ngIf="type3"
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            "
+          >
+            <div class="input-area" style="width: 48%">
+              <label for="verifyValue">Kết quả</label>
+              <select formControlName="verifyValue" class="form-control" id="">
+                <option selected disabled>Chọn kết quả</option>
+                <option value="Giỏi">Giải nhất</option>
+                <option value="Khá">Giải nhì</option>
+                <option value="Trung bình">Giải ba</option>
+                <option value="Trung bình">Giải khuyến khích</option>
+              </select>
+            </div>
+            <div class="input-area" style="width: 48%">
+              <label for="verifyYear">Năm</label>
+              <input
+                type="text"
+                formControlName="verifyYear"
+                class="form-control"
+                id="verifyYear"
+              />
+            </div>
+          </div>
+          <div class="avatar">
+            <mat-spinner
+              class="avatar-spinner"
+              *ngIf="isCertificateLoading"
+            ></mat-spinner>
+            <label for="upload-certiticate" class="cerfiticate-upload"
+              ><i class="fas fa-plus-circle mr-1"></i> Thêm ảnh</label
+            >
+            <input
+              type="file"
+              formControlName="verifyImage"
+              class="form-control"
+              id="upload-certiticate"
+              style="display: none"
+              (change)="selectCertificate($event)"
+            />
+            <img
+              [src]="imageSrc"
+              *ngIf="imageSrc"
+              style="width: 300px; margin-top: 30px"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal">Hủy</button>
+        <button
+          type="button"
+          *ngIf="certificateForm.valid"
+          (click)="addVerificate()"
+          class="update"
+          data-dismiss="modal"
+        >
+          Thêm
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

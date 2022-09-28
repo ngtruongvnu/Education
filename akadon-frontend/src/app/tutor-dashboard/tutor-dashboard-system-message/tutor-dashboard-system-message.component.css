@@ -1,0 +1,83 @@
+.main {
+  margin: 20px 0;
+  background-color: #fff;
+  border-radius: 10px;
+  height: calc(100vh - 131px);
+  padding: 20px 0;
+}
+.main .title {
+  margin-left: 20px;
+  font-size: 22px;
+  font-weight: 700;
+  padding-top: 10px;
+  margin-bottom: 20px;
+}
+.main .message {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  padding: 10px 20px;
+  border-top: 1px solid #cccccc69;
+  position: relative;
+  cursor: pointer;
+  color: #000;
+}
+.main .message:last-child {
+  border-bottom: 1px solid #cccccc69;
+}
+.message-content {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  line-height: 1.5;
+}
+.action {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.action .delete {
+  margin-left: 20px;
+  background: rgb(223, 53, 53);
+}
+.action p {
+  margin: 0;
+}
+.action .view {
+  margin-left: 20px;
+  background: rgb(0, 107, 207);
+}
+.action button {
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+.action button:hover {
+  opacity: 1;
+}
+.modal-content .modal-body {
+  align-items: flex-start;
+  justify-self: space-between;
+  font-size: 14px;
+}
+.modal-footer {
+  flex-direction: column;
+}
+.modal-footer .actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+}

@@ -1,0 +1,52 @@
+.register {
+  display: flex;
+}
+.register .banner {
+  background-image: url("/assets/images/register/banner.png");
+  height: 100vh;
+  width: 45%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 30px 50px;
+}
+.main {
+  width: 55%;
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  position: relative;
+}
+header {
+  font-size: 42px;
+  font-weight: 700;
+  position: relative;
+}
+header::after {
+  content: "";
+  width: 50px;
+  height: 7px;
+  background: #0367b4;
+  border-radius: 10px;
+  position: absolute;
+  left: 0;
+  bottom: -30px;
+}
+._main {
+  position: relative;
+  top: 300px;
+  transform: translateY(-50%);
+}
+footer {
+  font-size: 14px;
+  position: absolute;
+  bottom: 20px;
+}
+footer a {
+  color: #ff6d34;
+  font-weight: 700;
+  transition: 0.3s;
+}
+footer a:hover {
+  color: #0367b4;
+}

@@ -1,0 +1,203 @@
+<div class="body">
+  <header>
+    <div class="container" style="padding: 0">
+      <img src="./assets/images/profile-banner.svg" class="w-100" alt="" />
+      <div class="info">
+        <img
+          class="avatar"
+          src="http://localhost:8888/upload/images/{{ Student.image }}"
+          alt=""
+        />
+        <p style="font-weight: 600; font-size: 18px">{{ Student.fullName }}</p>
+        <p style="color: rgba(0, 0, 0, 0.452); padding-bottom: 20px">
+          Đã tham gia vào AKADON từ tháng
+          {{ Student.otpRequestTime | date: "MM/yyyy" }}
+        </p>
+      </div>
+    </div>
+  </header>
+  <div class="container mt-3">
+    <p class="title">Về học viên</p>
+    <table>
+      <tr>
+        <td><p>Số khóa học đã học</p></td>
+        <td>
+          <p class="ml-2" style="color: #0367b4; font-weight: 600">
+            {{ Student.learntCourseNumber }} khóa học
+          </p>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="container mt-3">
+    <p class="title">Điểm hành vi</p>
+    <div class="behavior-point">
+      <div class="point">
+        <img
+          src="./assets/images/dashboard/profile/behavior-point.png"
+          class="point-circle"
+          alt=""
+        />
+        <div class="emotions">
+          <img
+            *ngIf="point >= 0 && point < 20"
+            src="./assets/images/dashboard/profile/emotions/emotion-1.png"
+            class="w-100"
+            alt=""
+          />
+          <img
+            *ngIf="point >= 20 && point < 40"
+            src="./assets/images/dashboard/profile/emotions/emotion-2.png"
+            class="w-100"
+            alt=""
+          />
+          <img
+            *ngIf="point >= 40 && point < 60"
+            src="./assets/images/dashboard/profile/emotions/emotion-3.png"
+            class="w-100"
+            alt=""
+          />
+          <img
+            *ngIf="point >= 60 && point < 80"
+            src="./assets/images/dashboard/profile/emotions/emotion-4.png"
+            class="w-100"
+            alt=""
+          />
+          <img
+            *ngIf="point >= 80 && point <= 100"
+            src="./assets/images/dashboard/profile/emotions/emotion-5.png"
+            class="w-100"
+            alt=""
+          />
+        </div>
+        <div class="round" [style.transform]="rotate"></div>
+        <div class="score">
+          <span class="scoree">{{ point }}</span>
+          <span
+            class="level"
+            style="color: #ff1018"
+            *ngIf="point >= 0 && point < 20"
+            >Quá tệ</span
+          >
+          <span
+            class="level"
+            style="color: #ff5635"
+            *ngIf="point >= 20 && point < 40"
+            >Cảnh báo</span
+          >
+          <span
+            class="level"
+            style="color: #ffc007"
+            *ngIf="point >= 40 && point < 60"
+            >Bình thường</span
+          >
+          <span
+            class="level"
+            style="color: #036ab4"
+            *ngIf="point >= 60 && point < 80"
+            >Tốt</span
+          >
+          <span
+            class="level"
+            style="color: #03b0a9"
+            *ngIf="point >= 80 && point <= 100"
+            >Rất tốt</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container mt-3">
+    <p class="title">Đánh giá</p>
+    <div class="vote-menu">
+      <div
+        style="width: 20%; display: flex; align-items: center; font-weight: 700"
+      >
+        <span class="vote-average"> {{ average | number }} </span>
+        <span>/ 5 <i class="fas fa-star"></i> </span>
+      </div>
+      <ul>
+        <li>
+          <a class="active" (click)="chooseComment($event)" id="all-comments"
+            >Tất cả ({{ allReview }})</a
+          >
+        </li>
+        <li>
+          <a (click)="chooseComment($event)" id="5-star"
+            >5 <i class="fas fa-star"></i> ({{ fiveStarReview }})</a
+          >
+        </li>
+        <li>
+          <a (click)="chooseComment($event)" id="4-star"
+            >4 <i class="fas fa-star"></i> ({{ fourStarReview }})</a
+          >
+        </li>
+        <li>
+          <a (click)="chooseComment($event)" id="3-star"
+            >3 <i class="fas fa-star"></i> ({{ threeStarReview }})</a
+          >
+        </li>
+        <li>
+          <a (click)="chooseComment($event)" id="2-star"
+            >2 <i class="fas fa-star"></i> ({{ twoStarReview }})</a
+          >
+        </li>
+        <li>
+          <a (click)="chooseComment($event)" id="1-star"
+            >1 <i class="fas fa-star"></i> ({{ oneStarReview }})</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <div class="comments">
+      <mat-spinner class="review-spinner" *ngIf="isLoading"></mat-spinner>
+      <div class="empty" *ngIf="!isLoading && listReview.length === 0">
+        <img src="./assets/images/review-empty.svg" alt="" />
+        <p>Chưa có đánh giá</p>
+      </div>
+      <div *ngIf="!isLoading && listReview.length > 0">
+        <p class="title pt-1">Những gia sư đã đánh giá</p>
+        <table class="table review">
+          <thead>
+            <tr>
+              <th scope="col">Ngày đánh giá</th>
+              <th scope="col">Tên gia sư</th>
+              <th scope="col">Đánh giá</th>
+              <th scope="col">Số sao</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let review of listReview">
+              <td>{{ review.commentDate | date: "dd/MM/yyyy" }}</td>
+              <td>{{ review.sendName }}</td>
+              <td>
+                <p style="background-color: #fff; border: none; padding: 0">
+                  {{ review.comment }}
+                </p>
+              </td>
+              <td>
+                <div class="vote ml-2">
+                  <div class="active-star">
+                    <i
+                      class="fas fa-star mb-1"
+                      style="color: #ccc"
+                      *ngFor="let i of [].constructor(5)"
+                    ></i>
+                  </div>
+                  <div class="disable-star">
+                    <i
+                      class="fas fa-star mt-1"
+                      style="color: #ff6d34"
+                      *ngFor="let i of [].constructor(review.rating)"
+                    ></i>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

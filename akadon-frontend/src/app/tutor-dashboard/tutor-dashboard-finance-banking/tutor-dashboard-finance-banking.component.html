@@ -1,0 +1,267 @@
+<div class="back">
+  <a routerLink="/dashboard-tutor/home"
+    ><i class="fas fa-arrow-left mr-2"></i>Quay lại</a
+  >
+</div>
+<div class="banking-main">
+  <p style="font-weight: 600; font-size: 14px">Tài khoản ngân hàng</p>
+  <div class="row mt-4">
+    <div class="mb-3 col-xl-3">
+      <button class="insert-card" data-toggle="modal" data-target="#insertCard">
+        <i class="fas fa-plus"></i>
+        <p>Tài khoản ngân hàng</p>
+      </button>
+    </div>
+    <div class="mb-3 col-xl-3">
+      <div class="cards">
+        <div class="card-headerr">
+          <i class="fas fa-check-circle mr-2"></i> Đã xác thực
+        </div>
+        <div class="card-main">
+          <p class="bank-name pt-2 pb-2">Vietcombank</p>
+          <p class="number pt-3 pb-3">
+            <span class="hidden">****</span> <span class="show">1774</span>
+          </p>
+          <p class="name pt-2 pb-2">Vũ Văn Tuấn</p>
+        </div>
+        <div class="card-bottom"><span>Mặc định</span></div>
+      </div>
+    </div>
+    <div class="mb-3 col-xl-3">
+      <div class="cards">
+        <div class="card-headerr">
+          <i class="fas fa-check-circle mr-2"></i> Đã xác thực
+        </div>
+        <div class="card-main">
+          <p class="bank-name pt-2 pb-2">Vietcombank</p>
+          <p class="number pt-3 pb-3">
+            <span class="hidden">****</span> <span class="show">1774</span>
+          </p>
+          <p class="name pt-2 pb-2">Vũ Văn Tuấn</p>
+        </div>
+        <div class="card-bottom"></div>
+      </div>
+    </div>
+    <div class="mb-3 col-xl-3">
+      <div class="cards">
+        <div class="card-headerr">
+          <i class="fas fa-check-circle mr-2"></i> Đã xác thực
+        </div>
+        <div class="card-main">
+          <p class="bank-name pt-2 pb-2">Vietcombank</p>
+          <p class="number pt-3 pb-3">
+            <span class="hidden">****</span> <span class="show">1774</span>
+          </p>
+          <p class="name pt-2 pb-2">Vũ Văn Tuấn</p>
+        </div>
+        <div class="card-bottom"></div>
+      </div>
+    </div>
+    <div class="mb-3 col-xl-3">
+      <div class="cards">
+        <div class="card-headerr">
+          <i class="fas fa-check-circle mr-2"></i> Đã xác thực
+        </div>
+        <div class="card-main">
+          <p class="bank-name pt-2 pb-2">Vietcombank</p>
+          <p class="number pt-3 pb-3">
+            <span class="hidden">****</span> <span class="show">1774</span>
+          </p>
+          <p class="name pt-2 pb-2">Vũ Văn Tuấn</p>
+        </div>
+        <div class="card-bottom"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div
+  class="modal fade bd-example-modal-lg"
+  id="insertCard"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">
+          Tài khoản ngân hàng
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="cardForm" (ngSubmit)="submitCard()">
+          <div class="input-area">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="fullName"
+              placeholder="Họ và tên"
+            />
+            <div
+              *ngIf="
+                f.fullName.invalid && (f.fullName.dirty || f.fullName.touched)
+              "
+            >
+              <div *ngIf="f.fullName.errors">
+                <div *ngIf="f.fullName.errors.required">
+                  <span class="errors">Tên không được để trống</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="input-area">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="phoneNumber"
+              placeholder="Số điện thoại"
+            />
+            <div
+              *ngIf="
+                f.phoneNumber.invalid &&
+                (f.phoneNumber.dirty || f.phoneNumber.touched)
+              "
+            >
+              <div *ngIf="f.phoneNumber.errors">
+                <div *ngIf="f.phoneNumber.errors.required">
+                  <span class="errors">Số điện thoại không được để trống</span>
+                </div>
+                <div
+                  *ngIf="
+                    f.phoneNumber.errors.minlength ||
+                    f.phoneNumber.errors.maxlength
+                  "
+                >
+                  <span class="errors">Số điện thoại phải chứa 10 số</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="input-area">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="idCard"
+              placeholder="Số thẻ căn cước / chứng minh nhân dân"
+            />
+            <div
+              *ngIf="f.idCard.invalid && (f.idCard.dirty || f.idCard.touched)"
+            >
+              <div *ngIf="f.idCard.errors">
+                <div *ngIf="f.idCard.errors.required">
+                  <span class="errors"
+                    >Số thẻ căn cước / chứng minh nhân dân không được để
+                    trống</span
+                  >
+                </div>
+                <div
+                  *ngIf="f.idCard.errors.minlength || f.idCard.errors.maxlength"
+                >
+                  <span class="errors"
+                    >Số thẻ căn cước / chứng minh nhân dân phải chứa 12 số</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="input-area">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="accountNumber"
+              placeholder="Số tài khoản"
+            />
+            <div
+              *ngIf="
+                f.accountNumber.invalid &&
+                (f.accountNumber.dirty || f.accountNumber.touched)
+              "
+            >
+              <div *ngIf="f.accountNumber.errors">
+                <div *ngIf="f.accountNumber.errors.required">
+                  <span class="errors">Số thẻ không được để trống</span>
+                </div>
+                <div *ngIf="f.accountNumber.errors.minlength">
+                  <span class="errors">Số thẻ ít hơn 9 số</span>
+                </div>
+                <div *ngIf="f.accountNumber.errors.maxlength">
+                  <span class="errors">Số thẻ nhiều hơn 14 số</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="input-area">
+            <select id="bank" formControlName="bank" class="form-control">
+              <option selected="selected" value="" disabled="disabled">
+                Chọn ngân hàng
+              </option>
+              <option value="Techcombank">Techcombank</option>
+              <option value="Tienphongbank">Tienphongbank</option>
+              <option value="Vietinbank">Vietinbank</option>
+              <option value="VIB">VIB</option>
+              <option value="VietA">VietA</option>
+              <option value="MSB">MSB</option>
+              <option value="EXIM">EXIM</option>
+              <option value="SHB">SHB</option>
+              <option value="HDBank">HDBank</option>
+              <option value="Vietcombank">Vietcombank</option>
+              <option value="DongAbank">DongAbank</option>
+              <option value="MB">MB</option>
+              <option value="NAB">NAB</option>
+              <option value="SEABANK">SEABANK</option>
+              <option value="OCEANBANK">OCEANBANK</option>
+              <option value="BIDV">BIDV</option>
+              <option value="BACA">BACA</option>
+              <option value="VPBANK">VPBANK</option>
+              <option value="NCB (NAVIBANK)">NCB (NAVIBANK)</option>
+              <option value="AGRIBANK">AGRIBANK</option>
+              <option value="SAIGONBANK (SCB)">SAIGONBANK (SCB)</option>
+              <option value="SACOMBANK">SACOMBANK</option>
+              <option value="AnBinh Bank">AnBinh Bank</option>
+              <option value="PVCom Bank">PVCom Bank</option>
+              <option value="VCCB (Bản Việt)">VCCB (Bản Việt)</option>
+            </select>
+            <div *ngIf="f.bank.invalid && (f.bank.dirty || f.bank.touched)">
+              <div *ngIf="f.bank.errors">
+                <div *ngIf="f.bank.errors.required">
+                  <span class="errors">Vui lòng chọn ngân hàng</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <input
+            type="checkbox"
+            formControlName="defaultCard"
+            id="defaultCard"
+          />
+          <label for="defaultCard">Đặt làm thẻ mặc định</label>
+          <div class="modal-footer">
+            <button type="button" class="close" data-dismiss="modal">
+              Hủy
+            </button>
+            <button type="submit" class="update valid" *ngIf="cardForm.valid">
+              Tiếp tục
+            </button>
+            <button
+              type="submit"
+              class="update invalid"
+              *ngIf="!cardForm.valid"
+            >
+              Tiếp tục
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

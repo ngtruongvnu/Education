@@ -1,0 +1,148 @@
+p {
+  margin: 0;
+}
+header {
+  display: flex;
+  justify-content: flex-end;
+  position: sticky;
+  top: 0;
+  background-color: #eaf4fc;
+  z-index: 10;
+}
+header .information {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 10px;
+}
+
+header .information {
+  display: flex;
+  justify-content: space-between;
+}
+header .information .datetime {
+  display: flex;
+  font-size: 14px;
+}
+header .information .datetime .day {
+  color: #0367b4;
+  font-weight: 700;
+  margin-right: 5px;
+}
+header .information .datetime .date {
+  margin-right: 10px;
+}
+header .information .message-report,
+header .information .tutor-information {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+header .information .message-report i {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 50%;
+  font-size: 14px;
+  margin-right: 10px;
+  color: #0367b4;
+  cursor: pointer;
+  transition: 0.3s;
+}
+header .information .message-report i:hover {
+  background: #a3d7ff73;
+}
+header .information .tutor-information img {
+  border-radius: 50%;
+  margin-right: 10px;
+  width: 50px;
+  height: 50px;
+}
+header .information .tutor-information .tutor-name {
+  display: flex;
+  font-size: 14px;
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+}
+header .information .tutor-information .tutor-name span {
+  margin-right: 5px;
+  cursor: pointer;
+}
+#notifications {
+  position: absolute;
+  top: 35px;
+  right: 10px;
+  width: 350px;
+  height: 600px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px -5px;
+  overflow: auto;
+}
+#notifications .title {
+  font-size: 21px;
+  margin: 0;
+  font-weight: 600;
+  padding: 10px 10px 15px 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.281);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#notifications .title a {
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+#notifications .title a:hover {
+  color: #ff6d34;
+}
+#notifications .notify {
+  padding: 10px 10px 15px 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+  color: unset;
+  text-decoration: none;
+}
+#notifications .notify:hover {
+  background-color: rgb(202, 202, 202);
+}
+#notifications .notify .content {
+  margin-left: 10px;
+}
+.fa-circle {
+  font-size: 10px !important;
+  background: unset !important;
+}
+.header-spinner {
+  width: 30px !important;
+  height: 30px !important;
+  margin: 0 auto;
+}
+::ng-deep .header-spinner svg {
+  width: 30px !important;
+  height: 30px !important;
+}
+.number-unseen {
+  position: absolute;
+  top: 0 !important;
+  right: 0;
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50%;
+  background-color: #ff6d34;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 600;
+  font-size: 11px;
+}

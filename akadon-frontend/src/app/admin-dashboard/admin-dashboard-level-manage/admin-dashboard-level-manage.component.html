@@ -1,0 +1,32 @@
+<div class="table-responsive mt-5">
+  <p style="font-weight: 600; font-size: 18px">Danh sách các trình độ</p>
+  <table class="table" style="background: #fff; border-radius: 5px">
+    <thead>
+      <tr>
+        <th scope="col" style="font-weight: 600; text-align: center">STT</th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Trình độ
+        </th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Số khóa học
+        </th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Số yêu cầu
+        </th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Số gia sư
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let level of listLevel; let i = index">
+        <th scope="row" style="text-align: center">{{ i + 1 }}</th>
+        <td style="text-align: center">{{ level.levelName }}</td>
+        <td style="text-align: center">{{ countCourseByLevel[i] }}</td>
+        <td style="text-align: center">{{ countRequestByLevel[i] }}</td>
+        <td style="text-align: center">{{ countTutorByLevel[i] }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

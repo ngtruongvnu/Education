@@ -1,0 +1,421 @@
+p {
+  margin: 0;
+}
+a {
+  cursor: pointer;
+}
+.title {
+  position: absolute;
+  top: -72px;
+  left: 195px;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 500;
+  color: #0367b4;
+}
+.title img {
+  margin-right: 10px;
+}
+
+.back {
+  text-decoration: none;
+  color: #8f8f8f;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.5s;
+  display: flex;
+  align-items: center;
+}
+.back i {
+  margin-right: 10px;
+}
+.back:hover {
+  color: #ff6d34;
+}
+::ng-deep .mat-step-header .mat-step-icon-selected,
+::ng-deep .mat-step-header .mat-step-icon-state-edit {
+  background-color: #ff6d34;
+}
+::ng-deep .mat-step-header .mat-step-label-selected {
+  font-weight: 600;
+}
+.input-area {
+  width: 70%;
+  margin-left: 0;
+  /* display: flex;
+  flex-direction: column;
+  align-items: flex-start; */
+  margin: 10px 0;
+  position: relative;
+}
+.input-area label {
+  /* text-align: rig; */
+  margin-bottom: 10px;
+}
+.input-area label::after {
+  content: "*";
+  color: red;
+  margin-left: 5px;
+}
+.birthday .icon-birthday {
+  top: 0;
+}
+.input-area input,
+.input-area select {
+  width: 100%;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  padding: 12px 15px;
+  position: relative;
+}
+.input-area i {
+  position: absolute;
+  right: 20px;
+  top: 14px;
+  color: #8f8f8f;
+  cursor: pointer;
+  font-size: 20px;
+}
+.verify {
+  width: 100%;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
+
+.verify .input-area {
+  width: 100%;
+}
+.verify .actions {
+  width: 100%;
+}
+.verify a {
+  text-decoration: underline;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.verify a:hover {
+  color: #ff6d34;
+}
+.verify .errors {
+  left: 228px;
+  top: 55px;
+}
+.timer-and-resend {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.input-area #hide,
+.input-area #confirm-hide {
+  display: none;
+}
+#timeout {
+  display: none;
+  color: red;
+}
+.birthday .form-control {
+  height: 45px !important;
+  margin: 0 !important;
+  margin-left: 20px !important;
+  margin-bottom: 10px !important;
+  padding-bottom: 0 !important;
+}
+.birthday mat-label {
+  background-color: #fff;
+  position: relative;
+  /* top: 2px !important; */
+  left: -15px;
+}
+.birthday input {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between !important;
+  margin: 0 !important;
+}
+::ng-deep .mat-form-field-infix {
+  border: none;
+}
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+  display: none;
+}
+form .actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+}
+form .submit,
+form .actions a {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+}
+.previous {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  background: unset;
+  color: #8f8f8f;
+  transition: 0.3s;
+}
+.previous i {
+  top: 50%;
+  left: -57px;
+  transform: translateY(-50%);
+  opacity: 1;
+  color: #8f8f8f;
+}
+.previous:hover,
+.previous:hover i {
+  color: #ff6d34;
+}
+
+button {
+  width: 100%;
+  position: relative;
+  margin: 10px 0;
+  background: #2969b4;
+  border-radius: 30px;
+  padding: 12px;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+  border: none;
+}
+button i {
+  font-size: 11px;
+  position: absolute;
+  top: 16px;
+  right: 20%;
+  opacity: 0;
+  transition: 0.3s;
+}
+form .submit .valid:hover {
+  background: #277ddf;
+}
+form .submit .valid:hover i {
+  right: 10%;
+  opacity: 1;
+}
+.errors {
+  bottom: -10px;
+  left: 170px;
+}
+.error {
+  margin-top: -10px;
+  margin-left: 170px;
+}
+.error p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #8f8f8f;
+}
+.error-popup {
+  /* position: absolute;
+  top: 0;
+  right: 100px; */
+  background: rgba(185, 0, 0, 0.644);
+  color: #fff;
+  font-weight: 600;
+  padding: 20px 30px;
+  border-radius: 10px;
+  z-index: 20;
+}
+.forgot-password {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+  margin: 10px 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+.other {
+  width: 70%;
+  margin-top: 10px;
+  text-align: center;
+}
+.other span {
+  position: relative;
+}
+.other span::before,
+.other span::after {
+  content: "";
+  width: 70px;
+  height: 0.1px;
+  background-color: #000000;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.other span::before {
+  left: 0;
+  transform: translateX(-110%);
+}
+.other span::after {
+  right: 0;
+  transform: translateX(110%);
+}
+.other-methods {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.other-methods button {
+  width: 45%;
+}
+.other-methods button i {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.other-methods button:hover {
+  background: #277ddf;
+}
+.other-methods button:hover i {
+  right: 10%;
+  opacity: 1;
+}
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.mat-form-field {
+  margin-top: 16px;
+}
+.success-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.success-step .success-icon {
+  font-size: 70px;
+  color: #82c91e;
+  margin: 20px 0;
+}
+.success-step .success {
+  font-size: 24px;
+  font-weight: 600;
+  padding: 20px 0;
+}
+.success-step .actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.success-step .actions a {
+  width: 20%;
+  position: relative;
+  margin: 10px 20px;
+  background: #2969b4;
+  border-radius: 30px;
+  padding: 12px;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+  border: none;
+  text-align: center;
+}
+.success-step .actions a i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  color: #fff;
+  transition: 0.3s;
+}
+.success-step .actions #back-home i {
+  left: 30px;
+}
+.success-step .actions #go-to-dashboard i {
+  right: 30px;
+}
+.success-step .actions a:hover {
+  background: #277ddf;
+}
+.success-step .actions #back-home:hover i {
+  left: 20px;
+  opacity: 1;
+}
+.success-step .actions #go-to-dashboard:hover i {
+  right: 10px;
+  opacity: 1;
+}
+.input-form {
+  display: flex;
+  justify-content: space-between !important;
+  align-items: center;
+}
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  padding: 0 !important;
+  margin-left: 12px;
+  background-color: #fff;
+}
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+::ng-deep .mat-select-arrow-wrapper {
+  transform: unset !important;
+}
+mat-select {
+  height: unset !important;
+  padding: 10px 15px;
+  font-size: 14px;
+  width: 125%;
+}
+.input-form button {
+  margin: 0 !important;
+  position: relative;
+  top: -5px;
+}
+.detail {
+  max-height: calc(100vh - 340px);
+  overflow-y: auto;
+}
+.detail::-webkit-scrollbar {
+  width: 1px;
+}
+
+.detail::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.detail::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+.input-form .input-area {
+  width: 40%;
+}
+.detail-form {
+  border: 1px solid #00000014;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.certificate {
+  width: 100%;
+}
+.certificate input[type="file"] {
+  display: none;
+}
+.certificate label::after {
+  content: none;
+}
+.certificate #label-image img {
+  width: 300px;
+  border: 1px solid #000;
+  cursor: pointer;
+  margin-left: 30px;
+}
+.input-form button {
+  width: 8%;
+  border-radius: 5px;
+  height: 45px;
+}

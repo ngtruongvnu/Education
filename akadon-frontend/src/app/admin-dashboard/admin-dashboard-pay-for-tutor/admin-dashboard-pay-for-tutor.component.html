@@ -1,0 +1,50 @@
+<p style="font-weight: 600; font-size: 18px">Những gia sư cần thanh toán</p>
+
+<div class="table-responsive mt-2">
+  <table class="table" style="background: #fff; border-radius: 5px">
+    <thead>
+      <tr>
+        <th scope="col" style="font-weight: 600; text-align: center">STT</th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Ngày giao dịch
+        </th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Người nhận
+        </th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Nội dung chuyển khoản
+        </th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Số tiền
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <p
+        *ngIf="listTransaction.length === 0"
+        style="padding: 10px; color: red; font-weight: 600"
+      >
+        Chưa có giao dịch nào
+      </p>
+      <tr *ngFor="let transaction of listTransaction; let i = index">
+        <th scope="row" style="text-align: center">{{ i + 1 }}</th>
+        <td style="text-align: center">
+          {{ transaction.dateTransaction | date: "dd/MM/yyyy HH:mm:ss" }}
+        </td>
+        <td style="text-align: center">Hệ thống</td>
+        <td style="text-align: center">{{ transaction.content }}</td>
+        <td style="text-align: center">
+          {{ transaction.sentMoney | currency: "USD" }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <mat-paginator
+    *ngIf="listTransaction.length != 0"
+    [length]="length"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    (page)="pageEvent = getPaginatorData($event)"
+  >
+  </mat-paginator>
+</div>

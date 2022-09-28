@@ -1,0 +1,423 @@
+<p class="title">Khóa học của bạn</p>
+<div class="row">
+  <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12 mb-3">
+    <div class="course">
+      <div class="course-header">
+        <span class="type">Khóa học đang chờ</span>
+        <span class="quantity">{{ lengthWaiting }}</span>
+      </div>
+      <div class="course-main" id="waiting">
+        <p class="empty" *ngIf="lengthWaiting === 0">
+          Bạn chưa có khóa học nào đang chờ
+        </p>
+        <a
+          *ngFor="let course of listWaiting"
+          class="course-info"
+          data-toggle="modal"
+          data-target="#courseDetail"
+          style="color: unset; text-decoration: none"
+          (click)="viewCourseDetail(course)"
+        >
+          <img
+            src="http://localhost:8888/upload/images/{{
+              course?.objStudentRequest?.objStudent?.image
+            }}"
+            alt=""
+          />
+          <div class="info">
+            <p>
+              <span class="bold">Học viên:</span>
+              <span>{{ course.objStudentRequest?.objStudent?.fullName }}</span>
+            </p>
+            <p>
+              <span class="bold">Môn học:</span>
+              <span>{{
+                course.objStudentRequest?.objSubject?.subjectName
+              }}</span>
+            </p>
+            <p>
+              <span class="bold">Trình độ:</span>
+              <span>{{ course.objStudentRequest?.objLevel?.levelName }}</span>
+            </p>
+          </div>
+          <div class="info">
+            <p>
+              <span class="bold">Giờ học:</span>
+              <span
+                >{{ course.objStudentRequest?.beginTime | date: "HH:mm" }} -
+                {{ course.objStudentRequest?.endTime | date: "HH:mm" }}</span
+              >
+            </p>
+            <p>
+              <span class="bold">Ngày học:</span>
+              <span>{{ course.studyDate | learningDateTransform }}</span>
+            </p>
+            <p>
+              <span class="bold">Thời gian khóa học:</span>
+              <span
+                >{{ course.startDate | date: "dd/MM/yyy" }} -
+                {{ course.endDate | date: "dd/MM/yyy" }}</span
+              >
+            </p>
+          </div>
+        </a>
+      </div>
+      <mat-paginator
+        *ngIf="listWaiting.length != 0"
+        [length]="lengthWaiting"
+        [pageSize]="pageSizeWaiting"
+        [pageIndex]="pageIndexWaiting"
+        [pageSizeOptions]="[5, 10, 20]"
+        (page)="pageWaitingEvent = getPaginatorWaitingData($event)"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+  <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12 mb-3">
+    <div class="course">
+      <div class="course-header">
+        <span class="type">Khóa học đang diễn ra</span>
+        <span class="quantity">{{ lengthHappen }}</span>
+      </div>
+      <div class="course-main" id="happening">
+        <p class="empty" *ngIf="lengthHappen === 0">
+          Bạn chưa có khóa học nào đang diễn ra
+        </p>
+        <a
+          *ngFor="let course of listHappen"
+          class="course-info"
+          data-toggle="modal"
+          data-target="#courseDetail"
+          style="color: unset; text-decoration: none"
+          (click)="viewCourseDetail(course)"
+        >
+          <img
+            src="http://localhost:8888/upload/images/{{
+              course?.objStudentRequest?.objStudent?.image
+            }}"
+            alt=""
+          />
+          <div class="info">
+            <p>
+              <span class="bold">Học viên:</span>
+              <span>{{ course.objStudentRequest?.objStudent?.fullName }}</span>
+            </p>
+            <p>
+              <span class="bold">Môn học:</span>
+              <span>{{
+                course.objStudentRequest?.objSubject?.subjectName
+              }}</span>
+            </p>
+            <p>
+              <span class="bold">Trình độ:</span>
+              <span>{{ course.objStudentRequest?.objLevel?.levelName }}</span>
+            </p>
+          </div>
+          <div class="info">
+            <p>
+              <span class="bold">Giờ học:</span>
+              <span
+                >{{ course.objStudentRequest?.beginTime | date: "HH:mm" }} -
+                {{ course.objStudentRequest?.endTime | date: "HH:mm" }}</span
+              >
+            </p>
+            <p>
+              <span class="bold">Ngày học:</span>
+              <span>{{ course.studyDate | learningDateTransform }}</span>
+            </p>
+            <p>
+              <span class="bold">Thời gian khóa học:</span>
+              <span
+                >{{ course.startDate | date: "dd/MM/yyy" }} -
+                {{ course.endDate | date: "dd/MM/yyy" }}</span
+              >
+            </p>
+          </div>
+        </a>
+      </div>
+      <mat-paginator
+        *ngIf="listHappen.length != 0"
+        [length]="lengthHappen"
+        [pageSize]="pageSizeHappen"
+        [pageIndex]="pageIndexHappen"
+        [pageSizeOptions]="[5, 10, 20]"
+        (page)="pageHappenEvent = getPaginatorHappenData($event)"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+  <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12 mb-3">
+    <div class="course">
+      <div class="course-header">
+        <span class="type">Khóa học đã hoàn thành</span>
+        <span class="quantity">{{ lengthFinished }}</span>
+      </div>
+      <div class="course-main" id="finish">
+        <p class="empty" *ngIf="lengthFinished === 0">
+          Bạn chưa có khóa học nào đã hoàn thành
+        </p>
+        <a
+          *ngFor="let course of listFinished"
+          class="course-info"
+          data-toggle="modal"
+          data-target="#courseDetail"
+          style="color: unset; text-decoration: none"
+          (click)="viewCourseDetail(course)"
+        >
+          <img
+            src="http://localhost:8888/upload/images/{{
+              course?.objStudentRequest?.objStudent?.image
+            }}"
+            alt=""
+          />
+          <div class="info">
+            <p>
+              <span class="bold">Học viên:</span>
+              <span>{{ course.objStudentRequest?.objStudent?.fullName }}</span>
+            </p>
+            <p>
+              <span class="bold">Môn học:</span>
+              <span>{{
+                course.objStudentRequest?.objSubject?.subjectName
+              }}</span>
+            </p>
+            <p>
+              <span class="bold">Trình độ:</span>
+              <span>{{ course.objStudentRequest?.objLevel?.levelName }}</span>
+            </p>
+          </div>
+          <div class="info">
+            <p>
+              <span class="bold">Giờ học:</span>
+              <span
+                >{{ course.objStudentRequest?.beginTime | date: "HH:mm" }} -
+                {{ course.objStudentRequest?.endTime | date: "HH:mm" }}</span
+              >
+            </p>
+            <p>
+              <span class="bold">Ngày học:</span>
+              <span>{{ course.studyDate | learningDateTransform }}</span>
+            </p>
+            <p>
+              <span class="bold">Thời gian khóa học:</span>
+              <span
+                >{{ course.startDate | date: "dd/MM/yyy" }} -
+                {{ course.endDate | date: "dd/MM/yyy" }}</span
+              >
+            </p>
+          </div>
+        </a>
+      </div>
+      <mat-paginator
+        *ngIf="listFinished.length != 0"
+        [length]="lengthFinished"
+        [pageSize]="pageSizeFinished"
+        [pageIndex]="pageIndexFinished"
+        [pageSizeOptions]="[5, 10, 20]"
+        (page)="pageFinishedEvent = getPaginatorFinishedData($event)"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+</div>
+<div *ngIf="listStudent.length != 0">
+  <p class="title pt-1">Những học viên đã dạy nhưng chưa đánh giá</p>
+  <table class="table review">
+    <thead>
+      <tr>
+        <th scope="col">Tên học viên</th>
+        <th scope="col">Đánh giá của bạn</th>
+        <th scope="col">Số sao</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of listStudent">
+        <td>{{ student.fullName }}</td>
+        <td>
+          <textarea
+            rows="3"
+            class="form-control"
+            id="review-{{ student.studentId }}"
+            name="review"
+          ></textarea>
+        </td>
+        <td>
+          <ngb-rating
+            [formControl]="ctrl"
+            [rate]="rate"
+            id="rate-{{ student.studentId }}"
+            [max]="5"
+          ></ngb-rating>
+        </td>
+        <td>
+          <button class="btn btn-success" (click)="insertReview(student)">
+            Gửi
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="listReviewStudent.length > 0">
+  <p class="title pt-1">Những học viên đã đánh giá</p>
+  <table class="table review">
+    <thead>
+      <tr>
+        <th scope="col">Ngày đánh giá</th>
+        <th scope="col">Học viên</th>
+        <th scope="col">Đánh giá của bạn</th>
+        <th scope="col">Số sao</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let review of listReviewStudent">
+        <td>{{ review.commentDate | date: "dd/MM/yyyy" }}</td>
+        <td>{{ review.receiveName }}</td>
+        <td>
+          <p style="background-color: #fff; border: none; padding: 0">
+            {{ review.comment }}
+          </p>
+        </td>
+        <td>
+          <div class="vote ml-2">
+            <div class="active-star">
+              <i
+                class="fas fa-star mb-1"
+                style="color: #ccc"
+                *ngFor="let i of [].constructor(5)"
+              ></i>
+            </div>
+            <div class="disable-star">
+              <i
+                class="fas fa-star mt-1"
+                style="color: #ff6d34"
+                *ngFor="let i of [].constructor(review.rating)"
+              ></i>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="courseDetail"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title" id="exampleModalLabel">
+          Những buổi học đã diễn ra
+        </p>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Ngày học</th>
+              <th scope="col">Trạng thái</th>
+              <th scope="col">Đánh giá của học viên</th>
+              <th scope="col">Đánh giá của gia sư</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let courseDetail of listCourseDetail">
+              <td>
+                <div class="td-wrap">
+                  {{ courseDetail.activeDate | date: "dd/MM/yyyy" }}
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  {{
+                    courseDetail.status ? "Đã hoàn thành" : "Chưa hoàn thành"
+                  }}
+                </div>
+              </td>
+              <td>
+                <div class="wrap-td" *ngIf="courseDetail.studentRate != null">
+                  <div class="vote ml-2">
+                    <div class="active-star">
+                      <i
+                        class="fas fa-star mb-1"
+                        style="color: #ccc"
+                        *ngFor="let i of [].constructor(5)"
+                      ></i>
+                    </div>
+                    <div class="disable-star">
+                      <i
+                        class="fas fa-star mt-1"
+                        style="color: #ff6d34"
+                        *ngFor="
+                          let i of [].constructor(courseDetail.studentRate)
+                        "
+                      ></i>
+                    </div>
+                  </div>
+                  {{ courseDetail.studentComment }}
+                </div>
+              </td>
+              <td>
+                <div class="wrap-td">
+                  <div
+                    class="vote ml-2"
+                    *ngIf="courseDetail.teacherRate != null"
+                  >
+                    <div class="active-star">
+                      <i
+                        class="fas fa-star mb-1"
+                        style="color: #ccc"
+                        *ngFor="let i of [].constructor(5)"
+                      ></i>
+                    </div>
+                    <div class="disable-star">
+                      <i
+                        class="fas fa-star mt-1"
+                        style="color: #ff6d34"
+                        *ngFor="
+                          let i of [].constructor(courseDetail.teacherRate)
+                        "
+                      ></i>
+                    </div>
+                  </div>
+                  {{ courseDetail.tutorComment }}
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <mat-paginator
+          *ngIf="lengthCourseDetail != 0"
+          [length]="lengthCourseDetail"
+          [pageSize]="pageDetailSize"
+          [pageIndex]="pageDetailIndex"
+          [pageSizeOptions]="[5, 10, 20]"
+          (page)="pageDetailEvent = getDetailPage($event)"
+        >
+        </mat-paginator>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+          Đóng
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

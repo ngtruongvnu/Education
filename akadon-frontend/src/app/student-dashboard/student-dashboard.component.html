@@ -1,0 +1,125 @@
+<div class="dashboard">
+  <nav class="menu">
+    <div class="logo">
+      <a href="/" target="_blank">
+        <img
+          src="./assets/images/logo-akadon.png"
+          class="w-100 mb-3 logo"
+          alt=""
+        />
+      </a>
+    </div>
+    <i class="fas fa-chevron-left" id="hide" (click)="hideMenu()"></i>
+    <i class="fas fa-chevron-right" id="show" (click)="showMenu()"></i>
+    <ul class="mt-5">
+      <li>
+        <a routerLink="/dashboard-student/home" routerLinkActive="active-link">
+          <i class="fas fa-home"></i> <span class="menu-title">Trang chủ</span>
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/dashboard-student/request/send"
+          routerLinkActive="active-link"
+        >
+          <i class="far fa-envelope"></i>
+          <span class="menu-title">Tìm gia sư</span>
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/dashboard-student/course"
+          routerLinkActive="active-link"
+        >
+          <i class="far fa-envelope"></i>
+          <span class="menu-title">Khóa học</span>
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/dashboard-student/calendar"
+          routerLinkActive="active-link"
+        >
+          <i class="far fa-calendar-alt"></i>
+          <span class="menu-title">Lịch học tập</span>
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/dashboard-student/finance"
+          routerLinkActive="active-link"
+        >
+          <i class="far fa-credit-card"></i>
+          <span class="menu-title">Thanh toán học phí</span>
+        </a>
+      </li>
+      <!-- <li>
+        <a
+          data-toggle="collapse"
+          href="#finance"
+          role="button"
+          aria-expanded="false"
+          aria-controls="collapseExample"
+          routerLinkActive="active-link"
+          class="finance"
+          (click)="show = !show"
+        >
+          <i class="far fa-credit-card"></i>
+          <span class="menu-title">Thanh toán</span>
+          <i *ngIf="show" class="fas fa-chevron-down"></i>
+          <i *ngIf="!show" class="fas fa-chevron-up"></i>
+        </a>
+      </li>
+      <div class="collapse" id="finance">
+        <div class="card card-body" style="border: none; padding: 0">
+          <a
+            routerLinkActive="active-link"
+            class="sub-link"
+            routerLink="/dashboard-student/finance/revenue"
+            >Doanh thu</a
+          >
+          <a
+            routerLink="/dashboard-student/finance/banking"
+            routerLinkActive="active-link"
+            class="sub-link"
+            >Tài khoản ngân hàng</a
+          >
+          <a
+            routerLink="/dashboard-student/finance/payment"
+            routerLinkActive="active-link"
+            class="sub-link"
+            >Thiết lập thanh toán</a
+          >
+        </div>
+      </div> -->
+      <li>
+        <a routerLink="/dashboard-student/news" routerLinkActive="active-link">
+          <i class="fab fa-servicestack"></i>
+          <span class="menu-title">Dịch vụ akadon</span>
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/dashboard-student/notetip"
+          routerLinkActive="active-link"
+        >
+          <i class="fas fa-book"></i>
+          <span class="menu-title">Sổ tay hướng dẫn</span>
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/dashboard-student/system-messages"
+          routerLinkActive="active-link"
+        >
+          <i class="fas fa-comment-dots"></i>
+          <span class="menu-title">Tin nhắn hệ thống</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div class="main">
+    <app-student-dashboard-header></app-student-dashboard-header>
+    <router-outlet></router-outlet>
+  </div>
+</div>

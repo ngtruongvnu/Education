@@ -1,0 +1,82 @@
+<div class="summary row mt-2 mb-2">
+  <div class="col-xl-12">
+    <p class="title" style="font-weight: 600; font-size: 18px; margin: 20px 0">
+      Tổng số
+    </p>
+  </div>
+
+  <div class="col-xl-4">
+    <div class="info text-center tutor">
+      <div class="number" style="position: relative">
+        <p style="text-align: left; font-weight: 600; font-size: 40px">
+          {{ tutors }}
+        </p>
+        <p style="text-align: left; font-weight: 500; font-size: 18px">
+          Gia sư
+        </p>
+        <div class="icon">
+          <img src="./assets/images/register/teacher-icon.svg" alt="" />
+        </div>
+      </div>
+      <a routerLink="/dashboard-admin/tutor-account"
+        >Xem chi tiết <i class="fas fa-hand-point-right"></i
+      ></a>
+    </div>
+  </div>
+  <div class="col-xl-4">
+    <div class="info text-center student">
+      <div class="number" style="position: relative">
+        <p style="text-align: left; font-weight: 600; font-size: 40px">
+          {{ students }}
+        </p>
+        <p style="text-align: left; font-weight: 500; font-size: 18px">
+          Học viên
+        </p>
+        <div class="icon">
+          <img src="./assets/images/register/student-icon.svg" alt="" />
+        </div>
+      </div>
+      <a routerLink="/dashboard-admin/student-account"
+        >Xem chi tiết <i class="fas fa-hand-point-right"></i
+      ></a>
+    </div>
+  </div>
+  <div class="col-xl-4">
+    <div class="info text-center course">
+      <div class="number" style="position: relative">
+        <p style="text-align: left; font-weight: 600; font-size: 40px">
+          {{ courses }}
+        </p>
+        <p style="text-align: left; font-weight: 500; font-size: 18px">
+          Khóa học
+        </p>
+        <div class="icon">
+          <img src="./assets/images/register/student-icon.svg" alt="" />
+        </div>
+      </div>
+      <a routerLink="/dashboard-admin/course"
+        >Xem chi tiết <i class="fas fa-hand-point-right"></i
+      ></a>
+    </div>
+  </div>
+</div>
+<div class="account-chart">
+  <p class="title" style="font-weight: 600; font-size: 18px; margin: 20px 0">
+    Thống kê dữ liệu trong 6 tháng gần nay
+  </p>
+  <canvas
+    baseChart
+    width="500"
+    height="200"
+    [datasets]="lineChartData"
+    [labels]="lineChartLabels"
+    [options]="lineChartOptions"
+    [legend]="lineChartLegend"
+    [chartType]="'line'"
+    [plugins]="lineChartPlugins"
+  >
+  </canvas>
+  <p class="text-center" style="font-style: italic">
+    Số lượng gia sư, học viên, các khóa học trong vòng 6 tháng gần đây
+  </p>
+</div>

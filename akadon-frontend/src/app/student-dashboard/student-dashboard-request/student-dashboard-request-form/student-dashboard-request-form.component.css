@@ -1,0 +1,366 @@
+.title {
+  font-weight: 600;
+  font-size: 21px;
+}
+.back {
+  text-decoration: none;
+  color: #8f8f8f;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.5s;
+  display: flex;
+  align-items: center;
+}
+.back i {
+  margin-right: 10px;
+}
+.back:hover {
+  color: #ff6d34;
+}
+::ng-deep .mat-step-header .mat-step-icon-selected,
+::ng-deep .mat-step-header .mat-step-icon-state-edit {
+  background-color: #ff6d34;
+}
+::ng-deep .mat-step-header .mat-step-label-selected {
+  font-weight: 600;
+}
+.subject-info .input-area {
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+label {
+  text-align: left;
+  font-weight: 600;
+}
+.subject-info .input-area input,
+.subject-info .input-area select {
+  margin: 10px 0;
+  padding: 10px;
+}
+.subject-info .input-area input {
+  width: 100%;
+}
+.subject-info .subject-level {
+  display: flex;
+  justify-content: space-between;
+}
+.subject-info .subject-level .input-area {
+  width: 48%;
+}
+.subject-info .subject-level .input-area select {
+  width: 100%;
+}
+.errors {
+  bottom: -10px;
+}
+
+button {
+  position: relative;
+  margin: 10px 0;
+  background: #2969b4;
+  border-radius: 30px;
+  padding: 12px 30px;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+  border: none;
+}
+button i {
+  font-size: 11px;
+  margin-left: 5px;
+  opacity: 1;
+  transition: 0.3s;
+}
+button:hover {
+  background: #368ef3;
+}
+.invalid {
+  cursor: not-allowed;
+}
+.invalid:hover {
+  background: #2969b4;
+}
+.timePicker {
+  flex-direction: row !important;
+  width: 320px !important;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  align-items: center !important;
+  margin: 10px 0;
+}
+.timePicker input {
+  border: none;
+  margin: 0 10px !important;
+  text-align: center;
+}
+.form-control[readonly] {
+  background: unset !important;
+}
+.learningTime {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.learningTime .chooseDate {
+  margin-left: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+.timePicker {
+  width: 40% !important;
+}
+.datePicker {
+  width: 60% !important;
+}
+ng-multiselect-dropdown {
+  min-width: 96% !important;
+}
+.try input[type="radio"] {
+  width: unset !important;
+}
+.radio-input {
+  display: flex;
+  align-items: center;
+}
+.radio-input label {
+  font-weight: 400;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.end-date {
+  display: flex;
+  flex-direction: column;
+}
+.end-date input {
+  width: unset !important;
+}
+ng-multiselect-dropdown {
+  margin-left: 20px;
+  margin-top: 10px;
+  padding: 10px 0 !important;
+}
+mat-form-field {
+  width: 200px;
+  margin-top: 20px;
+}
+.student-info .input-area textarea {
+  width: 100% !important;
+  height: unset;
+  margin: 10px 0;
+  font-size: 14px;
+}
+.time-error {
+  bottom: -20px;
+}
+.request-list p {
+  margin: 0;
+}
+.request-list .request {
+  margin: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  top: 0;
+  transition: 0.3s;
+}
+.request-list .request:hover {
+  top: -5px;
+  box-shadow: 1px 5px 15px -10px #5eacff;
+}
+.request-list .request .request-content {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+.request-list .request .request-content .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.request-list .request .request-content .request-title {
+  font-weight: 600;
+  font-size: 18px;
+}
+.request-list .request .request-content .subject-info {
+  display: flex;
+}
+.request-list .request .request-content .normal {
+  color: #a194b3;
+}
+.request-list .request .request-content .bold {
+  color: #000;
+  font-weight: 500;
+}
+.request-list .request .request-student {
+  display: flex;
+  align-items: center;
+  margin-right: 80px;
+}
+.tutor {
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 14px;
+  position: relative;
+  box-shadow: 0px 0px 10px -5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tutor .information {
+  display: flex;
+  align-items: center;
+}
+.tutor .information img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.tutor .information .name-address {
+  height: 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.tutor .information .name-address .name {
+  color: #ff6d34;
+  font-weight: 600;
+}
+.tutor .information .name-address .address,
+.tutor .info {
+  font-size: 13px;
+  color: #919191;
+}
+.tutor .information .name-address .address i {
+  font-size: 11px;
+  margin-right: 5px;
+}
+.tutor .info {
+  display: flex;
+  align-items: center;
+}
+.tutor .info span {
+  color: #000;
+  font-weight: 600;
+  margin-left: 5px;
+}
+.tutor .view-profile {
+  position: relative;
+  display: inline-block;
+  background: #2969b4;
+  border-radius: 30px;
+  padding: 12px 30px;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.tutor .view-profile:hover {
+  background: #277ddf;
+}
+
+.order {
+  background: #ff6d34 !important;
+}
+.order:hover {
+  background: #ff895b !important;
+}
+.exist {
+  display: none;
+}
+.success-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.success-step .success-icon {
+  font-size: 70px;
+  color: #82c91e;
+  margin: 20px 0;
+}
+.success-step .success {
+  font-size: 24px;
+  font-weight: 600;
+  padding: 20px 0;
+}
+.view-profile {
+  position: relative;
+  display: inline-block;
+  background: #2969b4;
+  border-radius: 30px;
+  padding: 12px 50px;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+  border: none;
+  text-align: center;
+}
+.view-profile:hover {
+  background: #277ddf;
+}
+.success-step .actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.success-step .actions a {
+  width: 20%;
+  position: relative;
+  margin: 10px 20px;
+  background: #2969b4;
+  border-radius: 30px;
+  padding: 12px;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+  border: none;
+  text-align: center;
+}
+.success-step .actions a i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  color: #fff;
+  transition: 0.3s;
+}
+.success-step .actions #back-home i {
+  left: 30px;
+}
+.success-step .actions #go-to-dashboard i {
+  right: 30px;
+}
+.success-step .actions a:hover {
+  background: #277ddf;
+}
+.success-step .actions #back-home:hover i {
+  left: 20px;
+  opacity: 1;
+}
+.success-step .actions #go-to-dashboard:hover i {
+  right: 10px;
+  opacity: 1;
+}
+.vote {
+  position: relative;
+}
+.vote .disable-star {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

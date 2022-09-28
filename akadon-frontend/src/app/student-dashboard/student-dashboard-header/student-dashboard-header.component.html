@@ -1,0 +1,60 @@
+<header>
+  <div class="information">
+    <div class="datetime">
+      <span class="day">{{ day }},</span>
+      <div class="date">Ngày {{ date }} Tháng {{ month }} Năm {{ year }}</div>
+    </div>
+    <div class="message-report">
+      <i class="fab fa-facebook-messenger"></i>
+      <i class="fas fa-bell" id="bell"></i>
+      <span class="number-unseen" *ngIf="unseenLength != 0">{{
+        unseenLength
+      }}</span>
+      <div id="notifications" style="display: none" (scroll)="scrollEvent()">
+        <div class="title">
+          <p>Thông báo</p>
+          <a id="viewAll" (click)="viewAll()">Đánh dấu là đã đọc</a>
+        </div>
+        <ng-container *ngFor="let notification of notificationList">
+          <a
+            class="notify"
+            routerLink="{{ notification.link }}"
+            (click)="viewNotification(notification)"
+          >
+            <img src="./assets/images/dashboard/system-logo.svg" alt="" />
+            <div class="content">
+              <p class="mt-1" style="font-weight: 600">
+                {{ notification.title }}
+              </p>
+              <p class="mt-1">{{ notification.content }}</p>
+              <p class="mt-1" style="font-size: 13px" *ngIf="notification.seen">
+                {{ notification.notificationTime | timeRangeTransform }}
+              </p>
+              <p
+                class="mt-1"
+                style="font-size: 13px; color: #0367b4"
+                *ngIf="!notification.seen"
+              >
+                {{ notification.notificationTime | timeRangeTransform }}
+              </p>
+            </div>
+            <i class="fas fa-circle ml-2" *ngIf="!notification.seen"></i>
+          </a>
+        </ng-container>
+
+        <mat-spinner *ngIf="isLoading" class="header-spinner"></mat-spinner>
+      </div>
+    </div>
+    <div class="tutor-information">
+      <img
+        src="http://localhost:8888/upload/images/{{ loginUser.image }}"
+        class="user-image"
+        alt=""
+      />
+      <a class="tutor-name">
+        <span>{{ loginUser.fullName }}</span>
+        <i class="fas fa-angle-down"></i>
+      </a>
+    </div>
+  </div>
+</header>

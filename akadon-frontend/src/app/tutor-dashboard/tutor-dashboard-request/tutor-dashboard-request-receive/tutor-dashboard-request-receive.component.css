@@ -1,0 +1,28 @@
+form {
+  width: 100%;
+}
+.timePicker label {
+  display: block;
+}
+.timePicker input {
+  margin: 0;
+  margin-bottom: 20px;
+}
+::ng-deep .cdk-overlay-container {
+  z-index: 1200;
+}
+::ng-deep .timepicker-overlay {
+  z-index: 1200 !important;
+}
+mat-label {
+  background-color: #f5f5f5;
+}
+/* ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: #fff;
+}
+::ng-deep .mat-form-field-infix {
+  border: none;
+}
+::ng-deep .mat-form-field-underline {
+  display: none;
+} */

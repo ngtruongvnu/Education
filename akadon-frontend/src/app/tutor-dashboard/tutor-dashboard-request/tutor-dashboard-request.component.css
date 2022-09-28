@@ -1,0 +1,326 @@
+p {
+  margin: 0;
+}
+.request {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 20px 0;
+  height: calc(100% - 80px);
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header p {
+  font-weight: 700;
+  font-size: 24px;
+}
+header .link {
+  background: linear-gradient(90deg, #036bb3 3.75%, #03b0a9);
+  margin-left: 30px;
+  padding: 15px 20px;
+  border-radius: 50px;
+  color: #fff;
+  font-weight: 700;
+  transition: 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+}
+header .link:hover {
+  box-shadow: 0px 0px 30px -10px rgb(0, 183, 255);
+}
+.request-menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 0px 10px -7px;
+  border-radius: 5px;
+}
+.request-menu a {
+  width: 50%;
+  padding: 15px 0;
+  font-weight: 600;
+  font-size: 14px;
+  color: #868686;
+  text-align: center;
+  transition: 0.3s;
+  position: relative;
+  cursor: pointer;
+  border-radius: 5px;
+  text-decoration: none;
+}
+.request-menu a:hover {
+  background: rgba(204, 204, 204, 0.377);
+}
+.request-menu .active::after {
+  content: "";
+  height: 3px;
+  background-color: #ff7b5c;
+  position: absolute;
+  left: 0;
+  bottom: 0px;
+  animation: left-to-right 0.6s;
+  width: 100%;
+}
+.request-menu .active {
+  color: #ff7b5c;
+}
+@keyframes left-to-right {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+.request-main {
+  position: relative;
+  height: 84%;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px -7px;
+  background-image: url("/assets/images/dashboard/request/background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.request-main #main-save,
+.request-main #main-pre-accept-bid,
+.request-main #main-close {
+  position: absolute;
+  width: 100%;
+  height: unset;
+}
+.request-main #main-pre-accept-bid,
+.request-main #main-close {
+  display: none;
+}
+.filters {
+  width: 100%;
+}
+.filters ul {
+  display: flex;
+  justify-content: space-around;
+}
+.filters ul li {
+  position: relative;
+}
+.filters ul li #daterange {
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  /* left: 130px; */
+  z-index: -1;
+}
+.filters .form-control {
+  width: 170px;
+  font-size: 14px;
+  padding: 22px 10px;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #000;
+  font-weight: 600;
+  transition: 0.3s;
+  position: relative;
+}
+.filters .form-control:hover {
+  background: #e6f3ff;
+}
+.filters .form-control .checkbox {
+  position: absolute;
+  display: none;
+  background-color: #fff;
+  top: 45px;
+  left: 0;
+  border-radius: 5px;
+  border: 1px solid rgba(204, 204, 204, 0.767);
+  z-index: 2;
+  color: #000;
+  max-height: 380px;
+  overflow-y: scroll;
+}
+.filters .form-control .checkbox .checkbox-area {
+  display: flex;
+  align-items: center;
+  padding: 10px 5px;
+  transition: 0.2s;
+}
+.filters .form-control .checkbox .checkbox-area:hover {
+  background-color: rgba(204, 204, 204, 0.411);
+}
+.filters .form-control .checkbox .checkbox-area label {
+  cursor: pointer;
+  margin-left: 10px;
+  width: 100%;
+}
+.filters ul li button {
+  background-color: #0367b4;
+  font-size: 16px;
+  width: 110px;
+  height: 100%;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+  margin: 0 10px;
+}
+.filters ul li .reset {
+  background-color: #eaf4fc;
+  border: 1px solid #0367b4;
+  color: #0367b4;
+}
+.filters ul li button:hover {
+  box-shadow: 0px 0px 20px -5px #0367b4;
+}
+.filter-result {
+  display: none;
+  padding: 0 60px;
+  font-weight: 600;
+}
+.request-info table {
+  text-align: center;
+}
+.request-info table thead {
+  font-weight: 600;
+}
+.request-info table tbody {
+  font-weight: 500;
+}
+.request-info table tbody tr {
+  cursor: pointer;
+  transition: 0.3s;
+}
+.request-info table tbody tr:hover {
+  background-color: rgb(233, 233, 233);
+}
+.request-info table tbody .delete {
+  margin-left: 20px;
+  background: rgb(223, 53, 53);
+}
+.request-info table tbody .view {
+  margin-left: 20px;
+  background: rgb(0, 107, 207);
+}
+.request-info table tbody td {
+  line-height: 30px;
+}
+.request-info table tbody button {
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+.request-info table tbody button:hover {
+  opacity: 1;
+}
+.modal-content .modal-body {
+  align-items: flex-start;
+  justify-self: space-between;
+  font-size: 14px;
+}
+.modal-body .input-area {
+  width: 100%;
+}
+.modal-body .input-area label {
+  text-align: right;
+  width: 10%;
+}
+.modal-body .input-area input {
+  padding: 10px 12px;
+  width: 90%;
+}
+.modal-body .subject-level {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.modal-body .subject-level label {
+  width: 45%;
+  text-align: left;
+}
+.modal-body .subject-level input {
+  width: 55%;
+}
+.request-list .request {
+  margin: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  width: 100%;
+  padding: 10px 30px;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  top: 0;
+  transition: 0.3s;
+  color: unset;
+  text-decoration: none;
+}
+.request-list .request:hover {
+  top: -5px;
+  box-shadow: 1px 5px 15px -10px #5eacff;
+}
+.request-list .request .request-content {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+.request-list .request .request-content .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.request-list .request .request-content .request-title {
+  font-weight: 600;
+  font-size: 18px;
+}
+.request-list .request .request-content .subject-info {
+  display: flex;
+}
+.request-list .request .request-content .normal {
+  color: #a194b3;
+}
+.request-list .request .request-content .bold {
+  color: #000;
+  font-weight: 500;
+}
+.request-list .request .request-student {
+  display: flex;
+  align-items: center;
+  margin-right: 80px;
+}
+.request-list .request .request-student img {
+  border-radius: 50%;
+  border: 1px solid red;
+}
+.vote {
+  position: relative;
+}
+.vote .disable-star {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.actions button {
+  font-weight: 500;
+  margin: 0 10px;
+}

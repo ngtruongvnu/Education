@@ -1,0 +1,104 @@
+<!-- <div class="main">
+  <p class="title">Tin nhắn</p>
+  <p
+    class="title"
+    style="color: red; font-size: 16px; font-weight: 500"
+    *ngIf="listMessage.length === 0"
+  >
+    Hòm thư của bạn đang trống
+  </p>
+  <a
+    class="message"
+    data-toggle="modal"
+    data-target="#exampleModal"
+    id="message-{{ message.messageId }}"
+    (click)="viewMessage($event)"
+    *ngFor="let message of listMessage"
+  >
+    <img src="./assets/images/dashboard/system-logo.svg" alt="" />
+    <div
+      class="message-content"
+      [style.fontWeight]="message.seen === false ? '700' : 'unset'"
+    >
+      <p class="message-title">{{ message.title }}</p>
+      <p class="content">
+        {{ message.content }}
+      </p>
+    </div>
+    <div class="action">
+      <p>
+        {{ message.messageDate | date: "hh:mm" }} -
+        {{ message.messageDate | date: "dd/MM/yyyy" }}
+      </p>
+      <button class="delete"><i class="fas fa-trash-alt"></i></button>
+    </div>
+  </a>
+</div>
+
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tin nhắn</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="from mb-3">
+          <p class="pb-2" style="font-weight: 600">Người gửi:</p>
+          <p>{{ message.sendEmail }}</p>
+        </div>
+        <div class="title">
+          <p class="pb-2" style="font-weight: 600">Tiêu đề:</p>
+          <p>{{ message.title }}</p>
+        </div>
+        <div class="content">
+          <p class="pb-2" style="font-weight: 600">Nội dung:</p>
+          <p>{{ message.content }}</p>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="collapse" id="collapseExample">
+          <textarea
+            name=""
+            id=""
+            rows="2"
+            class="form-control"
+            style="margin: 0 10px; width: 80%; display: inline-block"
+          ></textarea>
+        </div>
+        <div class="actions">
+          <button
+            class="btn btn-info"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapseExample"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            Trả lời
+          </button>
+
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Đóng
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

@@ -1,0 +1,89 @@
+<div class="table-responsive mt-5">
+  <p style="font-weight: 600; font-size: 18px">Danh sách các học viên</p>
+  <table class="table" style="background: #fff; border-radius: 5px">
+    <thead>
+      <tr>
+        <th scope="col" style="font-weight: 600; text-align: center">STT</th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Họ và tên
+        </th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Ngày sinh
+        </th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Địa chỉ
+        </th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Số khóa học đã hoàn thành
+        </th>
+
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Điểm hành vi
+        </th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Đánh giá
+        </th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Ngày tạo
+        </th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Lần đăng nhập gần nhất
+        </th>
+        <th scope="col" style="font-weight: 600; text-align: center"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of listStudent; let i = index">
+        <th scope="row" style="text-align: center">{{ i + 1 }}</th>
+        <td style="text-align: center">{{ student.fullName }}</td>
+        <td style="text-align: center">
+          {{ student.birthday | date: "dd/MM/yyyy" }}
+        </td>
+        <td style="text-align: center">
+          {{ student.city }} - {{ student.district }} - {{ student.ward }}
+        </td>
+        <td style="text-align: center">{{ student.learntCourseNumber }}</td>
+        <td style="text-align: center">{{ student.behaviorPoint }}</td>
+        <td>
+          <div class="vote ml-2">
+            <div class="active-star">
+              <i
+                class="fas fa-star mb-1"
+                style="color: #ccc"
+                *ngFor="let i of [].constructor(5)"
+              ></i>
+            </div>
+            <div class="disable-star">
+              <i
+                class="fas fa-star mt-1"
+                style="color: #ff6d34"
+                *ngFor="let i of [].constructor(student.rating)"
+              ></i>
+            </div>
+          </div>
+        </td>
+        <td style="text-align: center">
+          {{ student.otpRequestTime | date: "dd/MM/yyyy" }}
+        </td>
+        <td style="text-align: center">
+          {{ student.lastLogin | date: "dd/MM/yyyy - HH:mm" }}
+        </td>
+        <td style="text-align: center">
+          <a href="/student-detail/{{ student.studentId }}" target="_blank"
+            >Xem chi tiết</a
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<mat-paginator
+  *ngIf="listStudent.length != 0"
+  [length]="length"
+  [pageSize]="pageSize"
+  [pageIndex]="pageIndex"
+  [pageSizeOptions]="[10, 20, 30]"
+  (page)="pageEvent = getPaginatorData($event)"
+>
+</mat-paginator>

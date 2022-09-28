@@ -1,0 +1,39 @@
+<div class="table-responsive mt-5">
+  <p style="font-weight: 600; font-size: 18px">Danh sách các môn học</p>
+  <table class="table" style="background: #fff; border-radius: 5px">
+    <thead>
+      <tr>
+        <th scope="col" style="font-weight: 600; text-align: center">STT</th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Tên môn học
+        </th>
+        <th scope="col" style="font-weight: 600; text-align: center">Ảnh</th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Số khóa học
+        </th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Số yêu cầu
+        </th>
+        <th scope="col" style="font-weight: 600; text-align: center">
+          Số gia sư
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let subject of listSubject; let i = index">
+        <th scope="row" style="text-align: center">{{ i + 1 }}</th>
+        <td style="text-align: center">{{ listSubject[i].subjectName }}</td>
+        <td style="text-align: center">
+          <img
+            src="http://localhost:8888/upload/images/{{ subject.subjectImage }}"
+            alt=""
+          />
+        </td>
+        <td style="text-align: center">{{ countCourseBySubject[i] }}</td>
+        <td style="text-align: center">{{ countRequestBySubject[i] }}</td>
+        <td style="text-align: center">{{ countTutorBySubject[i] }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

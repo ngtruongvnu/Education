@@ -1,0 +1,575 @@
+<div class="request-main">
+  <div class="filters mt-4 mb-4 pt-3">
+    <ul>
+      <li class="filter">
+        <mat-form-field
+          appearance="fill"
+          class="example-form-field"
+          style="height: 25px"
+        >
+          <mat-label>Ngày cập nhật</mat-label>
+          <mat-date-range-input [rangePicker]="rangePicker" [formGroup]="range">
+            <input
+              matStartDate
+              placeholder="Start date"
+              formControlName="start"
+            />
+            <input matEndDate placeholder="End date" formControlName="end" />
+          </mat-date-range-input>
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="rangePicker"
+          ></mat-datepicker-toggle>
+          <mat-date-range-picker #rangePicker>
+            <mat-date-range-picker-actions>
+              <button
+                mat-button
+                matDateRangePickerCancel
+                class="btn btn-primary bg-danger"
+                style="border: none; font-size: 14px; font-weight: 500"
+              >
+                Hủy
+              </button>
+              <button
+                style="
+                  border: none;
+                  margin-left: 10px;
+                  font-size: 14px;
+                  font-weight: 500;
+                "
+                class="btn btn-primary bg-info"
+                mat-raised-button
+                color="primary"
+                matDateRangePickerApply
+              >
+                Lọc
+              </button>
+            </mat-date-range-picker-actions>
+          </mat-date-range-picker>
+        </mat-form-field>
+      </li>
+      <li
+        class="form-control filter"
+        (click)="showCheckbox($event)"
+        id="subject"
+      >
+        <span>Môn học</span>
+        <i class="fas fa-filter" style="font-size: 13px"></i>
+        <div class="checkbox" id="subjectCheckbox">
+          <div class="checkbox-area" *ngFor="let subject of subjectData">
+            <input
+              type="checkbox"
+              name="subject"
+              id="{{ subject.subjectName }}"
+              [value]="subject.subjectName"
+              class="id-{{ subject.subjectId }}"
+            />
+            <label for="{{ subject.subjectName }}">{{
+              subject.subjectName
+            }}</label>
+          </div>
+        </div>
+      </li>
+      <li class="form-control filter" (click)="showCheckbox($event)" id="level">
+        <span>Trình độ</span>
+        <i class="fas fa-filter" style="font-size: 13px"></i>
+        <div class="checkbox" id="levelCheckbox">
+          <div class="checkbox-area" *ngFor="let level of levelData">
+            <input
+              type="checkbox"
+              name="level"
+              id="{{ level.levelName }}"
+              [value]="level.levelName"
+              class="id-{{ level.levelId }}"
+            />
+            <label for="{{ level.levelName }}">{{ level.levelName }}</label>
+          </div>
+        </div>
+      </li>
+      <li class="form-control filter" (click)="showCheckbox($event)" id="cost">
+        <span>Ngân sách</span>
+        <i class="fas fa-filter" style="font-size: 13px"></i>
+        <div class="checkbox" id="costCheckbox">
+          <div class="checkbox-area">
+            <input
+              type="checkbox"
+              name="cost"
+              id="smaller-100"
+              value="< {{ 100000 | number }} VNĐ"
+            />
+            <label for="smaller-100">< {{ 100000 | number }} VNĐ</label>
+          </div>
+          <div class="checkbox-area">
+            <input
+              type="checkbox"
+              name="cost"
+              id="100-to-200"
+              value="{{ 100000 | number }} - {{ 200000 | number }} VNĐ"
+            />
+            <label for="100-to-200"
+              >{{ 100000 | number }} - {{ 200000 | number }} VNĐ</label
+            >
+          </div>
+          <div class="checkbox-area">
+            <input
+              type="checkbox"
+              name="cost"
+              id="200-to-300"
+              value="{{ 200000 | number }} - {{ 300000 | number }} VNĐ"
+            />
+            <label for="200-to-300"
+              >{{ 200000 | number }} - {{ 300000 | number }} VNĐ</label
+            >
+          </div>
+          <div class="checkbox-area">
+            <input
+              type="checkbox"
+              name="cost"
+              id="300-to-400"
+              value="{{ 300000 | number }} - {{ 400000 | number }} VNĐ"
+            />
+            <label for="300-to-400"
+              >{{ 300000 | number }} - {{ 400000 | number }} VNĐ</label
+            >
+          </div>
+          <div class="checkbox-area">
+            <input
+              type="checkbox"
+              name="cost"
+              id="400-to-500"
+              value="{{ 400000 | number }} - {{ 500000 | number }} VNĐ"
+            />
+            <label for="400-to-500"
+              >{{ 400000 | number }} - {{ 500000 | number }} VNĐ</label
+            >
+          </div>
+          <div class="checkbox-area">
+            <input
+              type="checkbox"
+              name="cost"
+              id="500-to-600"
+              value="{{ 500000 | number }} - {{ 600000 | number }} VNĐ"
+            />
+            <label for="500-to-600"
+              >{{ 500000 | number }} - {{ 600000 | number }} VNĐ</label
+            >
+          </div>
+          <div class="checkbox-area">
+            <input
+              type="checkbox"
+              name="cost"
+              id="600-to-700"
+              value="{{ 600000 | number }} - {{ 700000 | number }} VNĐ"
+            />
+            <label for="600-to-700"
+              >{{ 600000 | number }} - {{ 700000 | number }} VNĐ</label
+            >
+          </div>
+          <div class="checkbox-area">
+            <input
+              type="checkbox"
+              name="cost"
+              id="700-to-800"
+              value="{{ 700000 | number }} - {{ 800000 | number }} VNĐ"
+            />
+            <label for="700-to-800"
+              >{{ 700000 | number }} - {{ 800000 | number }} VNĐ</label
+            >
+          </div>
+          <div class="checkbox-area">
+            <input
+              type="checkbox"
+              name="cost"
+              id="800-to-900"
+              value="{{ 800000 | number }} - {{ 900000 | number }} VNĐ"
+            />
+            <label for="800-to-900"
+              >{{ 800000 | number }} - {{ 900000 | number }} VNĐ</label
+            >
+          </div>
+          <div class="checkbox-area">
+            <input
+              type="checkbox"
+              name="cost"
+              id="900-to-1000"
+              value="900,000 - 1000,000 VNĐ"
+            />
+            <label for="800-to-900"
+              >{{ 900000 | number }} - {{ 1000000 | number }} VNĐ</label
+            >
+          </div>
+          <div class="checkbox-area">
+            <input
+              type="checkbox"
+              name="cost"
+              id="bigger-1000"
+              value="> 1,000,000"
+            />
+            <label for="bigger-1000">> {{ 1000000 | number }} VNĐ</label>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button (click)="filter()" class="filter">Lọc</button>
+        <button (click)="reset()" class="reset">Bỏ lọc</button>
+      </li>
+    </ul>
+  </div>
+  <p class="filter-result mt-4 mb-4">
+    <span class="mr-2">Kết quả lọc của:</span><span class="filterrr"></span>
+  </p>
+  <p
+    *ngIf="tutorRequest.length === 0"
+    style="color: red; font-weight: 600; padding: 0px 60px"
+  >
+    Không tìm thấy kết quả nào
+  </p>
+  <div id="main-save">
+    <div class="request-info">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Ngày yêu cầu</th>
+            <th scope="col">Môn học</th>
+            <th scope="col">Trình độ</th>
+            <th scope="col">Thời lượng</th>
+            <th scope="col">Học phí / tiếng</th>
+            <th scope="col">Học viên</th>
+            <th scope="col">Trạng thái</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let request of tutorRequest">
+            <td>
+              {{ request.receiveDate | date: "dd/MM/yyyy" }}
+            </td>
+            <td>{{ request.objStudentRequest?.objSubject?.subjectName }}</td>
+            <td>{{ request.objStudentRequest?.objLevel?.levelName }}</td>
+            <td>
+              {{
+                request.objStudentRequest?.durationPerSession | timeTransform
+              }}
+            </td>
+            <td>{{ request.objStudentRequest?.costPerHour | number }} VNĐ</td>
+            <td>{{ request.objStudentRequest?.objStudent?.fullName }}</td>
+            <td>{{ request.status }}</td>
+            <td style="display: flex; justify-content: center">
+              <button
+                class="delete"
+                type="button"
+                class="btn btn-primary"
+                data-toggle="modal"
+                data-target="#staticBackdrop"
+                id="request-{{ request.tutorRequestId }}"
+                (click)="viewRequest($event)"
+              >
+                <i class="fas fa-info-circle"></i>
+              </button>
+              <a
+                class="view"
+                routerLink="/dashboard-tutor/student-request-detail/{{
+                  request.objStudentRequest?.studentRequestId
+                }}"
+                [queryParams]="{ status: 'sent' }"
+              >
+                <i class="fas fa-eye"></i>
+              </a>
+              <button
+                class="delete"
+                (click)="deleteRequest($event)"
+                id="delete-{{ request.tutorRequestId }}"
+              >
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <mat-paginator
+        [length]="length"
+        [pageSize]="pageSize"
+        [pageIndex]="pageIndex"
+        [pageSizeOptions]="[5, 10, 20]"
+        (page)="pageEvent = getPaginatorData($event)"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-backdrop="static"
+  data-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title" id="staticBackdropLabel">Thông tin khóa học</p>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="courseEditForm" (ngSubmit)="submitEditForm()">
+          <div class="learningTime mb-4">
+            <p style="color: red; font-weight: 500; margin-bottom: 10px">
+              <span>
+                Chọn thời gian bắt đầu trong khoảng:
+                {{ minTime | date: "HH:mm " }}
+                -
+                {{ maxTime | date: "HH:mm" }}</span
+              >
+            </p>
+            <div
+              style="margin-bottom: 5px"
+              style="display: flex; align-items: center"
+            >
+              <label for="startTime" style="margin-bottom: 5px; width: 50%"
+                >Giờ bắt đầu</label
+              >
+              <label style="margin-bottom: 5px; width: 50%; margin-left: 28px"
+                >Giờ kết thúc</label
+              >
+            </div>
+            <div class="input-area timePicker">
+              <input
+                [ngxTimepicker]="startTimee"
+                class="form-control time"
+                formControlName="startTime"
+                [format]="24"
+                placeholder="Giờ bắt đầu"
+                [(ngModel)]="startTime"
+                [value]="startTime"
+                min="{{ minTime | date: 'HH:mm' }}"
+                max="{{ maxTime | date: 'HH:mm' }}"
+                (ngModelChange)="changeTime()"
+              />
+              <ngx-material-timepicker #startTimee></ngx-material-timepicker>
+              <span
+                style="
+                  font-weight: 500;
+                  font-size: 30px;
+                  margin: 0 10px 20px 10px;
+                "
+                >-</span
+              >
+              <input
+                type="text"
+                [value]="endTime | date: 'HH:mm'"
+                class="form-control time"
+                placeholder="Giờ kết thúc"
+                disabled
+              />
+            </div>
+            <div class="input-area datePicker" style="flex-direction: column">
+              <div
+                style="
+                  width: 100%;
+                  text-align: left;
+                  margin-bottom: 10px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                "
+              >
+                <p>
+                  Ngày học:
+                  <span style="font-weight: 600" *ngIf="!editDate">{{
+                    courseView.studyDate | learningDateTransform
+                  }}</span>
+                </p>
+
+                <i
+                  class="fas fa-pencil-alt edit-learningDate"
+                  (click)="editLearningDate()"
+                  *ngIf="!editDate"
+                ></i>
+                <i
+                  class="fas fa-times edit-learningDate no-edit"
+                  style="background-color: rgb(187, 0, 0)"
+                  (click)="editLearningDate()"
+                  *ngIf="editDate"
+                ></i>
+              </div>
+              <mat-form-field
+                appearance="fill"
+                *ngIf="editDate"
+                style="width: 100%"
+              >
+                <mat-label>Chọn ngày học</mat-label>
+                <mat-select
+                  formControlName="learningDate"
+                  class="form-control"
+                  multiple
+                  id="learningDate"
+                  placeholder="Chọn ngày học"
+                >
+                  <ng-container *ngFor="let date of learningDateData">
+                    <mat-option [value]="date" selected="selected">{{
+                      date
+                    }}</mat-option>
+                  </ng-container>
+                </mat-select>
+              </mat-form-field>
+              <div
+                *ngIf="
+                  t.learningDate.invalid &&
+                  (t.learningDate.dirty || t.learningDate.touched) &&
+                  editDate
+                "
+              >
+                <div *ngIf="t.learningDate.errors">
+                  <div *ngIf="t.learningDate.errors.required">
+                    <span class="errors" style="bottom: -5px"
+                      >Vui lòng chọn ngày học</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="input-area datePicker" style="flex-direction: column">
+              <div
+                style="margin-bottom: 5px"
+                style="display: flex; align-items: center; width: 100%"
+              >
+                <label
+                  for="startTime"
+                  style="margin-bottom: 5px; width: 48%; text-align: left"
+                  >Ngày bắt đầu khóa học</label
+                >
+                <label style="margin-bottom: 5px; width: 48%; text-align: right"
+                  >Ngày kết thúc khóa học</label
+                >
+              </div>
+              <div
+                class="datepicker-area w-100"
+                style="display: flex; justify-content: space-between"
+              >
+                <mat-form-field
+                  appearance="fill"
+                  class="example-form-field"
+                  style="width: 48%"
+                >
+                  <mat-label>Ngày bắt đầu</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="datepicker"
+                    formControlName="startDate"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="datepicker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #datepicker>
+                    <mat-datepicker-actions>
+                      <button
+                        mat-button
+                        matDatepickerCancel
+                        class="btn btn-danger"
+                        style="font-size: 14px; margin: 0 5px; font-weight: 600"
+                      >
+                        Hủy
+                      </button>
+                      <button
+                        mat-raised-button
+                        color="primary"
+                        class="btn btn-success"
+                        style="font-size: 14px; margin: 0 5px; font-weight: 600"
+                        matDatepickerApply
+                      >
+                        Chọn
+                      </button>
+                    </mat-datepicker-actions>
+                  </mat-datepicker>
+                </mat-form-field>
+                <div
+                  *ngIf="
+                    t.startDate.invalid &&
+                    (t.startDate.dirty || t.startDate.touched)
+                  "
+                >
+                  <div *ngIf="t.startDate.errors">
+                    <div *ngIf="t.startDate.errors.required">
+                      <span class="errors" style="bottom: -5px"
+                        >Vui lòng chọn ngày bắt đầu</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <mat-form-field
+                  appearance="fill"
+                  class="example-form-field"
+                  style="width: 48%"
+                >
+                  <mat-label class="w-100">Ngày kết thúc</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="endDatePicker"
+                    formControlName="endDate"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="endDatePicker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #endDatePicker>
+                    <mat-datepicker-actions>
+                      <button
+                        mat-button
+                        matDatepickerCancel
+                        class="btn btn-danger"
+                        style="font-size: 14px; margin: 0 5px; font-weight: 600"
+                      >
+                        Hủy
+                      </button>
+                      <button
+                        mat-raised-button
+                        color="primary"
+                        class="btn btn-success"
+                        style="font-size: 14px; margin: 0 5px; font-weight: 600"
+                        matDatepickerApply
+                      >
+                        Chọn
+                      </button>
+                    </mat-datepicker-actions>
+                  </mat-datepicker>
+                </mat-form-field>
+                <div
+                  *ngIf="
+                    t.endDate.invalid && (t.endDate.dirty || t.endDate.touched)
+                  "
+                >
+                  <div *ngIf="t.endDate.errors">
+                    <div *ngIf="t.endDate.errors.required">
+                      <span
+                        class="errors"
+                        style="bottom: -5px; right: 0; text-align: right"
+                        >Vui lòng chọn ngày kết thúc</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>

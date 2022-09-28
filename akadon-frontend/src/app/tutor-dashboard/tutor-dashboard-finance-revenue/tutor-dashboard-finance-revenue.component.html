@@ -1,0 +1,127 @@
+<p class="title">Tổng quan</p>
+<div class="row">
+  <div class="col-xl-7 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="surplus">
+      <div class="surplus-main">
+        <p style="font-weight: 600; text-align: center">Tổng số dư</p>
+        <div class="money">0 VNĐ</div>
+      </div>
+      <div class="link">
+        <img
+          src="./assets/images/dashboard/finance/cash-icon.svg"
+          class="mr-3"
+          alt=""
+        />
+        Rút tiền
+      </div>
+      <div class="surplus-bottom">
+        <p class="pb-2">
+          Số dư thực tế:
+          <span style="font-weight: 600">0 VNĐ</span>
+        </p>
+        <p style="opacity: 0.7; font-size: 13px">(Số dư bạn có thể rút)</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="back-account">
+      <p style="font-weight: 600; text-align: center">Tài khoản ngân hàng</p>
+      <div class="accounts">
+        <span class="account-number">****</span>
+        <div class="type">Mặc định</div>
+      </div>
+      <a class="more" routerLink="/dashboard-tutor/finance/banking">Xem thêm</a>
+    </div>
+  </div>
+</div>
+<p class="title">Các giao dịch gần đây</p>
+<div class="choose-date">
+  <label for="transaction-date" class="icon-birthday"
+    >Chọn khoảng ngày giao dịch</label
+  >
+  <input
+    type="text"
+    class="form-control"
+    name="transaction-date"
+    id="transaction-date"
+  />
+</div>
+<div class="request-menu mt-3 mb-2">
+  <a
+    class="menu-link active"
+    [routerLink]="['/dashboard-tutor/finance/revenue']"
+    [queryParams]="{ status: 'all' }"
+    (click)="change($event)"
+    id="all"
+    >Tất cả</a
+  >
+
+  <a
+    class="menu-link"
+    [routerLink]="['/dashboard-tutor/finance/revenue']"
+    [queryParams]="{ status: 'revenue' }"
+    (click)="change($event)"
+    id="revenue"
+    >Doanh thu</a
+  >
+
+  <a
+    class="menu-link"
+    [routerLink]="['/dashboard-tutor/finance/revenue']"
+    [queryParams]="{ status: 'cash-back' }"
+    (click)="change($event)"
+    id="cash-back"
+    >Rút tiền</a
+  >
+</div>
+<div class="finance-main">
+  <div id="main-all">
+    <p class="text-center pt-5 pb-5" style="font-size: 14px; font-weight: 600">
+      Chưa có lịch sử giao dịch
+    </p>
+    <table class="table" *ngIf="!emptyTransaction">
+      <thead>
+        <tr>
+          <th class="text-center" scope="col">Ngày</th>
+          <th class="text-center" scope="col">Loại giao dịch</th>
+          <th class="text-center" scope="col">Số tiền</th>
+          <th class="text-center" scope="col">Trạng thái</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th class="text-center" scope="row" style="font-weight: 500">1</th>
+          <td class="text-center">Mark</td>
+          <td class="text-center">Otto</td>
+          <td class="text-center">@mdo</td>
+        </tr>
+        <tr>
+          <th class="text-center" scope="row" style="font-weight: 500">2</th>
+          <td class="text-center">Jacob</td>
+          <td class="text-center">Thornton</td>
+          <td class="text-center">@fat</td>
+        </tr>
+        <tr>
+          <th class="text-center" scope="row" style="font-weight: 500">3</th>
+          <td class="text-center">Larry</td>
+          <td class="text-center">the Bird</td>
+          <td class="text-center">@twitter</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="main-revenue">
+    <img src="./assets/images/dashboard/finance/background.svg" alt="" />
+    <p class="text-center" style="font-size: 22px">
+      Hãy chờ đón những thông tin mới nhất của chúng tôi nhé !
+    </p>
+    <a class="more home-page" routerLink="/" target="_blank">Trang chủ</a>
+  </div>
+  <div id="main-cash-back">
+    <img src="./assets/images/dashboard/finance/background.svg" alt="" />
+    <p class="text-center" style="font-size: 22px">
+      Hãy chờ đón những thông tin mới nhất của chúng tôi nhé !
+    </p>
+    <a class="more home-page" routerLink="/" target="_blank">Trang chủ</a>
+  </div>
+</div>

@@ -1,0 +1,119 @@
+<div class="dashboard">
+  <nav class="menu">
+    <div class="logo">
+      <a href="/" target="_blank">
+        <img
+          src="./assets/images/logo-akadon.png"
+          class="w-100 mb-3 logo"
+          alt=""
+        />
+      </a>
+    </div>
+    <i class="fas fa-chevron-left" id="hide" (click)="hideMenu()"></i>
+    <i class="fas fa-chevron-right" id="show" (click)="showMenu()"></i>
+    <ul class="mt-5">
+      <li>
+        <a routerLink="/dashboard-admin/home" routerLinkActive="active-link">
+          <i class="fas fa-home"></i> <span class="menu-title">Trang chủ</span>
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/dashboard-admin/doanh-thu"
+          routerLinkActive="active-link"
+        >
+          <i class="far fa-chart-bar"></i>
+          <span class="menu-title">Thống kê giao dịch</span>
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/dashboard-admin/pay-for-tutor"
+          routerLinkActive="active-link"
+        >
+          <i class="fas fa-money-check-alt"></i>
+          <span class="menu-title">Thanh toán cho gia sư</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/dashboard-admin/course" routerLinkActive="active-link">
+          <i class="fas fa-user-graduate"></i>
+          <span class="menu-title">Quản lý các khóa học</span>
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/dashboard-admin/student-request"
+          routerLinkActive="active-link"
+        >
+          <i class="fas fa-user-graduate"></i>
+          <span class="menu-title">Quản lý yêu cầu của học viên</span>
+        </a>
+      </li>
+      <li>
+        <a
+          data-toggle="collapse"
+          href="#account"
+          role="button"
+          aria-expanded="false"
+          aria-controls="collapseExample"
+          routerLinkActive="active-link"
+          class="finance"
+          (click)="show = !show"
+        >
+          <i class="fas fa-user-circle"></i>
+          <span class="menu-title">Quản lý tài khoản</span>
+          <i *ngIf="show" class="fas fa-chevron-down"></i>
+          <i *ngIf="!show" class="fas fa-chevron-up"></i>
+        </a>
+      </li>
+      <div class="collapse" id="account">
+        <div class="card card-body" style="border: none; padding: 0">
+          <a
+            routerLinkActive="active-link"
+            class="sub-link"
+            routerLink="/dashboard-admin/tutor-account"
+            >Tài khoản gia sư</a
+          >
+          <a
+            routerLink="/dashboard-admin/student-account"
+            routerLinkActive="active-link"
+            class="sub-link"
+            >Tài khoản học viên</a
+          >
+          <a
+            routerLink="/dashboard-admin/admin-account"
+            routerLinkActive="active-link"
+            class="sub-link"
+            >Tài khoản admin</a
+          >
+        </div>
+      </div>
+      <li>
+        <a routerLink="/dashboard-admin/subject" routerLinkActive="active-link">
+          <i class="fas fa-book"></i>
+          <span class="menu-title">Quản lý môn học</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/dashboard-admin/level" routerLinkActive="active-link">
+          <i class="fab fa-servicestack"></i>
+          <span class="menu-title">Quản lý trình độ</span>
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/dashboard-admin/messages"
+          routerLinkActive="active-link"
+        >
+          <i class="fas fa-comment-dots"></i>
+          <span class="menu-title">Tin nhắn người dùng</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div class="main">
+    <app-student-dashboard-header></app-student-dashboard-header>
+    <router-outlet></router-outlet>
+  </div>
+</div>

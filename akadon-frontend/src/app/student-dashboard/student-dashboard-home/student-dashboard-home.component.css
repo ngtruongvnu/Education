@@ -1,0 +1,323 @@
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+}
+header .information {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 10px;
+}
+header .information {
+  display: flex;
+  justify-content: space-between;
+}
+header .information .datetime {
+  display: flex;
+  font-size: 14px;
+}
+header .information .datetime .day {
+  color: #0367b4;
+  font-weight: 700;
+  margin-right: 5px;
+}
+header .information .datetime .date {
+  margin-right: 10px;
+}
+header .information .message-report,
+header .information .tutor-information {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+header .information .message-report i {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 50%;
+  font-size: 14px;
+  margin-right: 10px;
+  color: #0367b4;
+  cursor: pointer;
+  transition: 0.3s;
+}
+header .information .message-report i:hover {
+  background: #a3d7ff73;
+}
+header .information .tutor-information img {
+  border-radius: 50%;
+  width: 25%;
+  margin-right: 10px;
+}
+header .information .tutor-information .tutor-name {
+  display: flex;
+  font-size: 14px;
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+}
+header .information .tutor-information .tutor-name span {
+  margin-right: 5px;
+  cursor: pointer;
+}
+.complete-profile {
+  display: flex;
+  align-items: center;
+  background-color: #d3d3d3;
+  padding: 15px 20px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.banner {
+  background-image: url("/assets/images/dashboard-student/banner.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  border-radius: 20px;
+  padding: 0 20px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.banner .tutor-name {
+  font-weight: 700;
+  font-size: 36px;
+  height: 50%;
+}
+.banner .begin {
+  font-weight: 500;
+  font-size: 20px;
+}
+.link {
+  background: linear-gradient(90deg, #03b0a9 3.75%, #0369b3);
+  margin-left: 30px;
+  padding: 15px 20px;
+  border-radius: 50px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 700;
+  transition: 0.3s;
+}
+.link:hover {
+  box-shadow: 0px 0px 20px -10px #000;
+}
+.procedure .title {
+  display: flex;
+  align-items: center;
+}
+.procedure {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+}
+.procedure .row-step {
+  width: 100%;
+  margin: 10px 0;
+}
+.procedure .title span {
+  font-weight: 600;
+  margin-left: 10px;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+.procedure .step {
+  height: 280px;
+  border: 1px solid #0000002b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+  position: relative;
+}
+.procedure .step .step-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+.procedure .step .step-top .index {
+  font-weight: 700;
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff6d34;
+}
+.procedure .step .step-top .step-name {
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+.procedure .step .step-top .step-content {
+  font-weight: 500;
+  margin-top: 10px;
+  line-height: 1.5;
+  font-size: 14px;
+  padding: 0 5px;
+}
+.procedure .step .step-top .step-content a:hover {
+  text-decoration: underline;
+}
+.procedure .step .step-images {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+}
+.procedure .step .step-images img {
+  width: 28%;
+}
+.procedure .step1 .step-images {
+  justify-content: space-between;
+}
+.procedure .step1 .step-images img {
+  width: 15%;
+}
+.request-header {
+  display: flex;
+  justify-content: space-between;
+}
+.request-header .link {
+  font-size: 14px;
+  text-transform: capitalize;
+  padding: 12px 15px;
+}
+.request-title {
+  display: flex;
+  align-items: center;
+}
+.request-title p {
+  margin-left: 15px;
+  font-weight: 600;
+  font-size: 18px;
+}
+.subject {
+  width: 300px;
+  padding: 10px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px -7px;
+  color: #000;
+  transition: 0.3s;
+}
+.subject:hover {
+  color: #ff6d34;
+}
+.subject img {
+  width: 75px;
+  height: 75px;
+}
+.subject span {
+  font-weight: 600;
+  margin-left: 20px;
+}
+owl-carousel-o {
+  margin: 0 10px;
+}
+owl-carousel-o {
+  margin-top: 30px;
+  padding: 0 20px;
+  position: relative;
+}
+owl-carousel-o .tutor {
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 14px;
+  position: relative;
+  box-shadow: 0px 0px 10px -5px;
+}
+owl-carousel-o .tutor .information {
+  display: flex;
+  align-items: center;
+}
+owl-carousel-o .tutor .information img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+owl-carousel-o .tutor .information .name-address {
+  height: 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+owl-carousel-o .tutor .information .name-address .name {
+  color: #ff6d34;
+  font-weight: 600;
+}
+owl-carousel-o .tutor .information .name-address .address,
+owl-carousel-o .tutor .info {
+  font-size: 13px;
+  color: #919191;
+}
+owl-carousel-o .tutor .information .name-address .address i {
+  font-size: 11px;
+  margin-right: 5px;
+}
+owl-carousel-o .tutor .info {
+  display: flex;
+  align-items: center;
+}
+owl-carousel-o .tutor .info span {
+  color: #000;
+  font-weight: 600;
+  margin-left: 5px;
+}
+owl-carousel-o .tutor .view-profile {
+  position: relative;
+  display: inline-block;
+  margin: 10px 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2969b4;
+  border-radius: 30px;
+  padding: 12px 70px;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+owl-carousel-o .tutor .view-profile i {
+  font-size: 11px;
+  position: absolute;
+  top: 14px;
+  right: 20%;
+  opacity: 0;
+  transition: 0.3s;
+}
+owl-carousel-o .tutor .view-profile:hover {
+  background: #277ddf;
+}
+owl-carousel-o .tutor .view-profile:hover i {
+  right: 10%;
+  opacity: 1;
+}
+.vote {
+  position: relative;
+}
+.vote .disable-star {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

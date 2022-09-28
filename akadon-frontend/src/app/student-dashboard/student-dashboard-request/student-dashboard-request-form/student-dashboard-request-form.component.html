@@ -1,0 +1,563 @@
+<a routerLink="/dashboard-student/request/send" class="back"
+  ><i class="fas fa-arrow-left"></i> Quay lại</a
+>
+<p class="title mt-3">Yêu cầu tìm gia sư</p>
+<mat-stepper [linear]="true" #stepper>
+  <mat-step>
+    <ng-template matStepLabel>Đăng yêu cầu tìm gia sư</ng-template>
+    <mat-stepper orientation="vertical" #subStepper [linear]="true">
+      <mat-step [stepControl]="subjectInfoForm">
+        <ng-template matStepLabel>1. Thông tin về môn học</ng-template>
+        <form
+          class="subject-info"
+          [formGroup]="subjectInfoForm"
+          (ngSubmit)="submitSubject()"
+        >
+          <div class="input-area">
+            <label for="requesTitle"
+              >Tiêu đề yêu cầu
+              <span class="red" style="color: red">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control"
+              formControlName="requestTitle"
+              id="requesTitle"
+            />
+            <div
+              *ngIf="
+                s.requestTitle.invalid &&
+                (s.requestTitle.dirty || s.requestTitle.touched)
+              "
+            >
+              <div *ngIf="s.requestTitle.errors">
+                <div *ngIf="s.requestTitle.errors.required">
+                  <span class="errors">Vui lòng điền tiêu đề</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="subject-level">
+            <div class="input-area">
+              <label for="subject"
+                >Môn học yêu cầu
+                <span class="red" style="color: red">*</span></label
+              >
+              <select
+                formControlName="subject"
+                class="form-control"
+                id="subject"
+              >
+                <option disabled selected>Chọn môn học</option>
+                <ng-container *ngFor="let subject of subjectData">
+                  <option [ngValue]="subject">
+                    {{ subject.subjectName }}
+                  </option>
+                </ng-container>
+              </select>
+              <div
+                *ngIf="
+                  s.subject.invalid && (s.subject.dirty || s.subject.touched)
+                "
+              >
+                <div *ngIf="s.subject.errors">
+                  <div *ngIf="s.subject.errors.subjectCheck">
+                    <span class="errors">Vui lòng chọn môn học</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="input-area">
+              <label for="level"
+                >Trình độ yêu cầu
+                <span class="red" style="color: red">*</span></label
+              >
+              <select formControlName="level" class="form-control" id="level">
+                <option disabled selected>Chọn trình độ</option>
+                <ng-container *ngFor="let level of levelData">
+                  <option [ngValue]="level">
+                    {{ level.levelName }}
+                  </option>
+                </ng-container>
+              </select>
+              <div
+                *ngIf="s.level.invalid && (s.level.dirty || s.level.touched)"
+              >
+                <div *ngIf="s.level.errors">
+                  <div *ngIf="s.level.errors.levelCheck">
+                    <span class="errors">Vui lòng chọn trình độ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="exist" style="color: red">
+            Môn học với trình độ này đã được yêu cầu !
+          </p>
+          <button
+            mat-button
+            matStepperNext
+            class="action"
+            *ngIf="subjectInfoForm.valid"
+          >
+            Tiếp theo <i class="fas fa-arrow-down"></i>
+          </button>
+          <button
+            mat-button
+            class="action invalid"
+            *ngIf="!subjectInfoForm.valid"
+          >
+            Tiếp theo <i class="fas fa-arrow-down"></i>
+          </button>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="timeCostForm">
+        <ng-template matStepLabel>2. Thời gian và Học phí</ng-template>
+        <form class="subject-info" [formGroup]="timeCostForm">
+          <p style="font-weight: 500; color: rgb(97, 97, 97)">
+            <span class="red" style="color: red">*</span> là thông tin bắt buộc
+          </p>
+          <div class="subject-level">
+            <div class="input-area">
+              <label for="cost"
+                >Ngân sách cho 1 tiếng
+                <span class="red" style="color: red">*</span></label
+              >
+              <select formControlName="cost" class="form-control" id="cost">
+                <option disabled selected>Chọn ngân sách</option>
+                <option value="50000">{{ 50000 | number }}</option>
+                <option value="100000">{{ 100000 | number }}</option>
+                <option value="150000">{{ 150000 | number }}</option>
+                <option value="200000">{{ 200000 | number }}</option>
+                <option value="250000">{{ 250000 | number }}</option>
+                <option value="300000">{{ 300000 | number }}</option>
+                <option value="350000">{{ 350000 | number }}</option>
+                <option value="400000">{{ 400000 | number }}</option>
+                <option value="450000">{{ 450000 | number }}</option>
+                <option value="500000">{{ 500000 | number }}</option>
+              </select>
+              <div *ngIf="t.cost.invalid && (t.cost.dirty || t.cost.touched)">
+                <div *ngIf="t.cost.errors">
+                  <div *ngIf="t.cost.errors.costCheck">
+                    <span class="errors">Vui lòng chọn ngân sách</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="input-area">
+              <label for="duration"
+                >Thời lượng cho 1 buổi học
+                <span class="red" style="color: red">*</span></label
+              >
+              <select
+                formControlName="duration"
+                class="form-control"
+                id="duration"
+              >
+                <option disabled selected>Chọn thời lượng buổi học</option>
+                <option value="0.5">30 phút</option>
+                <option value="1">1 tiếng</option>
+                <option value="1.5">1 tiếng 30 phút</option>
+                <option value="2">2 tiếng</option>
+                <option value="2.5">2 tiếng 30 phút</option>
+                <option value="3">3 tiếng</option>
+                <option value="3.5">3 tiếng 30 phút</option>
+                <option value="4">4 tiếng</option>
+              </select>
+              <div
+                *ngIf="
+                  t.duration.invalid && (t.duration.dirty || t.duration.touched)
+                "
+              >
+                <div *ngIf="t.duration.errors">
+                  <div *ngIf="t.duration.errors.durationCheck">
+                    <span class="errors"
+                      >Vui lòng chọn thời lượng buổi học</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            "
+          >
+            <div style="width: 48%">
+              <label
+                >Thời gian rảnh của bạn(để AKADON tiện sắp xếp lịch học)
+                <span class="red" style="color: red">*</span></label
+              >
+              <div class="learningTime">
+                <div class="input-area timePicker">
+                  <input
+                    [ngxTimepicker]="startTime"
+                    class="form-control time"
+                    formControlName="startTime"
+                    [format]="24"
+                    readonly
+                    placeholder="Giờ bắt đầu"
+                  />
+                  <ngx-material-timepicker #startTime></ngx-material-timepicker>
+                  <span style="font-weight: 500; font-size: 30px">-</span>
+                  <input
+                    [ngxTimepicker]="endTime"
+                    class="form-control time"
+                    [format]="24"
+                    readonly
+                    formControlName="endTime"
+                    placeholder="Giờ kết thúc"
+                  />
+                  <ngx-material-timepicker #endTime></ngx-material-timepicker>
+                  <div
+                    *ngIf="
+                      (t.startTime.invalid &&
+                        (t.startTime.dirty || t.startTime.touched)) ||
+                      (t.endTime.invalid &&
+                        (t.endTime.dirty || t.endTime.touched))
+                    "
+                  >
+                    <div *ngIf="t.startTime?.errors || t.endTime?.errors">
+                      <div
+                        *ngIf="
+                          t.startTime.errors?.required ||
+                          t.endTime.errors?.required
+                        "
+                      >
+                        <span class="errors time-error"
+                          >Vui lòng chọn thời gian</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-area datePicker">
+                  <ng-multiselect-dropdown
+                    [placeholder]="'Chọn ngày học'"
+                    [settings]="dropdownSettings"
+                    [data]="dropdownList"
+                    formControlName="learningDate"
+                  >
+                  </ng-multiselect-dropdown>
+                </div>
+              </div>
+            </div>
+            <div style="width: 48%">
+              <div class="input-area">
+                <label for="payTime"
+                  >Thanh toán học phí sau
+                  <span class="red" style="color: red">*</span></label
+                >
+                <select
+                  formControlName="payTime"
+                  class="form-control w-100"
+                  id="payTime"
+                >
+                  <option disabled selected>Thanh toán học phí</option>
+                  <option value="3">3 buổi</option>
+                  <option value="5">5 buổi</option>
+                  <option value="10">10 buổi</option>
+                </select>
+                <div
+                  *ngIf="
+                    t.payTime.invalid && (t.payTime.dirty || t.payTime.touched)
+                  "
+                >
+                  <div *ngIf="t.payTime.errors">
+                    <div *ngIf="t.payTime.errors.payTimeCheck">
+                      <span class="errors"
+                        >Vui lòng chọn thời gian thanh toán học phí</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p style="color: #ff6d34; font-style: italic">
+            Bạn có thể học thử một buổi trước khi chọn cho mình một gia sư phù
+            hợp. Vì vậy, hãy cho chúng tôi biết thời gian rảnh bạn có thể học
+            thử với gia sư nhé!
+          </p>
+          <div class="input-area try">
+            <label
+              >Hình thức học
+              <span class="red" style="color: red">*</span></label
+            >
+            <div class="radio-input">
+              <input
+                type="radio"
+                formControlName="learningMethod"
+                id="online"
+                value="true"
+              />
+              <label for="online">Online</label>
+            </div>
+            <div class="radio-input">
+              <input
+                type="radio"
+                formControlName="learningMethod"
+                id="offline"
+                value="false"
+              />
+              <label for="offline">Offline</label>
+            </div>
+          </div>
+          <div class="input-area try">
+            <label>Học thử ?</label>
+            <div class="radio-input">
+              <input
+                type="radio"
+                formControlName="try"
+                id="true"
+                value="true"
+              />
+              <label for="true">Có</label>
+            </div>
+            <div class="radio-input">
+              <input
+                type="radio"
+                formControlName="try"
+                id="false"
+                value="false"
+              />
+              <label for="false">Không</label>
+            </div>
+          </div>
+          <div class="end-date">
+            <label>Thời gian kết thúc dự kiến</label>
+            <mat-form-field appearance="fill">
+              <mat-label>Chọn 1 ngày</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                formControlName="endDate"
+                style="padding: 0"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <button
+            mat-button
+            matStepperNext
+            class="action"
+            *ngIf="timeCostForm.valid"
+          >
+            Tiếp theo <i class="fas fa-arrow-down"></i>
+          </button>
+          <button mat-button class="action invalid" *ngIf="!timeCostForm.valid">
+            Tiếp theo <i class="fas fa-arrow-down"></i>
+          </button>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="studentInfoForm">
+        <ng-template matStepLabel>3. Thông tin học viên</ng-template>
+        <form class="subject-info student-info" [formGroup]="studentInfoForm">
+          <div class="input-area mt-2">
+            <label for="introduction"
+              >Thông tin về học viên
+              <span class="red" style="color: red">*</span></label
+            >
+            <textarea
+              class="form-control"
+              formControlName="introduction"
+              id="introduction"
+              rows="2"
+              placeholder="Giới thiệu về trình độ của học sinh"
+            ></textarea>
+            <div
+              *ngIf="
+                si.introduction.invalid &&
+                (si.introduction.dirty || si.introduction.touched)
+              "
+            >
+              <div *ngIf="si.introduction.errors">
+                <div *ngIf="si.introduction.errors.required">
+                  <span class="errors">Vui lòng điên thông tin</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="input-area">
+            <label for="wish"
+              >Mong muốn của học viên với gia sư
+              <span class="red" style="color: red">*</span></label
+            >
+            <textarea
+              class="form-control"
+              formControlName="wish"
+              id="wish"
+              rows="2"
+              placeholder="Mong muốn gia sư củng cố lại kiến thức cơ bản hoặc luyện thi..."
+            ></textarea>
+            <div *ngIf="si.wish.invalid && (si.wish.dirty || si.wish.touched)">
+              <div *ngIf="si.wish.errors">
+                <div *ngIf="si.wish.errors.required">
+                  <span class="errors">Vui lòng điên mong muốn</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+    </mat-stepper>
+    <button
+      mat-button
+      matStepperNext
+      (click)="submitStep1()"
+      class="action"
+      *ngIf="
+        studentInfoForm.valid && subjectInfoForm.valid && timeCostForm.valid
+      "
+    >
+      Tiếp theo <i class="fas fa-arrow-right"></i>
+    </button>
+    <button
+      mat-button
+      class="action invalid"
+      *ngIf="
+        !studentInfoForm.valid || !subjectInfoForm.valid || !timeCostForm.valid
+      "
+    >
+      Tiếp theo <i class="fas fa-arrow-right"></i>
+    </button>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Chọn gia sư phù hợp</ng-template>
+    <p
+      *ngIf="suitableTutor.length > 0"
+      style="font-size: 16px; padding-top: 20px; font-weight: 500"
+    >
+      Những gia sư phù hợp với yêu cầu của bạn
+    </p>
+    <p
+      *ngIf="suitableTutor.length === 0"
+      style="
+        color: red;
+        font-weight: 600;
+        padding: 0px 60px;
+        text-align: center;
+      "
+    >
+      Hiện tại chưa có gia sư nào phù hợp với yêu cầu của bạn ! Chúng tôi sẽ
+      thông báo nếu tìm thấy gia sư phù hợp !
+    </p>
+    <a
+      routerLink="/dashboard-student/request/send"
+      *ngIf="suitableTutor.length === 0"
+      class="view-profile"
+      (click)="skip()"
+    >
+      <i class="fas fa-arrow-left"></i> Quản lý yêu cầu
+    </a>
+    <div class="tutor-list" *ngIf="suitableTutor.length > 0">
+      <div class="tutor mb-3" *ngFor="let tutorDetail of suitableTutor">
+        <div class="tutor-info">
+          <div class="information">
+            <img
+              src="http://localhost:8888/upload/images/{{
+                tutorDetail.objTutor?.image
+              }}"
+              alt=""
+              class="account-image"
+            />
+            <div class="name-address">
+              <p class="name">{{ tutorDetail.objTutor?.fullName }}</p>
+              <p class="address">
+                <i class="fas fa-map-marker-alt"></i>
+                {{ tutorDetail.objTutor?.city }}
+              </p>
+            </div>
+          </div>
+          <div class="info mt-2">
+            Xếp hạng:
+            <div class="vote ml-2">
+              <div class="active-star">
+                <i
+                  class="fas fa-star mb-1"
+                  style="color: #ccc"
+                  *ngFor="let i of [].constructor(5)"
+                ></i>
+              </div>
+              <div class="disable-star">
+                <i
+                  class="fas fa-star mt-1"
+                  style="color: #ff6d34"
+                  *ngFor="let i of [].constructor(tutorDetail.objTutor?.rating)"
+                ></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="introduction">
+          <p class="info mt-2">
+            Điểm hành vi: <span>{{ tutorDetail.objTutor?.behaviorPoint }}</span>
+          </p>
+          <p class="info">
+            Số khóa học đã hoàn thành:
+            <span>{{ tutorDetail.objTutor?.taughtCourseNumber }}</span>
+          </p>
+        </div>
+        <div class="actions">
+          <a
+            href="/tutor-detail/{{ tutorDetail.objTutor?.tutorId }}"
+            class="view-profile"
+            target="_blank"
+          >
+            Xem chi tiết
+          </a>
+          <button
+            mat-button
+            matStepperNext
+            style="cursor: pointer"
+            (click)="sendRequest($event)"
+            id="{{ tutorDetail.tutorDetailId }}"
+            class="view-profile order ml-2"
+          >
+            Gửi yêu cầu
+          </button>
+        </div>
+      </div>
+    </div>
+    <a
+      routerLink="/dashboard-student/request/send"
+      (click)="skip()"
+      class="view-profile"
+      *ngIf="suitableTutor.length > 0"
+    >
+      <i class="fas fa-arrow-left"></i> Bỏ qua
+    </a>
+    <mat-paginator
+      *ngIf="suitableTutor.length > 0"
+      [length]="length"
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex"
+      [pageSizeOptions]="[5, 10, 20]"
+      (page)="pageEvent = getPaginatorData($event)"
+    >
+    </mat-paginator>
+  </mat-step>
+  <mat-step *ngIf="suitableTutor.length > 0">
+    <ng-template matStepLabel>Hoàn thành</ng-template>
+    <div class="success-step">
+      <i class="far fa-check-circle success-icon"></i>
+      <p class="success">
+        Yêu cầu của bạn đã được gửi ! Vui lòng chờ gia sư chấp nhận !
+      </p>
+      <div class="actions">
+        <a routerLink="/dashboard-student/request/send" id="back-home"
+          ><i class="fas fa-arrow-left"></i> Quản lý yêu cầu</a
+        >
+      </div>
+    </div>
+  </mat-step>
+</mat-stepper>

@@ -1,0 +1,570 @@
+<div class="back">
+  <a routerLink="/dashboard-tutor/request-list" *ngIf="!sent"
+    ><i class="fas fa-arrow-left mr-2"></i>Quay lại</a
+  >
+  <a routerLink="/dashboard-tutor/request/receive" *ngIf="sent"
+    ><i class="fas fa-arrow-left mr-2"></i>Quay lại</a
+  >
+</div>
+<div class="area student-info">
+  <div class="request-student">
+    <img
+      src="http://localhost:8888/upload/images/{{
+        studentRequest?.objStudent?.image
+      }}"
+      alt=""
+      class="mr-3"
+    />
+    <div class="student-info">
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 45px;
+        "
+      >
+        <a
+          class="student-name"
+          target="_blank"
+          routerLink="/student-detail/{{
+            studentRequest.objStudent?.studentId
+          }}"
+        >
+          {{ studentRequest?.objStudent?.fullName }}
+        </a>
+        <div class="vote ml-2">
+          <div class="active-star">
+            <i
+              class="fas fa-star mb-1"
+              style="color: #ccc"
+              *ngFor="let i of [].constructor(5)"
+            ></i>
+          </div>
+
+          <div class="disable-star">
+            <i
+              class="fas fa-star mt-1"
+              style="color: #ff6d34"
+              *ngFor="
+                let i of [].constructor(studentRequest?.objStudent?.rating)
+              "
+            ></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p style="margin-left: 80px; color: rgb(104, 104, 104)">
+    Đã là thành viên trong {{ participateTime }} tháng, tham gia
+    {{ studentRequest.objStudent?.learntCourseNumber }} khóa học
+  </p>
+  <div class="try">
+    <span
+      *ngIf="studentRequest.testLearning"
+      style="
+        padding: 5px 10px;
+        background-color: #ffdacc;
+        color: #ff6d34;
+        font-weight: 600;
+        border-radius: 5px;
+      "
+      >Học viên yêu cầu học thử</span
+    >
+    <span
+      *ngIf="!studentRequest.testLearning"
+      style="
+        padding: 5px 10px;
+        background-color: #b3d1e8;
+        color: #1469be;
+        font-weight: 600;
+        border-radius: 5px;
+      "
+      >Học viên không yêu cầu học thử</span
+    >
+  </div>
+</div>
+<div class="area">
+  <p class="title">1. Thông tin về môn học</p>
+  <div style="padding: 5px 20px" class="request-info">
+    <p style="color: rgb(104, 104, 104)">
+      Tiêu đề yêu cầu:
+      <span style="font-weight: 600; color: #000; margin-left: 5px">{{
+        studentRequest.studentRequestTitle
+      }}</span>
+    </p>
+    <p style="color: rgb(104, 104, 104)">
+      Môn học yêu cầu:
+      <span style="font-weight: 600; color: #000; margin-left: 5px">{{
+        studentRequest.objSubject?.subjectName
+      }}</span>
+    </p>
+    <p style="color: rgb(104, 104, 104)">
+      Trình độ:
+      <span style="font-weight: 600; color: #000; margin-left: 5px">{{
+        studentRequest.objLevel?.levelName
+      }}</span>
+    </p>
+    <p style="color: rgb(104, 104, 104)">
+      Hình thức học:
+      <span
+        style="font-weight: 600; color: #1bb0a9; margin-left: 5px"
+        *ngIf="studentRequest.learningMethod"
+      >
+        Online (Trực tuyến)
+      </span>
+      <span
+        style="font-weight: 600; color: #1bb0a9; margin-left: 5px"
+        *ngIf="!studentRequest.learningMethod"
+      >
+        Offline (Gia sư tại nhà)
+      </span>
+    </p>
+    <p style="color: rgb(104, 104, 104)" *ngIf="!studentRequest.learningMethod">
+      Tỉnh/Thành phố:
+      <span style="font-weight: 600; color: #000; margin-left: 5px">{{
+        studentRequest.objStudent?.city
+      }}</span>
+    </p>
+    <p style="color: rgb(104, 104, 104)" *ngIf="!studentRequest.learningMethod">
+      Quận/huyện:
+      <span style="font-weight: 600; color: #000; margin-left: 5px">{{
+        studentRequest.objStudent?.district
+      }}</span>
+    </p>
+  </div>
+</div>
+<div class="area">
+  <p class="title">2. Thời gian và học phí</p>
+  <div style="padding: 5px 20px" class="request-info">
+    <p style="color: rgb(104, 104, 104)">
+      Chi phí:
+      <span style="font-weight: 600; color: #ff6d34; margin-left: 5px"
+        >{{ studentRequest.costPerHour | number }} VNĐ/tiếng</span
+      >
+    </p>
+    <p style="color: rgb(104, 104, 104)">
+      Thời lượng một buổi học:
+      <span style="font-weight: 600; color: #000; margin-left: 5px">{{
+        studentRequest.durationPerSession | timeTransform
+      }}</span>
+    </p>
+    <p style="color: rgb(104, 104, 104)">
+      Thanh toán sau mỗi:
+      <span style="font-weight: 600; color: #000; margin-left: 5px"
+        >{{ studentRequest.payTime }} buổi học
+      </span>
+    </p>
+    <p style="color: rgb(104, 104, 104)">
+      Thời gian rảnh:
+      <span style="font-weight: 600; color: #000; margin-left: 5px"
+        >{{ studentRequest.beginTime | date: "HH:mm" }} -
+        {{ studentRequest.endTime | date: "HH:mm" }} / {{ learningDate }}</span
+      >
+    </p>
+    <p style="color: rgb(104, 104, 104)">
+      Hình thức học:
+      <span
+        style="font-weight: 600; color: #1bb0a9; margin-left: 5px"
+        *ngIf="studentRequest.learningMethod"
+      >
+        Online (Trực tuyến)
+      </span>
+      <span
+        style="font-weight: 600; color: #1bb0a9; margin-left: 5px"
+        *ngIf="!studentRequest.learningMethod"
+      >
+        Offline (Gia sư tại nhà)
+      </span>
+    </p>
+    <p style="color: rgb(104, 104, 104)" *ngIf="!studentRequest.learningMethod">
+      Tỉnh/Thành phố:
+      <span style="font-weight: 600; color: #000; margin-left: 5px">{{
+        studentRequest.objStudent?.city
+      }}</span>
+    </p>
+    <p style="color: rgb(104, 104, 104)" *ngIf="!studentRequest.learningMethod">
+      Quận/huyện:
+      <span style="font-weight: 600; color: #000; margin-left: 5px">{{
+        studentRequest.objStudent?.district
+      }}</span>
+    </p>
+    <p style="color: rgb(104, 104, 104)">
+      Ngày kết thúc:
+      <span
+        *ngIf="studentRequest.endDate"
+        style="font-weight: 600; color: #000; margin-left: 5px"
+        >{{ studentRequest.endDate | date: "dd/MM/yyyy" }}</span
+      >
+      <span
+        *ngIf="!studentRequest.endDate"
+        style="font-weight: 600; color: #000; margin-left: 5px"
+        >Chưa có</span
+      >
+    </p>
+  </div>
+</div>
+<div class="area">
+  <p class="title">3. Thông tin học viên</p>
+  <div style="padding: 5px 20px" class="request-info">
+    <p style="color: rgb(104, 104, 104)">Thông tin về học viên:</p>
+    <p style="font-weight: 600">
+      {{ studentRequest.introduction }}
+    </p>
+    <p style="color: rgb(104, 104, 104)">Mong muốn của học viên với gia sư:</p>
+    <p style="font-weight: 600">
+      {{ studentRequest.studentWishes }}
+    </p>
+  </div>
+</div>
+<div class="action" *ngIf="!sent">
+  <button
+    (click)="openCourse()"
+    data-toggle="modal"
+    data-target="#acceptRequest"
+  >
+    Đề nghị dạy
+  </button>
+  <button>Lưu lại</button>
+</div>
+<!-- modal -->
+<div
+  class="modal fade"
+  id="acceptRequest"
+  data-backdrop="static"
+  data-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title" id="acceptRequest">Yêu cầu dạy</p>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="request-information w-100">
+          <form [formGroup]="courseEditForm" (ngSubmit)="submitEditForm()">
+            <div class="learningTime mb-4">
+              <p style="color: red; font-weight: 500; margin-bottom: 10px">
+                <span>
+                  Chọn thời gian bắt đầu trong khoảng:
+                  {{ minTime | date: "HH:mm " }}
+                  -
+                  {{ maxTime | date: "HH:mm" }}</span
+                >
+              </p>
+              <div
+                style="margin-bottom: 5px"
+                style="display: flex; align-items: center"
+              >
+                <label for="startTime" style="margin-bottom: 5px; width: 50%"
+                  >Giờ bắt đầu</label
+                >
+                <label style="margin-bottom: 5px; width: 50%; margin-left: 28px"
+                  >Giờ kết thúc</label
+                >
+              </div>
+              <div class="input-area timePicker">
+                <input
+                  [ngxTimepicker]="startTimee"
+                  class="form-control time"
+                  formControlName="startTime"
+                  [format]="24"
+                  placeholder="Giờ bắt đầu"
+                  [(ngModel)]="startTime"
+                  [value]="startTime"
+                  min="{{ minTime | date: 'HH:mm' }}"
+                  max="{{ maxTime | date: 'HH:mm' }}"
+                  (ngModelChange)="changeTime()"
+                />
+                <ngx-material-timepicker #startTimee></ngx-material-timepicker>
+                <span
+                  style="
+                    font-weight: 500;
+                    font-size: 30px;
+                    margin: 0 10px 20px 10px;
+                  "
+                  >-</span
+                >
+                <input
+                  type="text"
+                  [value]="endTime | date: 'HH:mm'"
+                  class="form-control time"
+                  placeholder="Giờ kết thúc"
+                  disabled
+                />
+              </div>
+              <div class="input-area datePicker" style="flex-direction: column">
+                <label
+                  for="learningDate"
+                  style="width: 100%; text-align: left; margin-bottom: 10px"
+                  >Ngày học</label
+                >
+                <mat-form-field appearance="fill" style="width: 100%">
+                  <mat-label>Chọn ngày học</mat-label>
+                  <mat-select
+                    formControlName="learningDate"
+                    class="form-control"
+                    multiple
+                    id="learningDate"
+                    placeholder="Chọn ngày học"
+                  >
+                    <ng-container *ngFor="let date of learningDateData">
+                      <mat-option [value]="date">{{ date }}</mat-option>
+                    </ng-container>
+                  </mat-select>
+                </mat-form-field>
+                <div
+                  *ngIf="
+                    t.learningDate.invalid &&
+                    (t.learningDate.dirty || t.learningDate.touched)
+                  "
+                >
+                  <div *ngIf="t.learningDate.errors">
+                    <div *ngIf="t.learningDate.errors.required">
+                      <span class="errors" style="bottom: -5px"
+                        >Vui lòng chọn ngày học</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="try-date mb-2"
+                style="position: relative"
+                *ngIf="studentRequest.testLearning"
+              >
+                <label
+                  for="tryDate"
+                  style="width: 100%; text-align: left; margin-bottom: 10px"
+                  >Chọn 1 ngày học thử</label
+                >
+                <mat-form-field
+                  appearance="fill"
+                  class="example-form-field"
+                  style="width: 100%"
+                >
+                  <mat-label>Ngày học thử</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="tryDatePicker"
+                    formControlName="tryDate"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="tryDatePicker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #tryDatePicker>
+                    <mat-datepicker-actions>
+                      <button
+                        mat-button
+                        matDatepickerCancel
+                        class="btn btn-danger"
+                        style="font-size: 14px; margin: 0 5px; font-weight: 600"
+                      >
+                        Hủy
+                      </button>
+                      <button
+                        mat-raised-button
+                        color="primary"
+                        class="btn btn-success"
+                        style="font-size: 14px; margin: 0 5px; font-weight: 600"
+                        matDatepickerApply
+                      >
+                        Chọn
+                      </button>
+                    </mat-datepicker-actions>
+                  </mat-datepicker>
+                </mat-form-field>
+                <div
+                  *ngIf="
+                    t.tryDate.invalid && (t.tryDate.dirty || t.tryDate.touched)
+                  "
+                >
+                  <div *ngIf="t.tryDate.errors">
+                    <div *ngIf="t.tryDate.errors.required">
+                      <span class="errors" style="bottom: -5px"
+                        >Vui lòng chọn ngày học thử</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="input-area datePicker" style="flex-direction: column">
+                <div
+                  style="margin-bottom: 5px"
+                  style="display: flex; align-items: center; width: 100%"
+                >
+                  <label
+                    for="startDate"
+                    style="margin-bottom: 5px; width: 48%; text-align: left"
+                    >Ngày bắt đầu khóa học</label
+                  >
+                  <label
+                    style="margin-bottom: 5px; width: 48%; text-align: right"
+                    >Ngày kết thúc khóa học</label
+                  >
+                </div>
+                <div
+                  class="datepicker-area w-100"
+                  style="display: flex; justify-content: space-between"
+                >
+                  <mat-form-field
+                    appearance="fill"
+                    class="example-form-field"
+                    style="width: 48%"
+                  >
+                    <mat-label>Ngày bắt đầu</mat-label>
+                    <input
+                      matInput
+                      [matDatepicker]="datepicker"
+                      formControlName="startDate"
+                    />
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="datepicker"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #datepicker>
+                      <mat-datepicker-actions>
+                        <button
+                          mat-button
+                          matDatepickerCancel
+                          class="btn btn-danger"
+                          style="
+                            font-size: 14px;
+                            margin: 0 5px;
+                            font-weight: 600;
+                          "
+                        >
+                          Hủy
+                        </button>
+                        <button
+                          mat-raised-button
+                          color="primary"
+                          class="btn btn-success"
+                          style="
+                            font-size: 14px;
+                            margin: 0 5px;
+                            font-weight: 600;
+                          "
+                          matDatepickerApply
+                        >
+                          Chọn
+                        </button>
+                      </mat-datepicker-actions>
+                    </mat-datepicker>
+                  </mat-form-field>
+                  <div
+                    *ngIf="
+                      t.startDate.invalid &&
+                      (t.startDate.dirty || t.startDate.touched)
+                    "
+                  >
+                    <div *ngIf="t.startDate.errors">
+                      <div *ngIf="t.startDate.errors.required">
+                        <span class="errors" style="bottom: -5px"
+                          >Vui lòng chọn ngày bắt đầu</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <mat-form-field
+                    appearance="fill"
+                    class="example-form-field"
+                    style="width: 48%"
+                  >
+                    <mat-label class="w-100">Ngày kết thúc</mat-label>
+                    <input
+                      matInput
+                      [matDatepicker]="endDatePicker"
+                      formControlName="endDate"
+                    />
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="endDatePicker"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #endDatePicker>
+                      <mat-datepicker-actions>
+                        <button
+                          mat-button
+                          matDatepickerCancel
+                          class="btn btn-danger"
+                          style="
+                            font-size: 14px;
+                            margin: 0 5px;
+                            font-weight: 600;
+                          "
+                        >
+                          Hủy
+                        </button>
+                        <button
+                          mat-raised-button
+                          color="primary"
+                          class="btn btn-success"
+                          style="
+                            font-size: 14px;
+                            margin: 0 5px;
+                            font-weight: 600;
+                          "
+                          matDatepickerApply
+                        >
+                          Chọn
+                        </button>
+                      </mat-datepicker-actions>
+                    </mat-datepicker>
+                  </mat-form-field>
+                  <div
+                    *ngIf="
+                      t.endDate.invalid &&
+                      (t.endDate.dirty || t.endDate.touched)
+                    "
+                  >
+                    <div *ngIf="t.endDate.errors">
+                      <div *ngIf="t.endDate.errors.required">
+                        <span
+                          class="errors"
+                          style="bottom: -5px; right: 0; text-align: right"
+                          >Vui lòng chọn ngày kết thúc</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-info"
+            style="font-size: 600; font-size: 14px"
+            *ngIf="courseEditForm.valid"
+            (click)="submitEditForm()"
+            data-dismiss="modal"
+          >
+            Yêu cầu
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            data-dismiss="modal"
+            style="font-size: 600; font-size: 14px"
+            (click)="courseEditForm.reset()"
+          >
+            Đóng
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

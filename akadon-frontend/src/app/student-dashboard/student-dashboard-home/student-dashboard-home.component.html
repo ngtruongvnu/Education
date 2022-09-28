@@ -1,0 +1,191 @@
+<div class="banner mt-3 mb-3">
+  <p class="tutor-name">Chào mừng, {{ loginUser.fullName }}</p>
+  <div class="begin">
+    <span>Bắt đầu học tập nào !</span>
+    <a class="link" routerLink="/dashboard-student/request-form"
+      >Tìm gia sư miễn phí ngay</a
+    >
+  </div>
+</div>
+<div class="procedure mt-3 mb-3">
+  <div class="title">
+    <img src="./assets/images/dashboard/process-title.svg" alt="" />
+    <span>Quy trình tìm gia sư</span>
+  </div>
+  <div class="row row-step">
+    <div class="mb-2 mt-2 col-xl-2 col-lg-4 col-md-4 col-sm-4 col-4">
+      <div class="step step1">
+        <div class="step-top">
+          <div class="index">1</div>
+          <div class="step-name">Yêu cầu</div>
+          <div class="step-content">
+            Học viên đăng yêu cầu tìm gia sư MIỄN PHÍ trên website
+            <a href="akadon.edu.vn" target="_blank">akadon.edu.vn</a>
+          </div>
+        </div>
+        <div class="step-images">
+          <img
+            src="./assets/images/dashboard/procedure/step-1-image-left.png"
+            alt=""
+          />
+          <img
+            src="./assets/images/dashboard/procedure/step-1-image-right.png"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+    <div class="mb-2 mt-2 col-xl-2 col-lg-4 col-md-4 col-sm-4 col-4">
+      <div class="step">
+        <div class="step-top">
+          <div class="index">2</div>
+          <div class="step-name">Lựa chọn</div>
+          <div class="step-content">
+            Học viên chọn 01 Gia sư phù hợp từ danh sách những người đăng ký
+          </div>
+        </div>
+        <div class="step-images">
+          <img src="./assets/images/dashboard/procedure/step-2.png" alt="" />
+        </div>
+      </div>
+    </div>
+    <div class="mb-2 mt-2 col-xl-2 col-lg-4 col-md-4 col-sm-4 col-4">
+      <div class="step">
+        <div class="step-top">
+          <div class="index">3</div>
+          <div class="step-name">HỌC THỬ</div>
+          <div class="step-content">
+            Hai bên học thử để làm quen và đánh giá độ phù hợp
+          </div>
+        </div>
+        <div class="step-images">
+          <img src="./assets/images/dashboard/procedure/step-3.png" alt="" />
+        </div>
+      </div>
+    </div>
+    <div class="mb-2 mt-2 col-xl-2 col-lg-4 col-md-4 col-sm-4 col-4">
+      <div class="step">
+        <div class="step-top">
+          <div class="index">4</div>
+          <div class="step-name">THỐNG NHẤT</div>
+          <div class="step-content">
+            Học viên và Gia sư thống nhất nội dung Khóa học và thành lập Hợp
+            đồng điện tử
+          </div>
+        </div>
+        <div class="step-images">
+          <img src="./assets/images/dashboard/procedure/step-4.png" alt="" />
+        </div>
+      </div>
+    </div>
+    <div class="mb-2 mt-2 col-xl-2 col-lg-4 col-md-4 col-sm-4 col-4">
+      <div class="step">
+        <div class="step-top">
+          <div class="index">5</div>
+          <div class="step-name">VÀO HỌC</div>
+          <div class="step-content">
+            Học viên và Gia sư học tại nhà, hoặc học online trên website
+            <a href="akadon.edu.vn" target="_blank">akadon.edu.vn</a>
+          </div>
+        </div>
+        <div class="step-images">
+          <img src="./assets/images/dashboard/procedure/step-5.png" alt="" />
+        </div>
+      </div>
+    </div>
+    <div class="mb-2 mt-2 col-xl-2 col-lg-4 col-md-4 col-sm-4 col-4">
+      <div class="step">
+        <div class="step-top">
+          <div class="index">6</div>
+          <div class="step-name">Thanh toán</div>
+          <div class="step-content">
+            Học viên thanh toán cho Gia sư ngay sau mỗi buổi học
+          </div>
+        </div>
+        <div class="step-images">
+          <img src="./assets/images/dashboard/procedure/step-6.png" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="request-header">
+  <div class="request-title">
+    <img src="./assets/images/dashboard-student/find-tutor.svg" alt="" />
+    <p style="margin: 0; margin-left: 10px">
+      Tìm gia sư cho những môn học dưới đây
+    </p>
+  </div>
+</div>
+<owl-carousel-o [options]="customOptions">
+  <ng-container *ngFor="let subject of subjectData">
+    <ng-template carouselSlide>
+      <a class="subject">
+        <img
+          src="http://localhost:8888/upload/images/{{ subject.subjectImage }}"
+        />
+        <span>{{ subject.subjectName }}</span>
+      </a>
+    </ng-template>
+  </ng-container>
+</owl-carousel-o>
+<div class="request-header">
+  <div class="request-title">
+    <img src="./assets/images/dashboard-student/featured-tutor.svg" alt="" />
+    <p style="margin: 0; margin-left: 10px">
+      Hãy xem những gia sư nổi bật của chúng tôi
+    </p>
+  </div>
+</div>
+<owl-carousel-o [options]="featuredTutor">
+  <ng-container *ngFor="let tutor of listTutor">
+    <ng-template carouselSlide>
+      <div class="tutor">
+        <div class="information">
+          <img
+            src="http://localhost:8888/upload/images/{{ tutor.image }}"
+            alt=""
+            class="account-image"
+          />
+          <div class="name-address">
+            <p class="name">{{ tutor.fullName }}</p>
+            <p class="address">
+              <i class="fas fa-map-marker-alt"></i> {{ tutor.city }}
+            </p>
+          </div>
+        </div>
+        <p class="info mt-2">
+          Điểm hành vi: <span>{{ tutor.behaviorPoint }}</span>
+        </p>
+        <p class="info">
+          Số khóa học đã dạy: <span>{{ tutor.taughtCourseNumber }}</span>
+        </p>
+        <div class="info mt-2">
+          Xếp hạng:
+          <div class="vote ml-2">
+            <div class="active-star">
+              <i
+                class="fas fa-star mb-1"
+                style="color: #ccc"
+                *ngFor="let i of [].constructor(5)"
+              ></i>
+            </div>
+            <div class="disable-star">
+              <i
+                class="fas fa-star mt-1"
+                style="color: #ff6d34"
+                *ngFor="let i of [].constructor(tutor.rating)"
+              ></i>
+            </div>
+          </div>
+        </div>
+        <a
+          href="/tutor-detail/{{ tutor.tutorId }}"
+          target="_blank"
+          class="view-profile"
+          >Tìm hiểu thêm<i class="fas fa-arrow-right"></i
+        ></a>
+      </div>
+    </ng-template>
+  </ng-container>
+</owl-carousel-o>

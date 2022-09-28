@@ -1,0 +1,515 @@
+<div class="title">
+  <img src="./assets/images/register/teacher-icon.svg" alt="" />
+  <p>Gia sư</p>
+</div>
+<mat-stepper [linear]="true" #stepper>
+  <mat-step [stepControl]="loginForm" *ngIf="!socialLogin">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <ng-template matStepLabel>Thông tin tài khoản</ng-template>
+      <div class="input-area">
+        <label for="email">Email</label>
+        <input
+          type="text"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          placeholder="Email"
+        />
+        <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)">
+          <div *ngIf="f.email.errors">
+            <div *ngIf="f.email.errors.required">
+              <span class="errors">Email không được để trống</span>
+            </div>
+            <div *ngIf="f.email.errors.email">
+              <span class="errors">Không đúng định dạng email</span>
+            </div>
+            <div *ngIf="f.email.errors.tutorEmailCheck">
+              <span class="errors">Email này đã được sử dụng</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-area">
+        <label for="password">Mật khẩu</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="form-control"
+          placeholder="Mật khẩu"
+          (input)="onPasswordChange($event)"
+        />
+        <i class="far fa-eye" id="hide" (click)="change($event)"></i>
+        <i class="far fa-eye-slash" id="show" (click)="change($event)"></i>
+      </div>
+      <div class="error">
+        <p id="lengthCheck">
+          <i class="far fa-check-circle mr-2"></i>Ít nhất 8 ký tự
+        </p>
+        <p id="transformCheck">
+          <i class="far fa-check-circle mr-2"></i>Ít nhất 1 chữ cái in thường và
+          1 chữ cái in hoa
+        </p>
+        <p id="numberCheck">
+          <i class="far fa-check-circle mr-2"></i>Ít nhất 1 số
+        </p>
+        <p id="specialCharacterCheck">
+          <i class="far fa-check-circle mr-2"></i>Ít nhất 1 ký tự đặc biệt (VD:
+          @,#,&,...)
+        </p>
+      </div>
+      <div class="input-area">
+        <label for="password">Nhập lại mật khẩu</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          class="form-control"
+          placeholder="Nhập lại mật khẩu"
+        />
+        <div
+          *ngIf="
+            f.confirmPassword.invalid &&
+            (f.confirmPassword.dirty || f.confirmPassword.touched)
+          "
+        >
+          <div *ngIf="f.confirmPassword.errors">
+            <div *ngIf="f.confirmPassword.errors.confirmedValidator">
+              <span class="errors">Mật khẩu xác nhận không đúng</span>
+            </div>
+          </div>
+        </div>
+        <i class="far fa-eye" id="confirm-hide" (click)="change($event)"></i>
+        <i
+          class="far fa-eye-slash"
+          id="confirm-show"
+          (click)="change($event)"
+        ></i>
+      </div>
+      <div class="actions">
+        <a class="back" routerLink="/user/register"
+          ><i class="fas fa-arrow-left"></i> <span>Quay lại</span></a
+        >
+        <div class="submit">
+          <button
+            type="submit"
+            mat-button
+            matStepperNext
+            class="valid"
+            *ngIf="loginForm.valid"
+          >
+            Tiếp theo <i class="fas fa-arrow-right"></i>
+          </button>
+
+          <button
+            type="submit"
+            *ngIf="!loginForm.valid"
+            style="cursor: not-allowed; opacity: 0.5"
+          >
+            Tiếp theo
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="login-form">
+      <div class="other"><span>Hoặc đăng ký bằng</span></div>
+      <div class="other-methods">
+        <button class="valid facebook" (click)="facebookLogin()">
+          Facebook <i class="fas fa-arrow-right"></i>
+        </button>
+        <button class="valid zalo" (click)="googleLogin()">
+          Google <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </mat-step>
+  <mat-step [stepControl]="verifyForm" *ngIf="!socialLogin">
+    <form [formGroup]="verifyForm" (ngSubmit)="verify()" class="verify">
+      <ng-template matStepLabel>Xác thực tài khoản</ng-template>
+      <p class="text-center" style="font-style: italic; padding: 20px 0 10px 0">
+        AKADON vừa gửi một mã code vào email mà bạn đăng ký. Vui lòng kiểm tra
+        email
+      </p>
+
+      <div class="input-area">
+        <label for="code">Nhập mã code</label>
+        <input
+          type="text"
+          id="code"
+          formControlName="code"
+          class="form-control"
+          placeholder="Verify code"
+        />
+        <div *ngIf="v.code.invalid && (v.code.dirty || v.code.touched)">
+          <div *ngIf="v.code.errors">
+            <div *ngIf="v.code.errors.required!; resend">
+              <span class="errors">Mã OTP không được để trống</span>
+            </div>
+            <div *ngIf="v.code.errors.TutorCodeCheck">
+              <span class="errors">Mã OTP không đúng</span>
+            </div>
+            <div *ngIf="v.code.errors.TutorCodeCheckTimeOut && !resend">
+              <span class="errors"
+                >Mã OTP đã hết hiệu lực! Vui lòng nhấn gửi lại !</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="timer-and-resend" style="margin-top: 30px" *ngIf="timeOut">
+        <div class="count-down">
+          <span>Mã sẽ hết hiệu lực sau: </span>
+          <countdown [config]="config"></countdown>
+        </div>
+        <span id="timeout"
+          >Mã OTP đã hết hiệu lực! Vui lòng nhấn gửi lại !</span
+        >
+        <p>Bạn chưa nhận được mã? <a (click)="sendCode()">Gửi lại code</a></p>
+      </div>
+      <div style="text-align: right" *ngIf="!timeOut">
+        <p>Bạn chưa nhận được mã? <a (click)="sendCode()">Gửi lại code</a></p>
+      </div>
+      <div class="actions">
+        <a class="back" (click)="cancel()"><span>Hủy đăng ký</span></a>
+        <div class="submit">
+          <button
+            type="submit"
+            mat-button
+            matStepperNext
+            class="valid"
+            *ngIf="verifyForm.valid"
+          >
+            Tiếp theo <i class="fas fa-arrow-right"></i>
+          </button>
+          <button
+            type="submit"
+            *ngIf="!verifyForm.valid"
+            style="cursor: not-allowed; opacity: 0.5"
+          >
+            Tiếp theo
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="informationForm">
+    <form [formGroup]="informationForm" (ngSubmit)="submitInfo()">
+      <ng-template matStepLabel>Thông tin cá nhân</ng-template>
+      <div class="input-area" *ngIf="!socialLogin">
+        <label for="fullName">Họ và tên</label>
+        <input
+          type="text"
+          id="fullName"
+          formControlName="fullName"
+          class="form-control"
+          placeholder="Họ và tên"
+        />
+        <div
+          *ngIf="i.fullName.invalid && (i.fullName.dirty || i.fullName.touched)"
+        >
+          <div *ngIf="i.fullName.errors">
+            <div *ngIf="i.fullName.errors.required">
+              <span class="errors">Họ và tên không được để trống</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="input-area" *ngIf="socialLogin">
+        <label for="fullName">Họ và tên</label>
+        <input
+          type="text"
+          id="fullName"
+          class="form-control"
+          formControlName="fullName"
+          placeholder="Họ và tên"
+          [value]="fullName"
+        />
+      </div>
+      <div class="input-area birthday">
+        <label for="picker">Ngày sinh</label>
+        <mat-form-field class="form-control">
+          <mat-label>Chọn ngày sinh</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            style="padding: 0; width: 100%"
+            formControlName="birthday"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div
+          *ngIf="i.birthday.invalid && (i.birthday.dirty || i.birthday.touched)"
+        >
+          <div *ngIf="i.birthday.errors">
+            <div *ngIf="i.birthday.errors.required">
+              <span class="errors">Vui lòng chọn ngày sinh</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="input-area">
+        <label for="gender">Giới tính</label>
+        <select class="form-control" formControlName="gender" id="gender">
+          <option selected disabled="disabled">Chọn giới tính</option>
+          <option value="true">Nam</option>
+          <option value="false">Nữ</option>
+        </select>
+        <div *ngIf="i.gender.invalid && (i.gender.dirty || i.gender.touched)">
+          <div *ngIf="i.gender.errors">
+            <div *ngIf="i.gender.errors.genderCheck">
+              <span class="errors">Vui lòng chọn giới tính</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="input-area">
+        <label for="city">Tỉnh / Thành phố</label>
+        <select
+          class="form-control"
+          formControlName="city"
+          id="city"
+          (change)="chooseCity($event)"
+        >
+          <option selected disabled="disabled">Tỉnh / Thành phố</option>
+          <ng-container *ngFor="let city of cityData">
+            <option [value]="city.id">{{ city.Name }}</option>
+          </ng-container>
+        </select>
+        <div *ngIf="i.city.invalid && (i.city.dirty || i.city.touched)">
+          <div *ngIf="i.city.errors">
+            <div *ngIf="i.city.errors.cityCheck">
+              <span class="errors">Vui lòng chọn tỉnh, thành phố</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="input-area">
+        <label for="district">Quận / Huyện</label>
+        <select
+          class="form-control"
+          formControlName="district"
+          id="district"
+          (change)="chooseDistrict($event)"
+        >
+          <option selected disabled="disabled">Quận / Huyện</option>
+          <ng-container *ngFor="let district of districtData">
+            <option [value]="district.id">
+              {{ district.Name }}
+            </option>
+          </ng-container>
+        </select>
+        <div
+          *ngIf="i.district.invalid && (i.district.dirty || i.district.touched)"
+        >
+          <div *ngIf="i.district.errors">
+            <div *ngIf="i.district.errors.districtCheck">
+              <span class="errors">Vui lòng chọn quận, huyện</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="input-area">
+        <label for="ward">Phường / Xã</label>
+        <select class="form-control" formControlName="ward" id="ward">
+          <option selected disabled="disabled">Phường / Xã</option>
+          <ng-container *ngFor="let ward of wardData">
+            <option [value]="ward.Name">{{ ward.Name }}</option>
+          </ng-container>
+        </select>
+        <div *ngIf="i.ward.invalid && (i.ward.dirty || i.ward.touched)">
+          <div *ngIf="i.ward.errors">
+            <div *ngIf="i.ward.errors.wardCheck">
+              <span class="errors">Vui lòng chọn phường, xã</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="input-area">
+        <label for="phoneNumber">Số điện thoại</label>
+        <input
+          type="text"
+          class="form-control"
+          id="phoneNumber"
+          formControlName="phoneNumber"
+          placeholder="0123-345-789"
+        />
+        <div
+          *ngIf="
+            i.phoneNumber.invalid &&
+            (i.phoneNumber.dirty || i.phoneNumber.touched)
+          "
+        >
+          <div *ngIf="i.phoneNumber.errors">
+            <div *ngIf="i.phoneNumber.errors.required">
+              <span class="errors">Số điện thoại không được để trống</span>
+            </div>
+            <div
+              *ngIf="
+                i.phoneNumber.errors.minlength || i.phoneNumber.errors.maxlength
+              "
+            >
+              <span class="errors">Số điện thoại từ 10 đến 11 số</span>
+            </div>
+            <div *ngIf="i.phoneNumber.errors.studentPhoneNumberCheck">
+              <span class="errors">Số điện thoại này đã được sử dụng</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="input-area">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" [value]="email" disabled />
+        <div *ngIf="socialEmailError">
+          <span class="errors">Email này đã được sử dụng</span>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="back" (click)="cancel()"><span>Hủy đăng ký</span></a>
+        <div class="submit">
+          <button
+            type="submit"
+            mat-button
+            matStepperNext
+            class="valid"
+            *ngIf="informationForm.valid"
+          >
+            Tiếp theo <i class="fas fa-arrow-right"></i>
+          </button>
+          <button
+            type="submit"
+            *ngIf="!informationForm.valid"
+            style="cursor: not-allowed; opacity: 0.5"
+          >
+            Tiếp theo
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="detailForm">
+    <ng-template matStepLabel>Hồ sơ chuyên môn</ng-template>
+    <form [formGroup]="detailForm" (ngSubmit)="submitDetail()" class="detail">
+      <div formArrayName="details">
+        <div
+          *ngFor="let detail of details.controls; let i = index"
+          class="detail-form"
+        >
+          <div [formGroupName]="i">
+            <div class="input-form">
+              <div class="input-area">
+                <label for="subject">Môn học</label>
+                <select
+                  class="form-control"
+                  formControlName="subject"
+                  id="subject"
+                >
+                  <option selected disabled="disabled">Chọn môn học</option>
+                  <ng-container *ngFor="let subject of subjectData">
+                    <option [ngValue]="subject">
+                      {{ subject.subjectName }}
+                    </option>
+                  </ng-container>
+                </select>
+              </div>
+              <div class="input-area">
+                <label for="level">Trình độ</label>
+                <mat-form-field appearance="fill">
+                  <!-- <mat-label>Chọn trình độ</mat-label> -->
+                  <mat-select
+                    formControlName="level"
+                    class="form-control"
+                    multiple
+                    id="level"
+                    placeholder="Chọn trình độ"
+                  >
+                    <mat-option
+                      *ngFor="let level of levelData"
+                      [value]="level"
+                      >{{ level.levelName }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <button class="btn btn-primary bg-info" (click)="addDetail()">
+                Thêm
+              </button>
+              <button
+                class="btn btn-primary bg-danger"
+                (click)="removeDetail(i)"
+                *ngIf="details.length > 1"
+              >
+                Xóa
+              </button>
+            </div>
+            <!-- <div class="input-area certificate">
+              <label for="certificate-{{ i }}">Ảnh chứng nhận (nếu có)</label>
+              <input
+                type="file"
+                id="certificate-{{ i }}"
+                (change)="onFileChange($event)"
+              />
+              <label for="certificate-{{ i }}" id="label-image">
+                <img [src]="imageSrc[i]" alt="" />
+              </label>
+            </div> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a class="back" (click)="cancel()"><span>Hủy đăng ký</span></a>
+        <div class="submit">
+          <button
+            type="submit"
+            mat-button
+            matStepperNext
+            class="valid"
+            *ngIf="detailForm.valid"
+          >
+            Tiếp theo <i class="fas fa-arrow-right"></i>
+          </button>
+          <button
+            type="submit"
+            *ngIf="!detailForm.valid"
+            style="cursor: not-allowed; opacity: 0.5"
+          >
+            Tiếp theo
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Hoàn thành</ng-template>
+    <div class="success-step">
+      <i class="far fa-check-circle success-icon"></i>
+      <p class="success">Tài khoản của bạn đã được tạo thành công !</p>
+      <div class="actions">
+        <a routerLink="/student" id="back-home"
+          ><i class="fas fa-arrow-left"></i> Về trang chủ</a
+        >
+        <a (click)="goToDashboard()" id="go-to-dashboard"
+          >Quản lý thông tin <i class="fas fa-arrow-right"></i
+        ></a>
+      </div>
+    </div>
+  </mat-step>
+</mat-stepper>
+<div class="mask" *ngIf="isLoading">
+  <div class="lds-roller">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>

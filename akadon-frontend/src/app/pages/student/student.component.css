@@ -1,0 +1,358 @@
+.title {
+  font-size: 28px;
+  font-weight: 700;
+}
+p {
+  line-height: 1.5;
+}
+.bold {
+  font-weight: 700;
+}
+.note {
+  color: #ff6d34;
+  font-style: italic;
+}
+/* banner */
+.banner {
+  padding: 100px 0;
+  background-image: url("/assets/images/banner.svg");
+  background-position: center;
+}
+.banner .text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.banner .text .title {
+  font-size: 48px;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+}
+.banner .text .title::after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  right: 95px;
+  width: 280px;
+  height: 22px;
+  background-color: #ff6d34;
+  z-index: -1;
+}
+
+.banner .text .content {
+  font-size: 21px;
+  color: #826664;
+  padding: 10px 0 20px 0;
+}
+.banner .text .link {
+  background: linear-gradient(90deg, rgb(255, 0, 90) 3.75%, rgb(255, 72, 13));
+  text-align: center;
+  padding: 17px;
+  width: 90%;
+  border-radius: 30px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+}
+.banner .text .link i {
+  position: absolute;
+  right: 25%;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: 0.4s;
+  opacity: 0;
+  font-size: 14px;
+}
+.banner .text .link:hover {
+  background: linear-gradient(90deg, rgb(255, 72, 13) 3.75%, rgb(255, 0, 90));
+}
+.banner .text .link:hover i {
+  right: 5%;
+  opacity: 1;
+}
+/* end-banner */
+
+/* tinh-nang-noi-bat */
+.tinh-nang .title {
+  font-size: 21px;
+  padding-bottom: 15px;
+}
+/* end-tinh-nang-noi-bat */
+
+/* dich-vu */
+.dich-vu {
+  background: #eef3f6;
+  padding: 15px 0 60px 0;
+}
+.dich-vu .title {
+  color: #2969b4;
+  font-size: 17px;
+  font-weight: 500;
+  width: 60%;
+  margin: auto;
+}
+.dich-vu ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+.dich-vu ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.dich-vu ul li p {
+  font-weight: 600;
+  font-size: 14px;
+}
+.dieu-khoan,
+.cam-ket {
+  background: #eaf4fc;
+  padding: 30px;
+  min-height: 500px;
+  position: relative;
+}
+.dieu-khoan ul,
+.cam-ket ul {
+  list-style: disc;
+  margin-left: 15px;
+}
+.dieu-khoan ul li,
+.cam-ket ul li {
+  margin-bottom: 20px;
+}
+.cam-ket ul li ul {
+  list-style: none;
+  margin-top: 20px;
+}
+.cam-ket ul li ul li {
+  margin-bottom: 10px;
+}
+.cam-ket ul li ul li i {
+  color: #0092b3;
+  margin-right: 7px;
+}
+.dieu-khoan img,
+.cam-ket img {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+}
+/* end-dich-vu */
+
+/* goi-y */
+.suggest {
+  background: #ffe2ce;
+  padding: 30px 0 50px 0;
+}
+.owl-carousel {
+  margin-top: 30px;
+  padding: 0 20px;
+  position: relative;
+}
+.owl-carousel .tutor {
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 14px;
+  position: relative;
+  box-shadow: 0px 0px 10px -5px;
+}
+.owl-carousel .tutor .information {
+  display: flex;
+  align-items: center;
+}
+.owl-carousel .tutor .information img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.owl-carousel .tutor .information .name-address {
+  height: 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.owl-carousel .tutor .information .name-address .name {
+  color: #ff6d34;
+  font-weight: 600;
+}
+.owl-carousel .tutor .information .name-address .address,
+.owl-carousel .tutor .info {
+  font-size: 13px;
+  color: #919191;
+}
+.owl-carousel .tutor .information .name-address .address i {
+  font-size: 11px;
+  margin-right: 5px;
+}
+.owl-carousel .tutor .info {
+  padding-bottom: 7px;
+  display: flex;
+  align-items: center;
+}
+.owl-carousel .tutor .info span {
+  color: #000;
+  font-weight: 600;
+  margin-left: 5px;
+}
+.owl-carousel .tutor .view-profile {
+  position: relative;
+  display: inline-block;
+  margin: 10px 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2969b4;
+  border-radius: 30px;
+  padding: 12px 70px;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.owl-carousel .tutor .view-profile i {
+  font-size: 11px;
+  position: absolute;
+  top: 14px;
+  right: 20%;
+  opacity: 0;
+  transition: 0.3s;
+}
+.owl-carousel .tutor .view-profile:hover {
+  background: #277ddf;
+}
+.owl-carousel .tutor .view-profile:hover i {
+  right: 10%;
+  opacity: 1;
+}
+/* end-goi-y */
+
+/* faq */
+.faq {
+  margin: 30px 0;
+  position: relative;
+  line-height: 1.5;
+}
+.faq ul li {
+  border-bottom: 1px solid #ccc;
+  padding: 20px 0;
+}
+.faq .collapse-link {
+  color: #000;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 500;
+  font-size: 14px;
+  width: 100%;
+}
+
+.faq .card {
+  border: none;
+  padding: 20px;
+  padding-bottom: 0;
+  font-size: 14px;
+}
+.faq .card p {
+  padding: 5px 0;
+}
+.faq img {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.faq .image-question {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* end-faq */
+/* question */
+.send-question .question-image {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+form .input-area {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+form .input-area label {
+  text-align: left;
+  margin-top: 15px;
+  width: unset;
+}
+form .input-area input,
+form .input-area textarea {
+  margin-top: 10px;
+  width: 100%;
+  margin-left: 0;
+  padding: 10px 15px;
+}
+form .name-phoneNumber {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+form .name-phoneNumber .input-area {
+  width: 48%;
+}
+form .submit {
+  display: flex;
+  justify-content: flex-end;
+}
+form .submit button {
+  position: relative;
+  margin: 10px 0;
+  background: #2969b4;
+  border-radius: 30px;
+  padding: 12px 70px;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+  border: none;
+}
+form .submit button i {
+  font-size: 11px;
+  position: absolute;
+  top: 14px;
+  right: 20%;
+  opacity: 0;
+  transition: 0.3s;
+}
+form .submit .valid:hover {
+  background: #277ddf;
+}
+form .submit .valid:hover i {
+  right: 10%;
+  opacity: 1;
+}
+.errors {
+  bottom: -18px;
+}
+.error-popup {
+  /* position: absolute;
+  top: 0;
+  right: 100px; */
+  background: rgba(185, 0, 0, 0.644);
+  color: #fff;
+  font-weight: 600;
+  padding: 20px 30px;
+  border-radius: 10px;
+  z-index: 20;
+}
+/* end-question */

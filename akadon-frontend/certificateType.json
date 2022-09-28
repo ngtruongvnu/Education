@@ -1,0 +1,84 @@
+{
+  "certificateType": [
+    {
+      "id": 1,
+      "type": "Bằng đại học"
+    },
+    {
+      "id": 2,
+      "type": "Bằng cao đẳng"
+    },
+    {
+      "id": 3,
+      "type": "Bằng trung cấp"
+    },
+    {
+      "id": 4,
+      "type": "IELTS"
+    },
+    {
+      "id": 5,
+      "type": "TOEIC"
+    },
+    {
+      "id": 6,
+      "type": "TOEFL"
+    },
+    {
+      "id": 7,
+      "type": "SAT"
+    },
+    {
+      "id": 8,
+      "type": "Bằng đại học"
+    },
+    {
+      "id": 9,
+      "type": "Bằng cao đẳng"
+    },
+    {
+      "id": 10,
+      "type": "IELTS"
+    },
+    {
+      "id": 11,
+      "type": "TOEIC"
+    },
+    {
+      "id": 12,
+      "type": "TOEFL"
+    },
+    {
+      "id": 13,
+      "type": "SAT"
+    },
+    {
+      "id": 14,
+      "type": "CEFR"
+    },
+    {
+      "id": 15,
+      "type": "TOPIK"
+    },
+    {
+      "id": 16,
+      "type": "Nx"
+    },
+    {
+      "id": 17,
+      "type": "Học sinh giỏi"
+    },
+    {
+      "id": 18,
+      "type": "Thể thao"
+    },
+    {
+      "id": 19,
+      "type": "Nghiên cứu khoa học"
+    },
+    {
+      "id": 20,
+      "type": "Cuộc thi sinh viên"
+    }
+  ]
+}

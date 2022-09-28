@@ -1,0 +1,315 @@
+<div class="back">
+  <a routerLink="/dashboard-tutor/home"
+    ><i class="fas fa-arrow-left mr-2"></i>Quay lại</a
+  >
+</div>
+<div class="request-title">
+  <img src="./assets/images/dashboard/request/title-request.svg" alt="" />
+  <p>Yêu cầu từ học viên</p>
+  <span class="quantity ml-3" style="color: rgb(156, 156, 156)">
+    [{{ listStudentRequest.length }}]
+  </span>
+</div>
+<div class="filters mt-4 mb-4">
+  <ul>
+    <li class="form-control filter" (click)="showCheckbox($event)" id="subject">
+      <span>Môn học</span>
+      <i class="fas fa-filter" style="font-size: 13px"></i>
+      <div class="checkbox" id="subjectCheckbox">
+        <div class="checkbox-area" *ngFor="let subject of subjectData">
+          <input
+            type="checkbox"
+            name="subject"
+            id="{{ subject.subjectName }}"
+            [value]="subject.subjectName"
+            class="id-{{ subject.subjectId }}"
+          />
+          <label for="{{ subject.subjectName }}">{{
+            subject.subjectName
+          }}</label>
+        </div>
+      </div>
+    </li>
+    <li class="form-control filter" (click)="showCheckbox($event)" id="level">
+      <span>Trình độ</span>
+      <i class="fas fa-filter" style="font-size: 13px"></i>
+      <div class="checkbox" id="levelCheckbox">
+        <div class="checkbox-area" *ngFor="let level of levelData">
+          <input
+            type="checkbox"
+            name="level"
+            id="{{ level.levelName }}"
+            [value]="level.levelName"
+            class="id-{{ level.levelId }}"
+          />
+          <label for="{{ level.levelName }}">{{ level.levelName }}</label>
+        </div>
+      </div>
+    </li>
+    <li class="form-control filter" (click)="showCheckbox($event)" id="cost">
+      <span>Ngân sách</span>
+      <i class="fas fa-filter" style="font-size: 13px"></i>
+      <div class="checkbox" id="costCheckbox">
+        <div class="checkbox-area">
+          <input
+            type="checkbox"
+            name="cost"
+            id="smaller-100"
+            value="< 100,000 VNĐ"
+          />
+          <label for="smaller-100">< {{ 100000 | number }} VNĐ</label>
+        </div>
+        <div class="checkbox-area">
+          <input
+            type="checkbox"
+            name="cost"
+            id="100-to-200"
+            value="100,000 - 200,000 VNĐ"
+          />
+          <label for="100-to-200"
+            >{{ 100000 | number }} - {{ 200000 | number }} VNĐ</label
+          >
+        </div>
+        <div class="checkbox-area">
+          <input
+            type="checkbox"
+            name="cost"
+            id="200-to-300"
+            value="200,000 - 300,000 VNĐ"
+          />
+          <label for="200-to-300"
+            >{{ 200000 | number }} - {{ 300000 | number }} VNĐ</label
+          >
+        </div>
+        <div class="checkbox-area">
+          <input
+            type="checkbox"
+            name="cost"
+            id="300-to-400"
+            value="300,000 - 400,000 VNĐ"
+          />
+          <label for="300-to-400"
+            >{{ 300000 | number }} - {{ 400000 | number }} VNĐ</label
+          >
+        </div>
+        <div class="checkbox-area">
+          <input
+            type="checkbox"
+            name="cost"
+            id="400-to-500"
+            value="400,000 - 500,000 VNĐ"
+          />
+          <label for="400-to-500"
+            >{{ 400000 | number }} - {{ 500000 | number }} VNĐ</label
+          >
+        </div>
+        <div class="checkbox-area">
+          <input
+            type="checkbox"
+            name="cost"
+            id="500-to-600"
+            value="500,000 - 600,000 VNĐ"
+          />
+          <label for="500-to-600"
+            >{{ 500000 | number }} - {{ 600000 | number }} VNĐ</label
+          >
+        </div>
+        <div class="checkbox-area">
+          <input
+            type="checkbox"
+            name="cost"
+            id="600-to-700"
+            value="600,000 - 700,000 VNĐ"
+          />
+          <label for="600-to-700"
+            >{{ 600000 | number }} - {{ 700000 | number }} VNĐ</label
+          >
+        </div>
+        <div class="checkbox-area">
+          <input
+            type="checkbox"
+            name="cost"
+            id="700-to-800"
+            value="700,000 - 800,000 VNĐ"
+          />
+          <label for="700-to-800"
+            >{{ 700000 | number }} - {{ 800000 | number }} VNĐ</label
+          >
+        </div>
+        <div class="checkbox-area">
+          <input
+            type="checkbox"
+            name="cost"
+            id="800-to-900"
+            value="800,000 - 900,000 VNĐ"
+          />
+          <label for="800-to-900"
+            >{{ 800000 | number }} - {{ 900000 | number }} VNĐ</label
+          >
+        </div>
+        <div class="checkbox-area">
+          <input
+            type="checkbox"
+            name="cost"
+            id="900-to-1000"
+            value="900,000 - 1000,000 VNĐ"
+          />
+          <label for="800-to-900"
+            >{{ 900000 | number }} - {{ 1000000 | number }} VNĐ</label
+          >
+        </div>
+        <div class="checkbox-area">
+          <input
+            type="checkbox"
+            name="cost"
+            id="bigger-1000"
+            value="> 1,000,000"
+          />
+          <label for="bigger-1000">> {{ 1000000 | number }} VNĐ</label>
+        </div>
+      </div>
+    </li>
+    <li class="form-control filter" (click)="showCheckbox($event)" id="method">
+      <span>Hình thức học</span>
+      <i class="fas fa-filter" style="font-size: 13px"></i>
+      <div class="checkbox" id="methodCheckbox">
+        <div class="checkbox-area">
+          <input type="checkbox" name="method" id="true" value="true" />
+          <label for="true">Online</label>
+        </div>
+        <div class="checkbox-area">
+          <input type="checkbox" name="method" id="false" value="false" />
+          <label for="false">offline</label>
+        </div>
+      </div>
+    </li>
+    <li>
+      <button (click)="filter()" class="filter">Lọc</button>
+    </li>
+    <li>
+      <button (click)="reset()" class="reset">Bỏ lọc</button>
+    </li>
+  </ul>
+</div>
+<p class="filter-result mt-4 mb-4">
+  <span class="mr-2">Kết quả lọc của:</span><span class="filterrr"></span>
+</p>
+<p
+  *ngIf="listStudentRequest.length === 0"
+  style="color: red; font-weight: 600; padding: 10px 60px; background: #fff"
+>
+  Không tìm thấy kết quả nào
+</p>
+<div class="request-list">
+  <div class="request" *ngFor="let request of listStudentRequest">
+    <a
+      routerLink="/dashboard-tutor/student-request-detail/{{
+        request?.studentRequestId
+      }}"
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: unset;
+        width: 80%;
+        text-decoration: none;
+      "
+    >
+      <div class="request-content">
+        <img
+          src="http://localhost:8888/upload/images/{{
+            request?.objSubject?.subjectImage
+          }}"
+          alt=""
+        />
+        <div class="info ml-3">
+          <p class="request-title">
+            {{ request?.studentRequestTitle }}
+          </p>
+          <div class="subject-info">
+            <div
+              class="subject pr-2"
+              style="border-right: 1px solid rgba(0, 0, 0, 0.404)"
+            >
+              <span class="normal"
+                >Môn học:
+                <span class="bold">{{
+                  request?.objSubject?.subjectName
+                }}</span></span
+              >
+            </div>
+            <div
+              class="cost pl-2 pr-2"
+              style="border-right: 1px solid rgba(0, 0, 0, 0.404)"
+            >
+              <span class="normal"
+                >Trình độ:
+                <span class="bold">{{
+                  request?.objLevel?.levelName
+                }}</span></span
+              >
+            </div>
+            <div class="cost pl-2">
+              <span
+                >Ngân sách:
+                <span style="color: #3bb0a9; font-weight: 500">
+                  {{ request?.costPerHour | number }}
+                  VNĐ/tiếng</span
+                ></span
+              >
+            </div>
+          </div>
+          <div class="learning-method">
+            <span class="normal"
+              >Hình thức học: <span class="bold">Online</span></span
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="request-student">
+        <img
+          src="http://localhost:8888/upload/images/{{
+            request?.objStudent?.image
+          }}"
+          alt=""
+          class="mr-3"
+        />
+        <div class="student-info">
+          <p class="student-name">
+            {{ request?.objStudent?.fullName }}
+          </p>
+          <div class="vote ml-2">
+            <div class="active-star">
+              <i
+                class="fas fa-star mb-1"
+                style="color: #ccc"
+                *ngFor="let i of [].constructor(5)"
+              ></i>
+            </div>
+
+            <div class="disable-star">
+              <i
+                class="fas fa-star mt-1"
+                style="color: #ff6d34"
+                *ngFor="let i of [].constructor(request?.objStudent?.rating)"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+    <div class="actions">
+      <button class="btn btn-info">Đề nghị dạy</button>
+    </div>
+  </div>
+  <mat-paginator
+    *ngIf="listStudentRequest.length != 0"
+    [length]="length"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    [pageSizeOptions]="[5, 10, 20]"
+    (page)="pageEvent = getPaginatorData($event)"
+  >
+  </mat-paginator>
+</div>

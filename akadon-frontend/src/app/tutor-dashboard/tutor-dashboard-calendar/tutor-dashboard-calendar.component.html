@@ -1,0 +1,27 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<ejs-schedule
+  *ngIf="!isLoading"
+  height="90vh"
+  width="100%"
+  [eventSettings]="eventSettings"
+  #scheduleObj
+  [firstDayOfWeek]="1"
+  startHour="6:00"
+  endHour="23:00"
+  dateFormat="dd-MMM-yyyy"
+  [readonly]="true"
+  locale="vi"
+>
+  <e-resources>
+    <e-resource
+      field="studentId"
+      title="Tên học viên"
+      name="teacher"
+      textField="name"
+      idField="studentId"
+      [dataSource]="teacherDataSource"
+      colorField="color"
+    >
+    </e-resource>
+  </e-resources>
+</ejs-schedule>

@@ -1,0 +1,87 @@
+.pay {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+}
+.course {
+  background: #fff;
+  border-radius: 5px;
+  height: 80%;
+}
+.course .course-header {
+  padding: 15px 10px;
+  border-bottom: 2px solid #eaf4fc;
+  font-size: 14px;
+  font-weight: 700;
+}
+.course .course-header .quantity {
+  background: #ffcfbc;
+  color: #ff7241;
+  padding: 3px 15px;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+.course .course-main {
+  min-height: 425px;
+  background: #fff;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+.course .course-main .empty {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  transform: translateY(-50%);
+  font-size: 14px;
+}
+.course-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+  padding: 5px;
+  font-size: 12px;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s;
+  top: 0;
+}
+.course-info:hover {
+  top: -5px;
+  background: #ff71411e;
+  border-radius: 5px;
+}
+.course-info .info {
+  border-left: 1px solid rgba(0, 0, 0, 0.151);
+  padding: 0 20px;
+}
+.course-info img {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+}
+.bold {
+  font-weight: 600;
+  margin-right: 5px;
+}
+.pay {
+  max-height: 50%;
+}
+.link {
+  background: linear-gradient(90deg, #036bb3 3.75%, #03b0a9);
+  margin-left: 30px;
+  padding: 10px 20px;
+  border-radius: 50px;
+  color: #fff;
+  font-weight: 700;
+  transition: 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+}
+.link:hover {
+  box-shadow: 0px 0px 30px -10px rgb(0, 183, 255);
+}

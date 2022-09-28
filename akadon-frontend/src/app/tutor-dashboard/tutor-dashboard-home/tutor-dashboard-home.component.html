@@ -1,0 +1,244 @@
+<div class="complete-profile mt-3 mb-3">
+  <img src="./assets/images/dashboard/profile.svg" alt="" />
+  <p class="ml-3">
+    Hãy hoàn tất profile của bạn để AKADON giúp bạn tìm kiếm những yêu cầu phù
+    hợp từ học viên nhé
+  </p>
+</div>
+<div class="banner mt-3 mb-3">
+  <p class="tutor-name">Chào mừng, {{ loginUser.fullName }}</p>
+  <div class="begin">
+    <span>Bắt đầu chia sẻ kiến thức của bạn !</span>
+    <a class="link" routerLink="/dashboard-tutor/profile"
+      >Xây dựng hồ sơ chuyên môn</a
+    >
+  </div>
+</div>
+<div class="procedure mt-3 mb-3">
+  <div class="title">
+    <img src="./assets/images/dashboard/process-title.svg" alt="" />
+    <span>Quy trình tìm gia sư</span>
+  </div>
+  <div class="row row-step">
+    <div class="mb-2 mt-2 col-xl-2 col-lg-4 col-md-4 col-sm-4 col-4">
+      <div class="step step1">
+        <div class="step-top">
+          <div class="index">1</div>
+          <div class="step-name">Yêu cầu</div>
+          <div class="step-content">
+            Học viên đăng yêu cầu tìm gia sư MIỄN PHÍ trên website
+            <a href="akadon.edu.vn" target="_blank">akadon.edu.vn</a>
+          </div>
+        </div>
+        <div class="step-images">
+          <img
+            src="./assets/images/dashboard/procedure/step-1-image-left.png"
+            alt=""
+          />
+          <img
+            src="./assets/images/dashboard/procedure/step-1-image-right.png"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+    <div class="mb-2 mt-2 col-xl-2 col-lg-4 col-md-4 col-sm-4 col-4">
+      <div class="step">
+        <div class="step-top">
+          <div class="index">2</div>
+          <div class="step-name">Lựa chọn</div>
+          <div class="step-content">
+            Học viên chọn 01 Gia sư phù hợp từ danh sách những người đăng ký
+          </div>
+        </div>
+        <div class="step-images">
+          <img src="./assets/images/dashboard/procedure/step-2.png" alt="" />
+        </div>
+      </div>
+    </div>
+    <div class="mb-2 mt-2 col-xl-2 col-lg-4 col-md-4 col-sm-4 col-4">
+      <div class="step">
+        <div class="step-top">
+          <div class="index">3</div>
+          <div class="step-name">HỌC THỬ</div>
+          <div class="step-content">
+            Hai bên học thử để làm quen và đánh giá độ phù hợp
+          </div>
+        </div>
+        <div class="step-images">
+          <img src="./assets/images/dashboard/procedure/step-3.png" alt="" />
+        </div>
+      </div>
+    </div>
+    <div class="mb-2 mt-2 col-xl-2 col-lg-4 col-md-4 col-sm-4 col-4">
+      <div class="step">
+        <div class="step-top">
+          <div class="index">4</div>
+          <div class="step-name">THỐNG NHẤT</div>
+          <div class="step-content">
+            Học viên và Gia sư thống nhất nội dung Khóa học và thành lập Hợp
+            đồng điện tử
+          </div>
+        </div>
+        <div class="step-images">
+          <img src="./assets/images/dashboard/procedure/step-4.png" alt="" />
+        </div>
+      </div>
+    </div>
+    <div class="mb-2 mt-2 col-xl-2 col-lg-4 col-md-4 col-sm-4 col-4">
+      <div class="step">
+        <div class="step-top">
+          <div class="index">5</div>
+          <div class="step-name">VÀO HỌC</div>
+          <div class="step-content">
+            Học viên và Gia sư học tại nhà, hoặc học online trên website
+            <a href="akadon.edu.vn" target="_blank">akadon.edu.vn</a>
+          </div>
+        </div>
+        <div class="step-images">
+          <img src="./assets/images/dashboard/procedure/step-5.png" alt="" />
+        </div>
+      </div>
+    </div>
+    <div class="mb-2 mt-2 col-xl-2 col-lg-4 col-md-4 col-sm-4 col-4">
+      <div class="step">
+        <div class="step-top">
+          <div class="index">6</div>
+          <div class="step-name">Thanh toán</div>
+          <div class="step-content">
+            Học viên thanh toán cho Gia sư ngay sau mỗi buổi học
+          </div>
+        </div>
+        <div class="step-images">
+          <img src="./assets/images/dashboard/procedure/step-6.png" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="request-header" *ngIf="listStudentRequest.length > 0">
+  <div class="request-title">
+    <img src="./assets/images/dashboard/request/title-request.svg" alt="" />
+    <p>Yêu cầu từ học viên</p>
+  </div>
+  <div class="link">
+    <a routerLink="/dashboard-tutor/request-list" style="color: #fff"
+      >Xem tất cả</a
+    >
+  </div>
+</div>
+<div class="request-list">
+  <div class="request" *ngFor="let request of listStudentRequest">
+    <a
+      routerLink="/dashboard-tutor/student-request-detail/{{
+        request?.studentRequestId
+      }}"
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: unset;
+        width: 80%;
+        text-decoration: none;
+      "
+    >
+      <div class="request-content">
+        <img
+          src="http://localhost:8888/upload/images/{{
+            request?.objSubject?.subjectImage
+          }}"
+          alt=""
+        />
+        <div class="info ml-3">
+          <p class="request-title">
+            {{ request?.studentRequestTitle }}
+          </p>
+          <div class="subject-info">
+            <div
+              class="subject pr-2"
+              style="border-right: 1px solid rgba(0, 0, 0, 0.404)"
+            >
+              <span class="normal"
+                >Môn học:
+                <span class="bold">{{
+                  request?.objSubject?.subjectName
+                }}</span></span
+              >
+            </div>
+            <div
+              class="cost pl-2 pr-2"
+              style="border-right: 1px solid rgba(0, 0, 0, 0.404)"
+            >
+              <span class="normal"
+                >Trình độ:
+                <span class="bold">{{
+                  request?.objLevel?.levelName
+                }}</span></span
+              >
+            </div>
+            <div class="cost pl-2">
+              <span
+                >Ngân sách:
+                <span style="color: #3bb0a9; font-weight: 500">
+                  {{ request?.costPerHour | number }}
+                  VNĐ/tiếng</span
+                ></span
+              >
+            </div>
+          </div>
+          <div class="learning-method">
+            <span class="normal"
+              >Hình thức học: <span class="bold">Online</span></span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="request-student">
+        <img
+          src="http://localhost:8888/upload/images/{{
+            request?.objStudent?.image
+          }}"
+          alt=""
+          class="mr-3"
+        />
+        <div class="student-info">
+          <p class="student-name">
+            {{ request?.objStudent?.fullName }}
+          </p>
+          <div class="vote ml-2">
+            <div class="active-star">
+              <i
+                class="fas fa-star mb-1"
+                style="color: #ccc"
+                *ngFor="let i of [].constructor(5)"
+              ></i>
+            </div>
+
+            <div class="disable-star">
+              <i
+                class="fas fa-star mt-1"
+                style="color: #ff6d34"
+                *ngFor="let i of [].constructor(request?.objStudent?.rating)"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+<div class="upgrade">
+  <div class="upgrade-main">
+    <p>Nâng cấp tài khoản ngay để nhận thêm học viên !</p>
+    <div class="packages">
+      <a class="link standard">
+        <img src="./assets/images/dashboard/packages/standard.svg" alt="" />
+        Tiêu chuẩn
+      </a>
+      <a class="link professional">
+        <img src="./assets/images/dashboard/packages/professional.svg" alt="" />
+        Chuyên nghiệp
+      </a>
+    </div>
+  </div>
+</div>

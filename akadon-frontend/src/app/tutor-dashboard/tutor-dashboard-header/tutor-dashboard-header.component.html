@@ -1,0 +1,236 @@
+<header>
+  <div class="service-pack">
+    <div class="pack-name">Cơ bản</div>
+    <div
+      class="student-quantity"
+      data-toggle="tooltip"
+      data-placement="bottom"
+      title="Số học sinh còn lại được phép dạy"
+    >
+      <span class="quantity"
+        >{{ loginUser.objServicePackage?.maxStudents }}
+      </span>
+      <span class="unit">Học viên</span>
+    </div>
+    <div
+      class="request-quantity"
+      data-toggle="tooltip"
+      data-placement="bottom"
+      title="Số lần được đề nghị dạy còn lại"
+    >
+      <span
+        class="quantity"
+        *ngIf="loginUser.objServicePackage?.maxRequest === null"
+        >Không giới hạn
+      </span>
+      <span
+        class="quantity"
+        *ngIf="loginUser.objServicePackage?.maxRequest != null"
+        >{{ loginUser.objServicePackage?.maxRequest }}</span
+      >
+      <span class="unit">Đề nghị dạy</span>
+    </div>
+  </div>
+  <div class="information">
+    <div class="datetime">
+      <span class="day">{{ day }},</span>
+      <div class="date">Ngày {{ date }} Tháng {{ month }} Năm {{ year }}</div>
+    </div>
+    {{ id }}
+    <div class="message-report">
+      <i class="fab fa-facebook-messenger"></i>
+      <i class="fas fa-bell" id="bell"></i>
+      <span class="number-unseen" *ngIf="unseenLength != 0">{{
+        unseenLength
+      }}</span>
+      <div id="notifications" style="display: none" (scroll)="scrollEvent()">
+        <div class="title">
+          <p>Thông báo</p>
+          <a id="viewAll" (click)="viewAll()">Đánh dấu là đã đọc</a>
+        </div>
+        <a
+          class="notify"
+          routerLink="{{ notification.link }}"
+          [queryParams]="{ status: 'sent' }"
+          *ngFor="let notification of notificationList"
+          (click)="viewNotification(notification)"
+        >
+          <img src="./assets/images/dashboard/system-logo.svg" alt="" />
+          <div class="content">
+            <p class="mt-1" style="font-weight: 600">
+              {{ notification.title }}
+            </p>
+            <p class="mt-1">{{ notification.content }}</p>
+            <p class="mt-1" style="font-size: 13px" *ngIf="notification.seen">
+              {{ notification.notificationTime | timeRangeTransform }}
+            </p>
+            <p
+              class="mt-1"
+              style="font-size: 13px; color: #0367b4"
+              *ngIf="!notification.seen"
+            >
+              {{ notification.notificationTime | timeRangeTransform }}
+            </p>
+          </div>
+          <i class="fas fa-circle ml-2" *ngIf="!notification.seen"></i>
+        </a>
+        <mat-spinner *ngIf="isLoading" class="header-spinner"></mat-spinner>
+      </div>
+    </div>
+    <div class="tutor-information">
+      <img
+        src="http://localhost:8888/upload/images/{{ loginUser.image }}"
+        alt=""
+      />
+      <a class="tutor-name" id="information">
+        <span id="information">{{ loginUser.fullName }}</span>
+        <i class="fas fa-angle-down" id="information"></i>
+      </a>
+      <div class="menu" id="menu">
+        <ul>
+          <li>
+            <a routerLink="/dashboard-tutor/profile">Hồ sơ cá nhân</a>
+          </li>
+          <li>
+            <a>Nâng cấp tài khoản</a>
+          </li>
+          <li *ngIf="loginUser.password != null">
+            <a data-toggle="modal" data-target="#changePassword">
+              Đổi mật khẩu
+            </a>
+          </li>
+          <li>
+            <a (click)="signOut()">Đăng xuất</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+<div
+  class="modal fade"
+  id="changePassword"
+  data-backdrop="static"
+  data-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="position: relative">
+      <div class="mask" *ngIf="isUpdateLoading"></div>
+      <div class="modal-header">
+        <p class="modal-title" id="staticBackdropLabel">Đổi mật khẩu</p>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="loginForm">
+          <mat-spinner
+            *ngIf="isUpdateLoading"
+            class="passwordSpinner"
+          ></mat-spinner>
+
+          <div class="input-area">
+            <label for="password">Mật khẩu hiện tại</label>
+            <input
+              type="password"
+              id="currentPassword"
+              formControlName="currentPassword"
+              class="form-control"
+              placeholder="Mật khẩu hiện tại"
+            />
+            <i class="far fa-eye" id="hideee" (click)="change($event)"></i>
+            <i
+              class="far fa-eye-slash"
+              id="showww"
+              (click)="change($event)"
+            ></i>
+          </div>
+          <div class="input-area">
+            <label for="password">Mật khẩu mới</label>
+            <input
+              type="password"
+              id="password"
+              formControlName="password"
+              class="form-control"
+              placeholder="Mật khẩu mới"
+              (input)="onPasswordChange($event)"
+            />
+            <i class="far fa-eye" id="hidee" (click)="change($event)"></i>
+            <i class="far fa-eye-slash" id="showw" (click)="change($event)"></i>
+          </div>
+          <div class="error">
+            <p id="lengthCheck" style="color: rgb(143, 143, 143)">
+              <i class="far fa-check-circle mr-2"></i>Ít nhất 8 ký tự
+            </p>
+            <p id="transformCheck" style="color: rgb(143, 143, 143)">
+              <i class="far fa-check-circle mr-2"></i>Ít nhất 1 chữ cái in
+              thường và 1 chữ cái in hoa
+            </p>
+            <p id="numberCheck" style="color: rgb(143, 143, 143)">
+              <i class="far fa-check-circle mr-2"></i>Ít nhất 1 số
+            </p>
+            <p id="specialCharacterCheck" style="color: rgb(143, 143, 143)">
+              <i class="far fa-check-circle mr-2"></i>Ít nhất 1 ký tự đặc biệt
+              (VD: @,#,&,...)
+            </p>
+          </div>
+          <div class="input-area">
+            <label for="password">Nhập lại mật khẩu</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              formControlName="confirmPassword"
+              class="form-control"
+              placeholder="Nhập lại mật khẩu"
+            />
+            <div
+              *ngIf="
+                f.confirmPassword.invalid &&
+                (f.confirmPassword.dirty || f.confirmPassword.touched)
+              "
+            >
+              <div *ngIf="f.confirmPassword.errors">
+                <div *ngIf="f.confirmPassword.errors.confirmedValidator">
+                  <span class="errors" style="bottom: -20px"
+                    >Mật khẩu xác nhận không đúng</span
+                  >
+                </div>
+              </div>
+            </div>
+            <i
+              class="far fa-eye"
+              id="confirm-hide"
+              (click)="change($event)"
+            ></i>
+            <i
+              class="far fa-eye-slash"
+              id="confirm-show"
+              (click)="change($event)"
+            ></i>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+          Hủy
+        </button>
+        <button
+          type="button"
+          (click)="changePassword()"
+          class="btn btn-success"
+          *ngIf="loginForm.valid"
+        >
+          Đổi mật khẩu
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
